@@ -4,13 +4,16 @@ import PropTypes from 'prop-types'
 import { ConfigProvider, theme } from 'antd'
 
 // project
+import useConfig from '../hooks/useConfig'
 import { defaultPalette } from './palette'
 
 export default function CustomTheme ({ children }) {
+  const { theme: userTheme } = useConfig()
+
   return (
     <ConfigProvider
       theme={{
-        algorithm: theme.darkAlgorithm,
+        algorithm: userTheme === 'light' ? theme.defaultAlgorithm : theme.darkAlgorithm,
         token: defaultPalette
       }}
     >
