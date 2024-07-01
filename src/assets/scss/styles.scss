@@ -1,0 +1,25 @@
+// color variants
+@import 'themes-vars.module.scss';
+
+// Custom Scroll Bar
+
+::-webkit-scrollbar {
+	width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background: $background;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: $grey400;
+	border-radius: 4px;
+	transition: background 0.3s ease-in-out;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: $grey500;
+}
