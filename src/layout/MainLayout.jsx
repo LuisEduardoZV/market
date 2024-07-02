@@ -18,8 +18,7 @@ const MainLayout = () => {
     }}
     >
       <HeaderContainer />
-      <Content>
-        content
+      <Content style={{ maxWidth: '100vw', overflowX: 'hidden' }}>
         <Outlet />
       </Content>
       <Footer style={{ backgroundColor: 'transparent' }}>
