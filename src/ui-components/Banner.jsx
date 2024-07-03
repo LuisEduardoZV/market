@@ -4,8 +4,9 @@ import { useBannerImages } from '../hooks/useBannerImages'
 
 const { Text, Title } = Typography
 
-const Banner = () => {
-  const { banner } = useBannerImages()
+const Banner = ({ category }) => {
+  const { banner } = useBannerImages(category)
+
   return (
     <Flex style={{ width: '100%', overflowX: 'auto', position: 'relative', overflowY: 'hidden' }}>
       {banner && banner.map((img, idx) => (<img key={idx} src={img?.url} alt={img?.alt} />))}

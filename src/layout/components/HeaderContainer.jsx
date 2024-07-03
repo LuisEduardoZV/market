@@ -1,4 +1,6 @@
-import { IconTruckDelivery, IconUserFilled } from '@tabler/icons-react'
+import PropTypes from 'prop-types'
+
+import { IconMenu, IconTruckDelivery, IconUserFilled } from '@tabler/icons-react'
 import { Button, Col, Flex, Input, Layout, Row } from 'antd'
 
 import logo from '../../assets/img/logo.png'
@@ -6,7 +8,7 @@ import logo from '../../assets/img/logo.png'
 const { Header } = Layout
 const { Search } = Input
 
-const HeaderContainer = () => {
+const HeaderContainer = ({ openMenu }) => {
   const onSearch = (value, _e, info) => console.log(info?.source, value)
 
   return (
@@ -18,8 +20,9 @@ const HeaderContainer = () => {
         <Col span={16} style={{ height: 'max-content' }}>
           <Flex gap={20} align='center' justify='end'>
             <Search placeholder='Buscar...' allowClear onSearch={onSearch} style={{ maxWidth: '50%' }} />
-            <Button icon={<IconUserFilled />} />
-            <Button icon={<IconTruckDelivery />} />
+            <Button type='text' icon={<IconUserFilled />} />
+            <Button type='text' icon={<IconTruckDelivery />} />
+            <Button type='text' icon={<IconMenu />} onClick={openMenu} />
           </Flex>
         </Col>
       </Row>
@@ -27,8 +30,8 @@ const HeaderContainer = () => {
   )
 }
 
-Header.propTypes = {
-
+HeaderContainer.propTypes = {
+  openMenu: PropTypes.func
 }
 
 export default HeaderContainer

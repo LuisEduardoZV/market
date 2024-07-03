@@ -1,5 +1,5 @@
-export async function getBannerImages (client) {
-  const images = await client.photos.search({ query: 'people modeling in beach', per_page: 4 }).then(async (images) => {
+export async function getBannerImages (client, query) {
+  const images = await client.photos.search({ query, per_page: 4 }).then(async (images) => {
     const { photos } = images
     if (Array.isArray(photos) && photos.length > 0) {
       return photos.map((img) => ({
@@ -15,12 +15,14 @@ export async function getBannerImages (client) {
 
 export async function getImageByDesc (client, query) {
   const images = await Promise.all(query.map(async (op) => {
-    const img = await client.photos.search({ query: op, per_page: 1 }).then((images) => {
+    const { name, slug } = op
+    const img = await client.photos.search({ query: name, per_page: 1 }).then((images) => {
       const { photos } = images
       if (Array.isArray(photos) && photos.length > 0) {
         return photos.map((img) => ({
           url: img?.src?.small,
-          label: op
+          label: name,
+          slug
         }))
       }
       return null

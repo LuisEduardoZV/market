@@ -1,16 +1,10 @@
 import { useQuery } from 'react-query'
 
-import { Flex, Space, Typography, theme } from 'antd'
-
-import Banner from '../ui-components/Banner'
-import ImageMenu from '../ui-components/ImageMenu'
+import { Flex, Space, Typography } from 'antd'
 
 const { Text, Title } = Typography
-const { useToken } = theme
 
 const Home = () => {
-  const { token } = useToken()
-
   async function getTopProducts () {
     return await fetch('https://dummyjson.com/products/?select=title,price,rating,thumbnail&limit=15&sortBy=rating&order=desc')
       .then((res) => {
@@ -35,8 +29,6 @@ const Home = () => {
 
   return (
     <Flex vertical>
-      <Banner />
-      <ImageMenu />
       <Flex style={{ width: '100%', overflow: 'hidden' }} vertical>
         <Title level={3} style={{ marginBlock: '3%', paddingLeft: '2%' }}>People's favourite products!</Title>
         <Space style={{ overflowX: 'auto', gap: 10 }}>
