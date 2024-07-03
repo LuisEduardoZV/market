@@ -9,6 +9,8 @@ import { useProductsUsage } from '../hooks/useProductsUsage'
 import { getImageById } from '../services/imagesFunc'
 import { getTopProductsByCategory } from '../services/productsFun'
 
+import interesting from '../utils/interestingCards.json'
+
 const { Text, Title } = Typography
 const { useToken } = theme
 
@@ -54,28 +56,6 @@ const Home = () => {
               <Text strong italic>
                 ${price}
               </Text>
-            </Flex>
-          ))}
-        </Space>
-      </Flex>
-
-      <Flex style={{ width: '100%', overflow: 'hidden' }} vertical>
-        <Title level={3} style={{ marginBlock: '3%', paddingLeft: '2%' }}>Deeply discounted products!!</Title>
-        <Space style={{ overflowX: 'auto', gap: 10 }}>
-          {disscountProducts && disscountProducts?.map(({ thumbnail, id, discountPercentage, title, price }) => (
-            <Flex
-              key={id} vertical style={{
-                backgroundColor: 'white'
-              }}
-            >
-              <Title level={5} style={{ fontWeight: 500, fontStyle: 'italic' }}>{title}</Title>
-              <img src={thumbnail} />
-              <Space>
-                <Text delete type='danger' strong>${discountPercentage}</Text>
-                <Text strong italic>
-                  ${price}
-                </Text>
-              </Space>
             </Flex>
           ))}
         </Space>
@@ -138,6 +118,58 @@ const Home = () => {
             ))}
           </Space>
         )}
+      </Flex>
+
+      <Flex style={{ width: '100%', overflow: 'hidden' }} vertical>
+        <Title level={3} style={{ marginBlock: '3%', paddingLeft: '2%' }}>Deeply discounted products!!</Title>
+        <Space style={{ overflowX: 'auto', gap: 10 }}>
+          {disscountProducts && disscountProducts?.map(({ thumbnail, id, discountPercentage, title, price }) => (
+            <Flex
+              key={id} vertical style={{
+                backgroundColor: 'white'
+              }}
+            >
+              <Title level={5} style={{ fontWeight: 500, fontStyle: 'italic' }}>{title}</Title>
+              <img src={thumbnail} />
+              <Space>
+                <Text delete type='danger' strong>${discountPercentage}</Text>
+                <Text strong italic>
+                  ${price}
+                </Text>
+              </Space>
+            </Flex>
+          ))}
+        </Space>
+      </Flex>
+
+      <Flex vertical>
+        <Title level={3} style={{ marginBlock: '3%', paddingLeft: '2%' }}>También te puede interesar</Title>
+        <Row style={{ marginTop: 10, width: '100%', alignItems: 'start', justifyContent: 'space-around', paddingInline: '10%' }}>
+          {interesting.map((op, idx) => (
+            <Col key={idx} span={5} style={{ position: 'relative', display: 'flex', flexDirection: 'column', height: '100%' }}>
+              <Flex style={{ width: '100%', minHeight: 200, height: '100%', flex: 1 }} vertical>
+                {(typeof op.img === 'string')
+                  ? (
+                    <img src={op.img} alt='Image' style={{ maxHeight: 400, width: '100%', objectFit: 'cover' }} />
+                    )
+                  : (
+                    <Flex style={{ maxHeight: 400, width: '100%', flex: 1 }} vertical>
+                      {op.img.map((img, ixd) => (
+                        <img key={idx + ixd} src={img} alt='Image' style={{ maxHeight: (400 / op.img.length) - 8, width: '100%', objectFit: 'cover' }} />
+                      ))}
+                    </Flex>
+                    )}
+                <Flex vertical style={{ flex: 'none', justifyContent: 'space-between', height: 'max-content' }}>
+                  <Title level={5} style={{ fontSize: '1rem', paddingBlock: 10 }}>
+                    {op.title}
+                  </Title>
+                  <Text type='secondary' style={{ fontSize: '0.9rem' }}>{op.subtitle}</Text>
+                  <Button type='text' style={{ width: 'fit-content', marginTop: 10 }}>{op.btnText}</Button>
+                </Flex>
+              </Flex>
+            </Col>
+          ))}
+        </Row>
       </Flex>
 
     </Flex>

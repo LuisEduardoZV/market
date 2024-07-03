@@ -1,0 +1,30 @@
+[
+	{
+		"title": "Nuevas modelos en Laptops",
+		"subtitle": "Explora la fascinante nueva coleccion de laptop para todo tipo de público.",
+		"btnText": "Ver ahora",
+		"img": "https://images.pexels.com/photos/7974/pexels-photo.jpg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800"
+	},
+	{
+		"title": "Lo mejor para tus equipos",
+		"subtitle": "Combina tus diferentes estilos con los mejores accesorios.",
+		"btnText": "Comprar ahora",
+		"img": "https://images.pexels.com/photos/62689/pexels-photo-62689.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800"
+	},
+	{
+		"title": "Accesorios de cocina",
+		"subtitle": "Para cualquier estilo.",
+		"btnText": "Comprar ahora",
+		"img": "https://images.pexels.com/photos/2724748/pexels-photo-2724748.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=1200&w=800"
+	},
+	{
+		"title": "Grandes ofertas en Skincare",
+		"subtitle": "Aprovecha los descuentos que tenemos para ti, es momento de cuidar tu piel!",
+		"btnText": "Comprar",
+		"img": [
+			"https://images.pexels.com/photos/3762871/pexels-photo-3762871.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
+			"https://images.pexels.com/photos/3762466/pexels-photo-3762466.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200",
+			"https://images.pexels.com/photos/3762875/pexels-photo-3762875.jpeg?auto=compress&cs=tinysrgb&fit=crop&h=627&w=1200"
+		]
+	}
+]
