@@ -4,10 +4,11 @@ import { Outlet, useNavigate } from 'react-router-dom'
 import { Layout, theme } from 'antd'
 
 import { useGetCategories } from '../hooks/useGetCategories'
+import FooterCustom from './components/FooterCustom'
 import HeaderContainer from './components/HeaderContainer'
 import MenuModal from './components/MenuModal'
 
-const { Content, Footer } = Layout
+const { Content } = Layout
 const { useToken } = theme
 
 const MainLayout = () => {
@@ -44,9 +45,7 @@ const MainLayout = () => {
         )}
         <Outlet context={[categoriesInside, show]} />
       </Content>
-      <Footer style={{ backgroundColor: 'transparent' }}>
-        footer
-      </Footer>
+      <FooterCustom />
     </Layout>
   )
 }

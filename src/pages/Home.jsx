@@ -113,8 +113,8 @@ const Home = () => {
 
       <Flex vertical style={{ marginTop: 50, paddingInline: '10%' }}>
         <Radio.Group value={selected} buttonStyle='solid' onChange={(e) => { setSelected(e.target.value) }}>
-          <Radio.Button value='mens-shoes'>Man</Radio.Button>
-          <Radio.Button value='womens-shoes'>Woman</Radio.Button>
+          <Radio.Button value='mens-shoes'>Man Shoes</Radio.Button>
+          <Radio.Button value='womens-shoes'>Woman Shoes</Radio.Button>
         </Radio.Group>
         {data && (
           <Space style={{ marginTop: 10, width: '100%', alignItems: 'start' }} size='large'>
