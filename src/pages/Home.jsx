@@ -172,6 +172,12 @@ const Home = () => {
         </Row>
       </Flex>
 
+      <Flex vertical style={{ maxWidth: '45%', width: '100%', alignItems: 'center', alignSelf: 'center', paddingBlock: '7%', textAlign: 'center', gap: 10 }}>
+        <Title level={2} style={{ fontWeight: 400 }}>Consigue un 5% de descuento</Title>
+        <Text type='secondary' italic style={{ fontSize: '1.1rem' }}>Ssuscirbete a nuestro newsletter y obtendrás un 5% de descuento en tu próxima compra y promociones exclusivas.</Text>
+        <Button type='primary' style={{ marginTop: 20 }}>Suscribete</Button>
+      </Flex>
+
     </Flex>
   )
 }
