@@ -23,3 +23,170 @@
 ::-webkit-scrollbar-thumb:hover {
 	background: $grey500;
 }
+
+.shadow-img-menu {
+	box-shadow: 10.8px 10.6px 15.3px rgba(0, 0, 0, 0.01), 36.2px 35.7px 51.4px rgba(230, 5, 5, 0.029), 162px 160px 230px rgba(0, 0, 0, 0.04);
+}
+
+.cardItemCarousel {
+	display: grid !important;
+	grid-template-columns: repeat(auto-fill, minmax(20%, 23%));
+	place-items: start;
+	justify-content: space-around;
+	gap: 15;
+}
+
+.slick-prev,
+.slick-next {
+	color: black !important;
+	background-color: $paper !important;
+	padding-inline: 15px !important;
+	padding-block: 15px !important;
+	border: 1px solid black !important;
+}
+
+.slick-prev {
+	left: 1% !important;
+}
+
+.slick-next {
+	right: 1% !important;
+}
+
+.slick-next::after {
+	border: 0 solid;
+	border-inline-width: 3px 0 !important;
+	border-block-width: 3px 0 !important;
+	inset-inline: 20% !important;
+	inset-block: 30% !important;
+}
+
+.slick-prev::after {
+	border: 0 solid;
+	border-inline-width: 3px 0 !important;
+	border-block-width: 3px 0 !important;
+	inset-inline: 40% !important;
+	inset-block: 30% !important;
+}
+
+.primary-button {
+	color: white;
+	cursor: pointer;
+	font-size: 13px;
+	letter-spacing: 0.05rem;
+	border: 1px solid $darkPaper;
+	padding: 0.5rem 2rem;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 531.28 200'%3E%3Cdefs%3E%3Cstyle%3E .shape %7B fill: %230a369d /* fill: %230E1822; */ %7D %3C/style%3E%3C/defs%3E%3Cg id='Layer_2' data-name='Layer 2'%3E%3Cg id='Layer_1-2' data-name='Layer 1'%3E%3Cpolygon class='shape' points='415.81 200 0 200 115.47 0 531.28 0 415.81 200' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E%0A");
+	background-color: $darkPaper;
+	background-size: 200%;
+	background-position: 200%;
+	background-repeat: no-repeat;
+	transition: 0.3s ease-in-out;
+	transition-property: background-position, border, color;
+	position: relative;
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	z-index: 1;
+}
+
+.primary-button:hover {
+	border: 1px solid $primaryMain;
+	color: white;
+	background-position: 40%;
+}
+
+.primary-button:before {
+	content: '';
+	position: absolute;
+	background-color: $darkPaper;
+	width: 0.2rem;
+	height: 0.2rem;
+	top: -1px;
+	left: -1px;
+	transition: background-color 0.15s ease-in-out;
+}
+
+.primary-button:hover:before {
+	background-color: white;
+}
+
+.primary-button:hover:after {
+	background-color: white;
+}
+
+.primary-button:after {
+	content: '';
+	position: absolute;
+	background-color: $primaryMain;
+	width: 0.3rem;
+	height: 0.3rem;
+	bottom: -1px;
+	right: -1px;
+	transition: background-color 0.15s ease-in-out;
+}
+
+.button-borders {
+	margin-top: 40px;
+	position: relative;
+	width: fit-content;
+	height: fit-content;
+}
+
+.button-borders:before {
+	content: '';
+	position: absolute;
+	width: calc(100% + 0.5em);
+	height: 50%;
+	left: -0.3em;
+	top: -0.3em;
+	border: 1px solid $darkPaper;
+	border-bottom: 0px;
+	/* opacity: 0.3; */
+}
+
+.button-borders:after {
+	content: '';
+	position: absolute;
+	width: calc(100% + 0.5em);
+	height: 50%;
+	left: -0.3em;
+	bottom: -0.3em;
+	border: 1px solid $darkPaper;
+	border-top: 0px;
+	/* opacity: 0.3; */
+	z-index: 0;
+}
+
+.shape {
+	fill: $primaryMain;
+}
+
+.ant-radio-group {
+	.ant-radio-button-wrapper {
+		background-color: #fff;
+	}
+	.ant-radio-button-wrapper-checked {
+		background-color: $primaryLight !important;
+		color: $grey900 !important;
+	}
+}
+
+.big-card-item {
+	position: relative;
+	background-color: $paper;
+	min-height: 310px;
+	height: 100%;
+	width: 100%;
+	max-width: 40%;
+	border: 2px solid;
+	border-color: $paper;
+	cursor: pointer;
+	padding: 10px;
+}
+
+.priceUnderline::before {
+	content: '';
+	background-color: red;
+	border-top: 1px solid red;
+}

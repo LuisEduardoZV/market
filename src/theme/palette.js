@@ -33,7 +33,7 @@ const defaultPalette = {
   fontFamily: "'Dosis', sans-serif",
   fontWeight: 400,
   fontSize: 15,
-  borderRadius: 4
+  borderRadius: 0
 }
 
 export { defaultPalette }

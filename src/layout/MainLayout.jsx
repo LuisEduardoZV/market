@@ -34,8 +34,7 @@ const MainLayout = () => {
     }}
     >
       <HeaderContainer openMenu={() => { setShow(true) }} />
-      <Content style={{ maxWidth: '100vw' }}>
-        {/* SE ESTA TRABAJANDO LA MODAL */}
+      <Content style={{ maxWidth: '100vw', marginTop: 40 }}>
         {show && (
           <MenuModal
             categories={categories}

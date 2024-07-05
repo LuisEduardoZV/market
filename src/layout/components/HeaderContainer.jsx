@@ -1,20 +1,22 @@
 import PropTypes from 'prop-types'
 
 import { IconMenu, IconTruckDelivery, IconUserFilled } from '@tabler/icons-react'
-import { Button, Col, Flex, Input, Layout, Row } from 'antd'
+import { Button, Col, Flex, Input, Layout, Row, theme } from 'antd'
 
 import logo from '../../assets/img/logo.png'
 
 const { Header } = Layout
 const { Search } = Input
+const { useToken } = theme
 
 const HeaderContainer = ({ openMenu }) => {
+  const { token } = useToken()
   const onSearch = (value, _e, info) => console.log(info?.source, value)
 
   return (
-    <Header style={{ backgroundColor: 'transparent' }}>
-      <Row style={{ width: '100%', height: '100%', justifyContent: 'center', alignItems: 'center', position: 'relative' }}>
-        <Col span={8}>
+    <Header style={{ backgroundColor: token.colorPaper, position: 'fixed', top: 0, zIndex: 50 }}>
+      <Row style={{ width: '100%', height: '100%', justifyContent: 'center', alignItems: 'center', position: 'relative', placeItems: 'center' }}>
+        <Col span={8} style={{ alignItems: 'center' }}>
           <img src={logo} alt='Logo image' style={{ mixBlendMode: 'multiply', maxWidth: '15%' }} />
         </Col>
         <Col span={16} style={{ height: 'max-content' }}>
