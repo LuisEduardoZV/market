@@ -47,7 +47,7 @@ const BasicCardProduct = ({ id, title, rating, tags, images, price, typeCarousel
       }}
     >
       <img src={image} alt='Image' style={{ height: '100%', maxHeight: 350, width: 'fit-content' }} />
-      <Flex vertical style={{ backgroundColor: token.colorPaper, alignItems: 'center', width: '100%' }}>
+      <Flex vertical style={{ backgroundColor: token.colorPaper, alignItems: 'center', width: '100%', height: '100%' }}>
         <Row style={{ paddingBlock: '3%', alignSelf: 'start', width: '100%' }}>
           <Col span={18}>
             <Flex vertical>

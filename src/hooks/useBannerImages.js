@@ -6,7 +6,7 @@ import { getBannerImages } from '../services/imagesFunc'
 export function useBannerImages (search) {
   const { client } = usePexelsClient()
 
-  const query = (search && search !== '') ? `${search} products` : 'people modeling'
+  const query = (search && search !== '') ? `${search} products` : 'modeling'
 
   const { data, isLoading, isError } = useQuery(['banner', query], () => getBannerImages(client, query), { refetchOnWindowFocus: false })
 

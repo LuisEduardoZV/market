@@ -9,6 +9,24 @@ export async function getCategories () {
     })
 }
 
+export async function getProductsByCategories (categories) {
+  const images = await Promise.all(categories.map(async (op) => {
+    const { id } = op
+    return await fetch(`${BASE_URL_API}/products/category/${id}/`)
+      .then((res) => {
+        if (!res.ok) throw new Error('Error en getProductsByCategory')
+        return res.json()
+      })
+      .then((data) => {
+        const res = data.products
+        return res
+      })
+  })
+  )
+
+  return images.flatMap(op => op)
+}
+
 export async function getTopProductsByCategory (category) {
   return await fetch(`${BASE_URL_API}/products/category/${category}/?limit=4&sortBy=rating&order=desc`)
     .then((res) => {

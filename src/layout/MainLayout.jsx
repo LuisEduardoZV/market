@@ -14,10 +14,10 @@ const { useToken } = theme
 const MainLayout = () => {
   const { token } = useToken()
   const navigate = useNavigate()
-  const [currentCategory, setCurrentCat] = useState()
+  const [currentCategory, setCurrentCat] = useState(null)
   const [show, setShow] = useState(false)
 
-  const { categories, categoriesInside } = useGetCategories()
+  const { categoriesInside, categories } = useGetCategories(currentCategory)
 
   useEffect(() => {
     if (currentCategory) {
@@ -35,14 +35,13 @@ const MainLayout = () => {
     >
       <HeaderContainer openMenu={() => { setShow(true) }} />
       <Content style={{ maxWidth: '100vw', marginTop: 40 }}>
-        {show && (
-          <MenuModal
-            categories={categories}
-            close={() => { setShow(false) }}
-            setSelected={setCurrentCat}
-          />
-        )}
-        <Outlet context={[categoriesInside, show]} />
+        <MenuModal
+          categories={categories}
+          open={show}
+          close={() => { setShow(false) }}
+          setSelected={setCurrentCat}
+        />
+        <Outlet context={[categoriesInside, show, setCurrentCat]} />
       </Content>
       <FooterCustom />
     </Layout>

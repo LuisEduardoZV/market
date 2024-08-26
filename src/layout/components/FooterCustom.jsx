@@ -15,10 +15,9 @@ const FooterCustom = () => {
   const { token } = useToken()
 
   return (
-    <Footer style={{ marginTop: 50 }}>
+    <Footer style={{ marginTop: 50, backgroundColor: token.colorBgBase }}>
       <Row
         align='start'
-        className='rowFooter'
       >
         <Col xs={24} sm={11} lg={7} style={{ display: 'flex', justifyContent: 'start', alignItems: 'center' }}>
           <Text style={{ alignItems: 'center', display: 'flex', gap: 5, fontWeight: 500 }}><strong color={token.colorPrimaryText} style={{ fontSize: '1.4rem' }}>©</strong> {NAME_APP} | Todos los derechos reservados. 2024.</Text>

@@ -6,13 +6,13 @@ import Banner from '../../ui-components/Banner'
 import ImageMenu from '../../ui-components/ImageMenu'
 
 const HomeLayout = ({ children }) => {
-  const [categoriesInside] = useOutletContext()
+  const [categoriesInside, , setCurrentCat] = useOutletContext()
   const { category } = useParams()
 
   return (
     <Flex vertical>
       <Banner category={category?.replace('-', ' ')} />
-      <ImageMenu categories={categoriesInside} />
+      <ImageMenu categories={categoriesInside} setSelected={setCurrentCat} />
       {children}
     </Flex>
   )

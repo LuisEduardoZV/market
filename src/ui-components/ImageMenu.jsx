@@ -1,22 +1,17 @@
-import PropTypes from 'prop-types'
-
 import { Row } from 'antd'
 
+import ButtonCardMenu from './extended/ButtonCardMenu'
 import CardMenu from './extended/CardMenu'
 
-const ImageMenu = ({ categories }) => {
+const ImageMenu = ({ categories, setSelected }) => {
   if (!categories) return null
   return (
     <Row style={{ width: 'auto', paddingBlock: 10, marginTop: 40, paddingInline: '10%', justifyContent: 'space-between' }}>
       {categories.map((op, idx) => (
-        <CardMenu key={idx} id={idx} {...op} />
+        op?.inside ? <ButtonCardMenu key={idx} {...op} /> : <CardMenu key={idx} id={idx} setSelected={setSelected} {...op} />
       ))}
     </Row>
   )
-}
-
-ImageMenu.propTypes = {
-  categories: PropTypes.array
 }
 
 export default ImageMenu
