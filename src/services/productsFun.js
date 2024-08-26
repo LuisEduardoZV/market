@@ -34,9 +34,7 @@ export async function getTopProductsByCategory (category) {
       return res.json()
     })
     .then((data) => {
-      const res = data.products
-      shuffle(res)
-      return res
+      return data.products
     })
 }
 
