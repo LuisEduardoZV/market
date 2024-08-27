@@ -1,10 +1,10 @@
-import { Typography } from 'antd'
+import { Radio } from 'antd'
 
-const { Text } = Typography
-
-const ButtonCardMenu = ({ img, category, id, setSelected }) => {
+const ButtonCardMenu = ({ category, id }) => {
   return (
-    <Text>{category}</Text>
+    <Radio value={id} style={{ width: '100%' }}>
+      <span>{category}</span>
+    </Radio>
   )
 }
 

@@ -15,13 +15,26 @@ const MainLayout = () => {
   const { token } = useToken()
   const navigate = useNavigate()
   const [currentCategory, setCurrentCat] = useState(null)
+  const [currentSubCategory, setCurrentSubCat] = useState(null)
   const [show, setShow] = useState(false)
 
-  const { categoriesInside, categories } = useGetCategories(currentCategory)
+  const { categoriesInside, categories } = useGetCategories(currentCategory?.id)
+
+  const handleCurrentCat = (id, title, subcategory) => {
+    setShow(false)
+    setCurrentCat({ id, title })
+    setCurrentSubCat(subcategory)
+  }
+
+  const handleToHome = () => {
+    setCurrentCat(null)
+    setCurrentSubCat(null)
+    navigate('/', { replace: true })
+  }
 
   useEffect(() => {
     if (currentCategory) {
-      navigate(`/${currentCategory}`)
+      navigate(`/${currentCategory.id}`, { state: { title: currentCategory.title, subcategory: currentSubCategory } })
       setShow(false)
     }
   }, [currentCategory])
@@ -33,15 +46,15 @@ const MainLayout = () => {
       backgroundColor: token.colorPaper
     }}
     >
-      <HeaderContainer openMenu={() => { setShow(true) }} />
+      <HeaderContainer openMenu={() => { setShow(true) }} handleToHome={handleToHome} />
       <Content style={{ maxWidth: '100vw', marginTop: 40 }}>
         <MenuModal
           categories={categories}
           open={show}
           close={() => { setShow(false) }}
-          setSelected={setCurrentCat}
+          setSelected={handleCurrentCat}
         />
-        <Outlet context={[categoriesInside, show, setCurrentCat]} />
+        <Outlet context={[{ currentCategory: { ...currentCategory, subcategory: currentSubCategory }, categoriesInside, show, handleCurrentCat }]} />
       </Content>
       <FooterCustom />
     </Layout>

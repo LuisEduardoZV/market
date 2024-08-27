@@ -24,7 +24,8 @@ export async function getProductsByCategories (categories) {
   })
   )
 
-  return images.flatMap(op => op)
+  const data = images.flatMap(op => op)
+  return data
 }
 
 export async function getTopProductsByCategory (category) {

@@ -9,7 +9,7 @@ const { Header } = Layout
 const { Search } = Input
 const { useToken } = theme
 
-const HeaderContainer = ({ openMenu }) => {
+const HeaderContainer = ({ openMenu, handleToHome, currentSubCategory }) => {
   const { token } = useToken()
   const onSearch = (value, _e, info) => console.log(info?.source, value)
 
@@ -17,7 +17,7 @@ const HeaderContainer = ({ openMenu }) => {
     <Header style={{ backgroundColor: token.colorPaper, position: 'fixed', top: 0, zIndex: 50 }}>
       <Row style={{ width: '100%', height: '100%', justifyContent: 'center', alignItems: 'center', position: 'relative', placeItems: 'center' }}>
         <Col span={8} style={{ alignItems: 'center' }}>
-          <img src={logo} alt='Logo image' style={{ mixBlendMode: 'multiply', maxWidth: '15%' }} />
+          <img src={logo} alt='Logo image' style={{ mixBlendMode: 'multiply', maxWidth: '15%', cursor: 'pointer' }} onClick={() => handleToHome()} />
         </Col>
         <Col span={16} style={{ height: 'max-content' }}>
           <Flex gap={20} align='center' justify='end'>

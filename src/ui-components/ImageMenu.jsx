@@ -1,14 +1,13 @@
 import { Row } from 'antd'
 
-import ButtonCardMenu from './extended/ButtonCardMenu'
 import CardMenu from './extended/CardMenu'
 
-const ImageMenu = ({ categories, setSelected }) => {
-  if (!categories) return null
+const ImageMenu = ({ categories, setSelected, currentCategory }) => {
+  if (!categories || currentCategory.subcategory) return null
   return (
-    <Row style={{ width: 'auto', paddingBlock: 10, marginTop: 40, paddingInline: '10%', justifyContent: 'space-between' }}>
+    <Row style={{ width: 'auto', paddingBlock: 10, marginTop: 40, paddingInline: '10%', justifyContent: currentCategory.subcategory ? 'start' : 'space-between', rowGap: 20, columnGap: currentCategory.subcategory ? 20 : 0 }}>
       {categories.map((op, idx) => (
-        op?.inside ? <ButtonCardMenu key={idx} {...op} /> : <CardMenu key={idx} id={idx} setSelected={setSelected} {...op} />
+        !op?.inside && <CardMenu key={idx} id={idx} setSelected={setSelected} {...op} />
       ))}
     </Row>
   )

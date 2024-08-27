@@ -38,7 +38,7 @@ const ModalMenuCards = ({ item, setSelected }) => {
         id={`${item.id}-title`}
         level={5}
         style={{ cursor: 'pointer', backgroundColor: token.colorBgBase, paddingInline: '5%', paddingBlock: 2 }}
-        onClick={() => setSelected(item.id)}
+        onClick={() => setSelected(item.id, item.category)}
       >
         {item.category}
       </Title>

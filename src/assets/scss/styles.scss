@@ -3,16 +3,27 @@
 
 // Custom Scroll Bar
 
+.other-scrollbar::-webkit-scrollbar {
+	width: 5px;
+}
 ::-webkit-scrollbar {
 	width: 10px;
 }
 
 /* Track */
+.other-scrollbar::-webkit-scrollbar-track {
+	background: $background;
+}
 ::-webkit-scrollbar-track {
 	background: $background;
 }
 
 /* Handle */
+.other-scrollbar::-webkit-scrollbar-thumb {
+	background: $grey400;
+	border-radius: 4px;
+	transition: background 0.3s ease-in-out;
+}
 ::-webkit-scrollbar-thumb {
 	background: $grey400;
 	border-radius: 4px;
@@ -20,6 +31,9 @@
 }
 
 /* Handle on hover */
+.other-scrollbar::-webkit-scrollbar-thumb:hover {
+	background: $grey500;
+}
 ::-webkit-scrollbar-thumb:hover {
 	background: $grey500;
 }
@@ -189,4 +203,10 @@
 	content: '';
 	background-color: red;
 	border-top: 1px solid red;
+}
+
+.shadow-menu-subcategory {
+	box-shadow: 1.6px 1.6px 1.6px rgba(0, 0, 0, 0.004), 3.4px 3.4px 3.5px rgba(0, 0, 0, 0.006), 5.8px 5.8px 5.9px rgba(0, 0, 0, 0.008), 8.7px 8.7px 8.9px rgba(0, 0, 0, 0.009),
+		12.5px 12.5px 12.8px rgba(0, 0, 0, 0.01), 17.7px 17.7px 18.1px rgba(0, 0, 0, 0.011), 25.1px 25.1px 25.6px rgba(0, 0, 0, 0.012), 36.5px 36.5px 37.2px rgba(0, 0, 0, 0.014),
+		56.3px 56.3px 57.4px rgba(0, 0, 0, 0.016), 100px 100px 102px rgba(0, 0, 0, 0.02);
 }

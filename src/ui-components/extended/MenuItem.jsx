@@ -29,7 +29,7 @@ const MenuItem = ({ item, id, setSelected, category }) => {
       ref={container}
       style={{ cursor: 'pointer', fontSize: '0.9rem', backgroundColor: token.colorPaper }}
       onClick={() => {
-        setSelected(item.id + '/' + id)
+        setSelected(item.id, item.category, id)
       }}
     >{category}
     </Text>
