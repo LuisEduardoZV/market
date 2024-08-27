@@ -38,7 +38,7 @@ const Category = () => {
       {extraInfo && <SideMenuCategory categoriesInside={categoriesInside} filters={filters} brands={extraInfo?.brands} prices={extraInfo?.prices} handleFilters={handleFilters} />}
       {isLoading
         ? (
-          <Flex style={{ width: '82%', gap: 30, display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', alignSelf: 'end', position: 'sticky', top: '80%', marginTop: '0', paddingRight: '5%' }}>
+          <Flex style={{ width: '82%', gap: 30, display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', alignSelf: 'end', position: 'sticky', top: '8%', marginTop: '0', paddingRight: '5%' }}>
             <BasicCardProduct id={1} typeCarousel='loading' isLoading />
             <BasicCardProduct id={2} typeCarousel='loading' isLoading />
             <BasicCardProduct id={3} typeCarousel='loading' isLoading />
@@ -48,7 +48,7 @@ const Category = () => {
           </Flex>
           )
         : (
-          <Flex style={{ width: '82%', gap: 30, display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', alignSelf: 'end', position: 'sticky', top: '80%', marginTop: '-70vh', paddingRight: '5%' }}>
+          <Flex style={{ width: '82%', gap: 30, display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', alignSelf: 'end', position: 'sticky', top: '5%', marginTop: '-80vh', paddingRight: '5%' }}>
             {renderCards()}
             <Flex style={{ gridColumn: 'span 3', justifyContent: 'center' }}>
               {page < maxPage && (

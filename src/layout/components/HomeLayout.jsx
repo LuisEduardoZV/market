@@ -14,7 +14,7 @@ const HomeLayout = ({ children }) => {
   return (
     <Flex vertical>
       <Banner category={category?.replace('-', ' ')} />
-      <ImageMenu categories={categoriesInside} setSelected={handleCurrentCat} currentCategory={currentCategory} />
+      {!category && <ImageMenu categories={categoriesInside} setSelected={handleCurrentCat} currentCategory={currentCategory} />}
       {children}
     </Flex>
   )

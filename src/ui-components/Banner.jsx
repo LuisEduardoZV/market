@@ -10,7 +10,7 @@ const Banner = ({ category }) => {
   return (
     <Flex style={{ position: 'relative' }}>
       <div style={{ width: '100%' }}>
-        {!banner && isLoading && <Skeleton.Image active style={{ height: '85vh', width: '100vw', visibility: 'visible', opacity: 1 }} />}
+        {!banner && isLoading && <Skeleton.Image active style={{ height: category ? '45vh' : '85vh', width: '100vw', visibility: 'visible', opacity: 1 }} />}
         {banner && (
           <Carousel autoplay style={{ width: '100%' }}>
             {banner?.map((img, idx) => (
@@ -21,7 +21,7 @@ const Banner = ({ category }) => {
                   height: '100%'
                 }}
               >
-                <img key={idx} src={img?.url} alt={img?.alt} style={{ width: '100%', objectFit: 'cover', maxHeight: '85vh' }} />
+                <img key={idx} src={img?.url} alt={img?.alt} style={{ width: '100%', objectFit: 'cover', maxHeight: category ? '45vh' : '85vh' }} />
               </Flex>
             ))}
           </Carousel>
