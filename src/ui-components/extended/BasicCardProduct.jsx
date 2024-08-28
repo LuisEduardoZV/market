@@ -1,6 +1,7 @@
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import { IconThumbUp } from '@tabler/icons-react'
 import { Col, Flex, Row, Skeleton, Space, Typography, theme } from 'antd'
@@ -13,6 +14,7 @@ gsap.registerPlugin(useGSAP)
 const BasicCardProduct = ({ id, title, rating, tags, images, price, typeCarousel, noRating, isLoading = false }) => {
   const { token } = useToken()
   const card = useRef(null)
+  const navigate = useNavigate()
 
   let image = null
   if (!isLoading) image = images[0] ?? ''
@@ -49,6 +51,7 @@ const BasicCardProduct = ({ id, title, rating, tags, images, price, typeCarousel
         cursor: 'pointer',
         position: 'relative'
       }}
+      onClick={() => navigate(`/product/${id}`)}
     >
       {isLoading ? <Skeleton.Image active style={{ height: '100%', minHeight: 350, width: '100%', minWidth: 350 }} /> : <img src={image} alt='Image' style={{ height: '100%', maxHeight: 350, width: 'fit-content' }} />}
       <Flex vertical style={{ backgroundColor: token.colorPaper, alignItems: 'center', width: '100%', height: '100%' }}>

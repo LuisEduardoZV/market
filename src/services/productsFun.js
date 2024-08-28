@@ -87,3 +87,11 @@ export async function getDisscountProducts () {
       return res
     })
 }
+
+export async function getProductById (id) {
+  return await fetch(`${BASE_URL_API}/products/${id}`)
+    .then((res) => {
+      if (!res.ok) throw new Error('Error')
+      return res.json()
+    })
+}

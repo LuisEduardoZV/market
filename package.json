@@ -13,10 +13,12 @@
     "@gsap/react": "^2.1.1",
     "@tabler/icons-react": "^3.7.0",
     "antd": "^5.19.0",
+    "dayjs": "^1.11.13",
     "dotenv": "^16.4.5",
     "gsap": "^3.12.5",
     "pexels": "^1.4.0",
     "react": "^18.3.1",
+    "react-barcode": "^1.5.3",
     "react-dom": "^18.3.1",
     "react-query": "^3.39.3",
     "react-router-dom": "^6.24.0"

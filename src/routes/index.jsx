@@ -4,6 +4,7 @@ import MainLayout from '../layout/MainLayout'
 import HomeLayout from '../layout/components/HomeLayout'
 import Category from '../pages/Category'
 import Home from '../pages/Home'
+import Product from '../pages/Product'
 
 export default function Routes () {
   const Routes = {
@@ -19,6 +20,10 @@ export default function Routes () {
       {
         path: ':category',
         element: <HomeLayout><Category /></HomeLayout>
+      },
+      {
+        path: 'product/:id',
+        element: <Product />
       }
     ]
   }

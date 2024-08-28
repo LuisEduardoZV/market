@@ -1,6 +1,7 @@
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { useMemo, useRef } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import { Col, Flex, Rate, Row, Space, Typography, theme } from 'antd'
 
@@ -12,6 +13,7 @@ gsap.registerPlugin(useGSAP)
 const BigCardProduct = ({ id, rating, thumbnail, title, tags, brand, price, discountPercentage }) => {
   const { token } = useToken()
   const container = useRef(null)
+  const navigate = useNavigate()
 
   const infoPrice = useMemo(() => ({
     oldPrice: price,
@@ -42,7 +44,7 @@ const BigCardProduct = ({ id, rating, thumbnail, title, tags, brand, price, disc
   }, { scope: container })
 
   return (
-    <Flex ref={container} id={`big-card-container-${id}`} vertical key={id} className='big-card-item'>
+    <Flex ref={container} id={`big-card-container-${id}`} vertical key={id} className='big-card-item' onClick={() => navigate(`/product/${id}`)}>
       <Flex style={{
         position: 'absolute',
         top: 0,
