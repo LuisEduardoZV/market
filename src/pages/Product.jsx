@@ -8,8 +8,10 @@ import { Avatar, Button, Carousel, Divider, Flex, Progress, Rate, Select, Space,
 import dayjs from 'dayjs'
 import Barcode from 'react-barcode'
 
-import { getProductById } from '../services/productsFun'
+import { getProductById, getProductsByCategories } from '../services/productsFun'
 import IconBoxDimension from '../ui-components/extended/IconBoxDimension'
+import CarouselProducts from './components/CarouselProducts'
+import PromoBanner from './components/PromoBanner'
 
 import amex from '../assets/icons/amex.svg'
 import hiper from '../assets/icons/hiper.svg'
@@ -21,11 +23,15 @@ const { Title, Text, Paragraph, Link } = Typography
 const { useToken } = theme
 
 const Product = ({ hasDiscount }) => {
-  const { id } = useParams()
+  const { id, category } = useParams()
+  console.log(category)
+
   const ref = useRef()
   const { token } = useToken()
 
   const { isLoading, data } = useQuery(['product', id], () => getProductById(id), { refetchOnWindowFocus: false, enabled: !!id })
+
+  const { isLoading: loadingRelated, data: relatedData } = useQuery(['relatedProducts', category], () => getProductsByCategories([{ id: category }]), { refetchOnWindowFocus: false, enabled: !!category })
 
   const infoReviews = useMemo(() => {
     if (data && data?.reviews) {
@@ -44,18 +50,18 @@ const Product = ({ hasDiscount }) => {
     return data.price
   }, [data])
 
-  console.log(data)
+  console.log(relatedData)
 
   // console.log(ref.current) para obtener current slide y dar estilos
   /*
   MEDIOS DE PAGO DE MERCADO LIBRE
   */
 
-  if (isLoading) return null
+  if (isLoading || loadingRelated) return null
   return (
     <Flex vertical style={{ minHeight: '100vh', height: '100%', paddingTop: '4%', paddingInline: '2%' }}>
       <Flex style={{ width: '100%', justifyContent: 'space-between', position: 'relative', height: 'max-content', minHeight: '75vh' }}>
-        <Flex style={{ maxWidth: '30%', width: '100%' }}>
+        <Flex style={{ maxWidth: '30%', width: '100%', position: 'sticky', top: '10%', height: 'fit-content' }}>
           <Space direction='vertical'>
             {data && data?.images && data.images.map((item, idx) => (
               <Flex key={idx} style={{ maxHeight: 50, maxWidth: 50, cursor: 'pointer', borderWidth: 1, borderStyle: 'solid', borderColor: token.colorBgBase }} onMouseEnter={() => ref.current.goTo(idx)}>
@@ -123,7 +129,7 @@ const Product = ({ hasDiscount }) => {
             <Text type='secondary' style={{ fontSize: '0.8rem' }}>Last update: {dayjs(data.meta.updatedAt).format('DD/MM/YYYY HH:mm a')}</Text>
           </Flex>
         </Flex>
-        <Flex style={{ width: '100%', maxWidth: '20%', position: 'sticky', top: '15%', right: '2%', display: 'inline-block' }}>
+        <Flex style={{ width: '100%', maxWidth: '20%', display: 'inline-block', position: 'sticky', top: '10%', height: 'fit-content' }}>
 
           <Flex vertical style={{ gap: 30 }}>
             <Flex vertical style={{ position: 'relative' }}>
@@ -211,6 +217,11 @@ const Product = ({ hasDiscount }) => {
         </Flex>
       </Flex>
       <Divider />
+      <Flex style={{ width: '100%', overflow: 'hidden', paddingInline: '5%' }} vertical>
+        <Title level={3} style={{ marginBottom: '3%', paddingLeft: '2%' }}>Related products</Title>
+        <CarouselProducts products={relatedData} typeCarousel='relatedProducts' />
+      </Flex>
+      <Divider />
       <Flex vertical style={{ paddingInline: '5%', paddingBottom: '5%' }}>
 
         <Title level={2}>Customer reviews</Title>
@@ -260,6 +271,9 @@ const Product = ({ hasDiscount }) => {
             <Button type='link'>Show all reviews...</Button>
           </Flex>
         </Flex>
+      </Flex>
+      <Flex style={{ paddingInline: '5%' }}>
+        <PromoBanner inCategory />
       </Flex>
     </Flex>
   )

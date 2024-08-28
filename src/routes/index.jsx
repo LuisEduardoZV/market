@@ -22,7 +22,7 @@ export default function Routes () {
         element: <HomeLayout><Category /></HomeLayout>
       },
       {
-        path: 'product/:id',
+        path: ':category/product/:id',
         element: <Product />
       }
     ]

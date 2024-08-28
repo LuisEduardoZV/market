@@ -10,7 +10,7 @@ const { useToken } = theme
 
 gsap.registerPlugin(useGSAP)
 
-const BigCardProduct = ({ id, rating, thumbnail, title, tags, brand, price, discountPercentage }) => {
+const BigCardProduct = ({ id, rating, thumbnail, title, tags, brand, price, discountPercentage, category }) => {
   const { token } = useToken()
   const container = useRef(null)
   const navigate = useNavigate()
@@ -44,7 +44,7 @@ const BigCardProduct = ({ id, rating, thumbnail, title, tags, brand, price, disc
   }, { scope: container })
 
   return (
-    <Flex ref={container} id={`big-card-container-${id}`} vertical key={id} className='big-card-item' onClick={() => navigate(`/product/${id}`)}>
+    <Flex ref={container} id={`big-card-container-${id}`} vertical key={id} className='big-card-item' onClick={() => navigate(`${category}/product/${id}`)}>
       <Flex style={{
         position: 'absolute',
         top: 0,

@@ -11,7 +11,7 @@ const { useToken } = theme
 
 gsap.registerPlugin(useGSAP)
 
-const BasicCardProduct = ({ id, title, rating, tags, images, price, typeCarousel, noRating, isLoading = false }) => {
+const BasicCardProduct = ({ id, title, rating, tags, images, price, typeCarousel, noRating, category, isLoading = false }) => {
   const { token } = useToken()
   const card = useRef(null)
   const navigate = useNavigate()
@@ -51,7 +51,11 @@ const BasicCardProduct = ({ id, title, rating, tags, images, price, typeCarousel
         cursor: 'pointer',
         position: 'relative'
       }}
-      onClick={() => navigate(`/product/${id}`)}
+      onClick={() => {
+        console.log(category)
+
+        navigate(`/${category}/product/${id}`)
+      }}
     >
       {isLoading ? <Skeleton.Image active style={{ height: '100%', minHeight: 350, width: '100%', minWidth: 350 }} /> : <img src={image} alt='Image' style={{ height: '100%', maxHeight: 350, width: 'fit-content' }} />}
       <Flex vertical style={{ backgroundColor: token.colorPaper, alignItems: 'center', width: '100%', height: '100%' }}>
