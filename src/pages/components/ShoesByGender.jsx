@@ -10,7 +10,7 @@ import SkeletonShoesByG from '../../ui-components/extended/SkeletonShoesByG'
 const ShoesByGender = () => {
   const [selected, setSelected] = useState('mens-shoes')
 
-  const { data, isLoading } = useQuery(['topProductsBy', selected], () => getTopProductsByCategory(selected))
+  const { data, isLoading } = useQuery(['topProductsBy', selected], () => getTopProductsByCategory(selected), { refetchOnWindowFocus: false })
 
   return (
     <Flex vertical style={{ marginTop: 50, paddingInline: '10%' }}>
