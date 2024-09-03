@@ -25,7 +25,7 @@ const initialState = {
 }
 
 const slice = createSlice({
-  name: 'market-cart-shopping',
+  name: 'cart',
   initialState,
   reducers: {
     // HAS ERROR
@@ -35,23 +35,36 @@ const slice = createSlice({
 
     // ADD PRODUCT
     addProductSuccess (state, action) {
-      state.checkout.products = action.payload.products
+      state.checkout.products = state.checkout.products.concat(action.payload.product)
       state.checkout.subtotal += action.payload.subtotal
-      state.checkout.total += action.payload.subtotal
+      state.checkout.total = (Number(state.checkout.total) + Number(action.payload.total)).toFixed(2)
     },
 
     // REMOVE PRODUCT
     removeProductSuccess (state, action) {
-      state.checkout.products = action.payload.products
-      state.checkout.subtotal += -action.payload.subtotal
-      state.checkout.total += -action.payload.subtotal
+      const id = action.payload
+
+      const currentProduct = state.checkout.products.find((op) => op.id === id)
+
+      const lastSubtotal = currentProduct.quantityAdded * currentProduct.price
+
+      state.checkout.subtotal = state.checkout.subtotal - lastSubtotal
+      state.checkout.total = Number((state.checkout.total - lastSubtotal).toFixed(2))
+
+      state.checkout.products = state.checkout.products.filter((op) => op.id !== id)
     },
 
     // UPDATE PRODUCT
     updateProductSuccess (state, action) {
-      state.checkout.products = action.payload.products
-      state.checkout.subtotal = state.checkout.subtotal - action.payload.oldSubTotal + action.payload.subtotal
-      state.checkout.total = state.checkout.total - action.payload.oldSubTotal + action.payload.subtotal
+      const { quantityAdded, id, subtotal, total } = action.payload
+      const productIndex = state.checkout.products.findIndex((op) => op.id === id)
+      const currentProduct = state.checkout.products[productIndex]
+      const lastSubtotal = currentProduct.quantityAdded * currentProduct.price
+
+      state.checkout.subtotal = state.checkout.subtotal - lastSubtotal + subtotal
+      state.checkout.total = (Number(state.checkout.total) - lastSubtotal + total).toFixed(2)
+
+      state.checkout.products[productIndex].quantityAdded = quantityAdded
     },
 
     // SET STEP
@@ -123,39 +136,37 @@ export default slice.reducer
 
 // ----------------------------------------------------------------------
 
-/* export function addProduct (product, products) {
+export function addProduct (product) {
   return async () => {
     try {
-      const response = await axios.post('/api/cart/add', { product, products })
-      dispatch(slice.actions.addProductSuccess(response.data))
+      dispatch(slice.actions.addProductSuccess(product))
     } catch (error) {
       dispatch(slice.actions.hasError(error))
     }
   }
 }
 
-export function removeProduct (id, products) {
+export function removeProduct (productId) {
   return async () => {
     try {
-      const response = await axios.post('/api/cart/remove', { id, products })
-      dispatch(slice.actions.removeProductSuccess(response.data))
+      dispatch(slice.actions.removeProductSuccess(productId))
     } catch (error) {
       dispatch(slice.actions.hasError(error))
     }
   }
 }
 
-export function updateProduct (id, quantity, products) {
+export function updateProduct (product) {
   return async () => {
     try {
-      const response = await axios.post('/api/cart/update', { id, quantity, products })
-      dispatch(slice.actions.updateProductSuccess(response.data))
+      dispatch(slice.actions.updateProductSuccess(product))
     } catch (error) {
       dispatch(slice.actions.hasError(error))
     }
   }
 }
 
+/*
 export function setStep (step) {
   return () => {
     dispatch(slice.actions.setStepSuccess(step))

@@ -1,10 +1,12 @@
 import PropTypes from 'prop-types'
 import { Fragment, useState } from 'react'
 import { useQuery } from 'react-query'
-import { useNavigate } from 'react-router-dom'
+import { Link as LinkRoute, useNavigate } from 'react-router-dom'
 
 import { IconMenu, IconSquareRoundedXFilled, IconTruckDelivery, IconUserFilled } from '@tabler/icons-react'
-import { Button, Col, Divider, Flex, Input, Layout, Popover, Row, theme, Typography } from 'antd'
+import { Badge, Button, Col, Divider, Flex, Input, Layout, Popover, Row, theme, Typography } from 'antd'
+
+import { useSelector } from '../../store'
 
 import { searchProducts } from '../../services/productsFun'
 
@@ -16,6 +18,8 @@ const { Text, Link } = Typography
 const { useToken } = theme
 
 const HeaderContainer = ({ openMenu, handleToHome, currentSubCategory }) => {
+  const { checkout } = useSelector((state) => state.cart)
+
   const { token } = useToken()
   const navigate = useNavigate()
   const [search, setSearch] = useState('')
@@ -81,7 +85,13 @@ const HeaderContainer = ({ openMenu, handleToHome, currentSubCategory }) => {
               <Search placeholder='Buscar...' allowClear value={search} onSearch={onSearch} onChange={e => setSearch(e.target.value)} onFocus={() => setOpen(false)} style={{ maxWidth: '50%' }} loading={isLoading} />
             </Popover>
             <Button type='text' icon={<IconUserFilled />} />
-            <Button type='text' icon={<IconTruckDelivery />} onClick={() => navigate('/shopping-cart')} />
+            <Flex style={{ alignItems: 'center', justifyContent: 'center', height: 'fit-content' }}>
+              <LinkRoute to='/shopping-cart' style={{ alignItems: 'center', justifyContent: 'center', height: 50, placeContent: 'center' }}>
+                <Badge count={checkout.products.length} size='small' color={token.colorPrimary} style={{ fontSize: '0.7rem' }}>
+                  <IconTruckDelivery size={25} />
+                </Badge>
+              </LinkRoute>
+            </Flex>
             <Button type='text' icon={<IconMenu />} onClick={openMenu} />
           </Flex>
         </Col>

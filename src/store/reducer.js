@@ -7,7 +7,7 @@ import cartSlice from './cartSlice'
 const reducer = combineReducers({
   cart: persistReducer(
     {
-      key: 'market-cart-shopping',
+      key: 'cart',
       storage
     },
     cartSlice

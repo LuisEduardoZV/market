@@ -1,6 +1,6 @@
-import { Fragment, useMemo, useRef } from 'react'
+import { Fragment, useMemo, useRef, useState } from 'react'
 import { useQuery } from 'react-query'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 import { IconCubeSend, IconReceiptRefund, IconShieldCheckFilled, IconStarFilled, IconThumbUp, IconUserHexagon } from '@tabler/icons-react'
 import { Avatar, Button, Carousel, Divider, Flex, Progress, Rate, Select, Space, theme, Typography } from 'antd'
@@ -8,7 +8,10 @@ import { Avatar, Button, Carousel, Divider, Flex, Progress, Rate, Select, Space,
 import dayjs from 'dayjs'
 import Barcode from 'react-barcode'
 
+import useNotification from '../hooks/useNotification'
 import { getProductById, getProductsByCategories } from '../services/productsFun'
+import { useDispatch } from '../store'
+import { addProduct } from '../store/cartSlice'
 import IconBoxDimension from '../ui-components/extended/IconBoxDimension'
 import CarouselProducts from './components/CarouselProducts'
 import PromoBanner from './components/PromoBanner'
@@ -24,7 +27,9 @@ const { useToken } = theme
 
 const Product = ({ hasDiscount }) => {
   const { id, category } = useParams()
-  console.log(category)
+  const dispatch = useDispatch()
+  const { openNotification } = useNotification()
+  const navigate = useNavigate()
 
   const ref = useRef()
   const { token } = useToken()
@@ -32,6 +37,18 @@ const Product = ({ hasDiscount }) => {
   const { isLoading, data } = useQuery(['product', id], () => getProductById(id), { refetchOnWindowFocus: false, enabled: !!id })
 
   const { isLoading: loadingRelated, data: relatedData } = useQuery(['relatedProducts', category], () => getProductsByCategories([{ id: category }]), { refetchOnWindowFocus: false, enabled: !!category })
+
+  const [quantity, setQuantity] = useState(1)
+
+  const addToCart = (product) => {
+    dispatch(addProduct({ product: [{ ...product, quantityAdded: quantity }], subtotal: product.price * quantity, total: (product.price * quantity).toFixed(2) }))
+    openNotification({
+      message: 'Product added to cart.'
+    })
+    setTimeout(() => {
+      navigate('/shopping-cart')
+    }, 300)
+  }
 
   const infoReviews = useMemo(() => {
     if (data && data?.reviews) {
@@ -49,13 +66,6 @@ const Product = ({ hasDiscount }) => {
     }
     return data.price
   }, [data])
-
-  console.log(relatedData)
-
-  // console.log(ref.current) para obtener current slide y dar estilos
-  /*
-  MEDIOS DE PAGO DE MERCADO LIBRE
-  */
 
   if (isLoading || loadingRelated) return null
   return (
@@ -160,7 +170,8 @@ const Product = ({ hasDiscount }) => {
                 <Text>Cantidad:</Text>
                 <Select
                   variant='borderless'
-                  defaultValue={1}
+                  defaultValue={quantity}
+                  onChange={setQuantity}
                   options={[
                     { value: 1, label: '1 unidad' },
                     { value: 2, label: '2 unidades' },
@@ -169,7 +180,7 @@ const Product = ({ hasDiscount }) => {
                 />
               </Flex>
               <Button type='primary' className='shadow-menu-subcategory'>Buy</Button>
-              <Button className='shadow-menu-subcategory'>Add to cart</Button>
+              <Button className='shadow-menu-subcategory' onClick={() => addToCart(data)}>Add to cart</Button>
             </Flex>
           </Flex>
           <Divider />
