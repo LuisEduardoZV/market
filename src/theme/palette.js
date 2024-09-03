@@ -30,7 +30,7 @@ const defaultPalette = {
   colorTextBase: '',
   colorBgBase: colors.background,
   colorPaper: colors.paper,
-  fontFamily: "'Dosis', sans-serif",
+  fontFamily: "'SUSE', sans-serif",
   fontWeight: 400,
   fontSize: 15,
   borderRadius: 0

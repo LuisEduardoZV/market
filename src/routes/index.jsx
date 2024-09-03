@@ -2,6 +2,7 @@ import { useRoutes } from 'react-router-dom'
 
 import MainLayout from '../layout/MainLayout'
 import HomeLayout from '../layout/components/HomeLayout'
+import Cart from '../pages/Cart'
 import Category from '../pages/Category'
 import Home from '../pages/Home'
 import Product from '../pages/Product'
@@ -24,6 +25,10 @@ export default function Routes () {
       {
         path: ':category/product/:id',
         element: <Product />
+      },
+      {
+        path: 'shopping-cart',
+        element: <Cart />
       }
     ]
   }

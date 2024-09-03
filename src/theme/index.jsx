@@ -14,7 +14,12 @@ export default function CustomTheme ({ children }) {
     <ConfigProvider
       theme={{
         algorithm: userTheme === 'light' ? theme.defaultAlgorithm : theme.darkAlgorithm,
-        token: defaultPalette
+        token: defaultPalette,
+        components: {
+          Typography: {
+            fontFamily: '"SUSE", sans-serif'
+          }
+        }
       }}
     >
       {children}

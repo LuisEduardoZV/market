@@ -81,7 +81,7 @@ const HeaderContainer = ({ openMenu, handleToHome, currentSubCategory }) => {
               <Search placeholder='Buscar...' allowClear value={search} onSearch={onSearch} onChange={e => setSearch(e.target.value)} onFocus={() => setOpen(false)} style={{ maxWidth: '50%' }} loading={isLoading} />
             </Popover>
             <Button type='text' icon={<IconUserFilled />} />
-            <Button type='text' icon={<IconTruckDelivery />} />
+            <Button type='text' icon={<IconTruckDelivery />} onClick={() => navigate('/shopping-cart')} />
             <Button type='text' icon={<IconMenu />} onClick={openMenu} />
           </Flex>
         </Col>

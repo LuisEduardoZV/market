@@ -219,3 +219,9 @@
 .hoverProductSearching:hover #titleProductSearch {
 	color: $primaryMain;
 }
+
+.shadow-cart-cards {
+	box-shadow: 1.6px 1.6px 0.6px rgba(0, 0, 0, 0.006), 3.4px 3.4px 1.3px rgba(0, 0, 0, 0.009), 5.8px 5.8px 2.1px rgba(0, 0, 0, 0.011), 8.7px 8.7px 3.2px rgba(0, 0, 0, 0.013),
+		12.5px 12.5px 4.6px rgba(0, 0, 0, 0.015), 17.7px 17.7px 6.6px rgba(0, 0, 0, 0.017), 25.1px 25.1px 9.3px rgba(0, 0, 0, 0.019), 36.5px 36.5px 13.5px rgba(0, 0, 0, 0.021),
+		56.3px 56.3px 20.8px rgba(0, 0, 0, 0.024), 100px 100px 37px rgba(0, 0, 0, 0.03);
+}
