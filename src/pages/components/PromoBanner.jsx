@@ -59,16 +59,16 @@ const PromoBanner = ({ inCategory = false }) => {
           </Flex>
         </Flex>
       </Col>
-      <Col span={7} style={{ position: 'relative' }}>
+      <Col span={inCategory ? 6 : 7} style={{ position: 'relative' }}>
         <Flex>
           <img src={promo.url} alt={promo.alt} style={{ width: '100%', maxHeight: inCategory ? 500 : 700, height: inCategory ? 500 : 700 }} />
         </Flex>
       </Col>
-      <Col span={6} style={{ alignSelf: 'start' }}>
-        <Flex vertical style={{ position: 'relative', gap: 0, margin: 0, padding: 0, paddingInline: '7%', width: '100%', paddingTop: '35%' }}>
-          <Text strong italic style={{ fontSize: 30, width: 'fit-content', lineHeight: 1, color: 'white', textTransform: 'uppercase' }}>Up to</Text>
-          <Text strong italic style={{ fontSize: 150, width: 'fit-content', lineHeight: 1, color: 'white' }}>50%</Text>
-          <Text strong italic style={{ fontSize: 30, width: 'fit-content', lineHeight: 1, color: 'white', alignSelf: 'end', textTransform: 'uppercase' }}>off</Text>
+      <Col span={inCategory ? 7 : 6} style={{ alignSelf: 'start' }}>
+        <Flex vertical style={{ position: 'relative', gap: 0, margin: 0, padding: 0, paddingInline: '7%', width: '100%', paddingTop: inCategory ? '40%' : '35%' }}>
+          <Text strong italic style={{ fontSize: inCategory ? 28 : 30, width: 'fit-content', lineHeight: 1, color: 'white', textTransform: 'uppercase' }}>Up to</Text>
+          <Text strong italic style={{ fontSize: inCategory ? 140 : 150, width: 'fit-content', lineHeight: 1, color: 'white' }}>50%</Text>
+          <Text strong italic style={{ fontSize: inCategory ? 28 : 30, width: 'fit-content', lineHeight: 1, color: 'white', alignSelf: 'end', textTransform: 'uppercase' }}>off</Text>
         </Flex>
       </Col>
       <MarqueePromo position='bottom' />
