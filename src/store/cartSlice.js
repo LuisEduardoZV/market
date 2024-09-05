@@ -16,6 +16,7 @@ const initialState = {
     discount: 0,
     shipping: 0,
     billing: null,
+    code: '',
     payment: {
       type: 'free',
       method: 'cod',
@@ -65,6 +66,11 @@ const slice = createSlice({
       state.checkout.total = (Number(state.checkout.total) - lastSubtotal + total).toFixed(2)
 
       state.checkout.products[productIndex].quantityAdded = quantityAdded
+    },
+
+    // ADD PROMO CODE
+    addPromoCodeSuccess (state, action) {
+      state.checkout.code = action.payload
     },
 
     // SET STEP
@@ -160,6 +166,16 @@ export function updateProduct (product) {
   return async () => {
     try {
       dispatch(slice.actions.updateProductSuccess(product))
+    } catch (error) {
+      dispatch(slice.actions.hasError(error))
+    }
+  }
+}
+
+export function addPromoCode (code) {
+  return async () => {
+    try {
+      dispatch(slice.actions.addPromoCodeSuccess(code))
     } catch (error) {
       dispatch(slice.actions.hasError(error))
     }

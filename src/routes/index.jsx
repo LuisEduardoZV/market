@@ -5,6 +5,7 @@ import HomeLayout from '../layout/components/HomeLayout'
 import Cart from '../pages/Cart'
 import Category from '../pages/Category'
 import Home from '../pages/Home'
+import Payment from '../pages/Payment'
 import Product from '../pages/Product'
 
 export default function Routes () {
@@ -29,6 +30,10 @@ export default function Routes () {
       {
         path: 'shopping-cart',
         element: <Cart />
+      },
+      {
+        path: 'payment',
+        element: <Payment />
       }
     ]
   }

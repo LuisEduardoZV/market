@@ -1,17 +1,34 @@
-import { Button, Divider, Flex, Select, Space, Typography, theme } from 'antd'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
+import { Button, Collapse, Divider, Flex, Input, Select, Space, Typography, theme } from 'antd'
+
+import useNotification from '../hooks/useNotification'
 import PromoBanner from '../pages/components/PromoBanner'
 import { useDispatch, useSelector } from '../store'
-import { removeProduct, updateProduct } from '../store/cartSlice'
+import { addPromoCode, removeProduct, updateProduct } from '../store/cartSlice'
 
 import { IconCreditCardPay } from '@tabler/icons-react'
 
 const { Title, Text, Link, Paragraph } = Typography
 const { useToken } = theme
 
+const RedemCode = ({ handleAddPromoCode }) => {
+  const [code, setCode] = useState('')
+
+  return (
+    <>
+      <Input placeholder='Enter promo code' value={code} onChange={(e) => setCode(e.target.value)} style={{ width: '100%' }} />
+      <Button type='primary' disabled={!code} onClick={() => handleAddPromoCode(code)}>Add</Button>
+    </>
+  )
+}
+
 const Cart = () => {
   const { checkout } = useSelector((state) => state.cart)
   const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const { openNotification } = useNotification()
 
   const { token } = useToken()
 
@@ -21,6 +38,11 @@ const Cart = () => {
 
   const handleUpdate = (value, product) => {
     dispatch(updateProduct({ quantityAdded: value, id: product.id, subtotal: product.price * value, total: product.price * value }))
+  }
+
+  const handleAddPromoCode = (code) => {
+    dispatch(addPromoCode(code))
+    openNotification({ message: 'Promo code added.', type: 'success' })
   }
 
   if (!checkout) return null
@@ -88,16 +110,23 @@ const Cart = () => {
             <Text italic style={{ color: 'inherit', margin: 0 }}>Import costs: </Text>
             <Text underline style={{ color: 'inherit', margin: 0 }}>${checkout.shipping?.toFixed(2)}</Text>
           </Flex>
-          <Flex style={{ alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap' }}>
-            <Text italic style={{ color: 'inherit', margin: 0 }}>Disscount: </Text>
-            <Text underline style={{ color: 'inherit', margin: 0 }}>${checkout.discount?.toFixed(2)}</Text>
-          </Flex>
           <Divider style={{ borderColor: token.colorPrimaryBg, marginBlock: 10 }} />
-          <Flex style={{ alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', paddingBlock: '3%' }}>
+          <Flex style={{ alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', paddingBlock: '5%' }}>
             <Title level={2} underline style={{ color: 'inherit', margin: 0 }}>Total: </Title>
             <Title level={2} style={{ color: 'inherit', margin: 0 }}>${checkout.total}</Title>
           </Flex>
-          <Button type='default' style={{ width: '100%', marginTop: 15, marginBottom: 5 }} icon={<IconCreditCardPay />}>
+          <Collapse
+            items={[{
+              key: 'code',
+              label: 'Apply promo code',
+              children: (<RedemCode handleAddPromoCode={handleAddPromoCode} />),
+              style: { padding: 0, margin: 0, color: 'white!important' }
+            }]}
+            style={{ border: 'none', color: 'white!important' }}
+            size='small'
+            className='class'
+          />
+          <Button type='default' style={{ width: '100%', marginTop: 15, marginBottom: 5 }} icon={<IconCreditCardPay />} onClick={(() => navigate('/payment'))}>
             Go to payment
           </Button>
         </Flex>

@@ -225,3 +225,29 @@
 		12.5px 12.5px 4.6px rgba(0, 0, 0, 0.015), 17.7px 17.7px 6.6px rgba(0, 0, 0, 0.017), 25.1px 25.1px 9.3px rgba(0, 0, 0, 0.019), 36.5px 36.5px 13.5px rgba(0, 0, 0, 0.021),
 		56.3px 56.3px 20.8px rgba(0, 0, 0, 0.024), 100px 100px 37px rgba(0, 0, 0, 0.03);
 }
+
+.shadow-card-payment {
+	box-shadow: 2.8px 2.8px 2.2px rgba(0, 0, 0, 0.02), 6.7px 6.7px 5.3px rgba(0, 0, 0, 0.028), 12.5px 12.5px 10px rgba(0, 0, 0, 0.035), 22.3px 22.3px 17.9px rgba(0, 0, 0, 0.042),
+		41.8px 41.8px 33.4px rgba(0, 0, 0, 0.05), 100px 100px 80px rgba(0, 0, 0, 0.07);
+}
+
+.class {
+	& > .ant-collapse-item {
+		> .ant-collapse-header {
+			padding: 0;
+			color: $grey400;
+		}
+		> .ant-collapse-content {
+			background-color: $primaryMain;
+			border: none;
+			> .ant-collapse-content-box {
+				padding: 0;
+				margin: 0;
+				padding-block: 0.5rem;
+				display: flex;
+				align-items: center;
+				column-gap: 10px;
+			}
+		}
+	}
+}
