@@ -2,9 +2,11 @@ import { Fragment } from 'react'
 
 import { Button, Divider, Flex, Typography, theme } from 'antd'
 
+import StepButtonsPayment from './extended/StepButtonsPayment'
+
 import { useSelector } from '../../store'
 
-const PCheckPayment = () => {
+const PCheckPayment = ({ handleBack, handleNext, handleDone, steps }) => {
   const { checkout } = useSelector((state) => state.cart)
   const { token } = theme.useToken()
 
@@ -68,6 +70,13 @@ const PCheckPayment = () => {
             </Flex>
           </Flex>
         </Flex>
+        <StepButtonsPayment
+          handleBack={handleBack}
+          handleNext={handleNext}
+          handleDone={handleDone}
+          current={checkout.step}
+          steps={steps}
+        />
       </Flex>
 
       <Flex vertical style={{ maxWidth: '30%', width: '100%', backgroundColor: token.colorBgElevated, padding: '1.5%', position: 'relative' }}>
@@ -101,6 +110,7 @@ const PCheckPayment = () => {
           </Button>
         </Flex>
       </Flex>
+
     </Flex>
   )
 }

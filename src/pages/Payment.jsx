@@ -1,11 +1,13 @@
-import { useState } from 'react'
-
 import { IconAddressBook, IconCreditCardFilled, IconCubeSend } from '@tabler/icons-react'
-import { Button, Flex, Form, message, Steps, theme } from 'antd'
+import { Flex, Steps, theme } from 'antd'
+
+import { useDispatch, useSelector } from '../store'
 
 import PAddresForm from './components/P_AddresForm'
 import PCheckPayment from './components/P_CheckPayment'
 import PPaymentForm from './components/P_PaymentForm'
+
+import { setBackStep, setNextStep } from '../store/cartSlice'
 
 const steps = [
   {
@@ -26,16 +28,10 @@ const steps = [
 ]
 
 const Payment = () => {
+  const { checkout } = useSelector(state => state.cart)
+  const dispatch = useDispatch()
+
   const { token } = theme.useToken()
-  const [current, setCurrent] = useState(0)
-
-  const next = () => {
-    setCurrent(current + 1)
-  }
-
-  const prev = () => {
-    setCurrent(current - 1)
-  }
 
   const items = steps.map((item) => ({
     key: item.title,
@@ -52,60 +48,39 @@ const Payment = () => {
     padding: '2%'
   }
 
+  const handleBack = () => dispatch(setBackStep())
+  const handleNext = () => dispatch(setNextStep())
+
   return (
     <Flex style={{ paddingBlock: '4%', paddingInline: '8%', width: '100%', alignItems: 'center', justifyContent: 'center' }}>
       <Flex vertical style={{ width: '100%' }}>
-        <Steps current={current} items={items} />
+        <Steps current={checkout.step} items={items} />
         <div style={contentStyle}>
-          <Form
-            name='payment-form'
-            labelWrap
-            labelCol={{
-              span: 4
-            }}
-            wrapperCol={{
-              flex: 1
-            }}
-            style={{
-              maxWidth: '100%'
-            }}
-            initialValues={{
-              shipType: 1
-            }}
-        /* onFinish={onFinish}
-        onFinishFailed={onFinishFailed} */
-            autoComplete='off'
-          >
-            {current === 0 && <PAddresForm />}
-            {current === 1 && <PPaymentForm />}
-            {current === 2 && <PCheckPayment />}
-          </Form>
-        </div>
-        <div
-          style={{
-            marginTop: 24
-          }}
-        >
-          {current > 0 && (
-            <Button
-              style={{
-                margin: '0 8px'
-              }}
-              onClick={() => prev()}
-            >
-              Previous
-            </Button>
+
+          {checkout.step === 0 && (
+            <PAddresForm
+              handleBack={handleBack}
+              handleNext={handleNext}
+              current={checkout.step}
+              steps={steps.length}
+            />
           )}
-          {current < steps.length - 1 && (
-            <Button type='primary' onClick={() => next()}>
-              Next
-            </Button>
+          {checkout.step === 1 && (
+            <PPaymentForm
+              handleBack={handleBack}
+              handleNext={handleNext}
+              current={checkout.step}
+              steps={steps.length}
+            />
           )}
-          {current === steps.length - 1 && (
-            <Button type='primary' onClick={() => message.success('Processing complete!')}>
-              Done
-            </Button>
+          {checkout.step === 2 && (
+            <PCheckPayment
+              handleBack={handleBack}
+              handleNext={handleNext}
+              steps={steps.length}
+            />
           )}
+
         </div>
       </Flex>
     </Flex>

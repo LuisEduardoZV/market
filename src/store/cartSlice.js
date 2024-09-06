@@ -15,12 +15,19 @@ const initialState = {
     total: 0,
     discount: 0,
     shipping: 0,
-    billing: null,
+    billing: {
+      fullName: '',
+      address: '',
+      cp: '',
+      phone: '',
+      shipType: 1
+    },
     code: '',
     payment: {
-      type: 'free',
-      method: 'cod',
-      card: ''
+      type: '',
+      data: {
+
+      }
     }
   }
 }
@@ -90,7 +97,8 @@ const slice = createSlice({
 
     // SET BILLING ADDRESS
     setBillingAddressSuccess (state, action) {
-      state.checkout.billing = action.payload.billing
+      state.checkout.billing = action.payload.data
+      state.checkout.shipping = action.payload.shipping
     },
 
     // SET DISCOUNT
@@ -182,7 +190,6 @@ export function addPromoCode (code) {
   }
 }
 
-/*
 export function setStep (step) {
   return () => {
     dispatch(slice.actions.setStepSuccess(step))
@@ -201,17 +208,17 @@ export function setBackStep () {
   }
 }
 
-export function setBillingAddress (address) {
+export function setBillingAddress (billing) {
   return async () => {
     try {
-      const response = await axios.post('/api/cart/billing-address', { address })
-      dispatch(slice.actions.setBillingAddressSuccess(response.data))
+      dispatch(slice.actions.setBillingAddressSuccess(billing))
     } catch (error) {
       dispatch(slice.actions.hasError(error))
     }
   }
 }
 
+/*
 export function setDiscount (code, total) {
   return async () => {
     try {

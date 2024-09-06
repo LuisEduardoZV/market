@@ -1,11 +1,43 @@
 import { Divider, Flex, Form, Input, Radio, Space, Typography } from 'antd'
+import { useDispatch, useSelector } from '../../store'
 
-const PAddresForm = () => {
+import { setBillingAddress } from '../../store/cartSlice'
+import StepButtonsPayment from './extended/StepButtonsPayment'
+
+const PAddresForm = ({ handleBack, handleNext, current, steps }) => {
+  const [form] = Form.useForm()
+  const { checkout } = useSelector(state => state.cart)
+  const dispatch = useDispatch()
+
+  const handleSaveAddress = () => {
+    dispatch(setBillingAddress({
+      data: form.getFieldsValue(),
+      shipping: form.getFieldValue('shipType') === 1 ? 0 : form.getFieldValue('shipType') === 2 ? 5 : 10
+    }))
+    handleNext()
+  }
+
   return (
-    <>
+    <Form
+      form={form}
+      name='address-form'
+      labelWrap
+      labelCol={{
+        span: 4
+      }}
+      wrapperCol={{
+        flex: 1
+      }}
+      style={{
+        maxWidth: '100%'
+      }}
+      initialValues={checkout.billing}
+        /* onFinishFailed={onFinishFailed} */
+      autoComplete='off'
+    >
       <Form.Item
         label='Full name of recipient'
-        name='fullname'
+        name='fullName'
         rules={[
           {
             required: true,
@@ -123,7 +155,15 @@ const PAddresForm = () => {
           </Space>
         </Radio.Group>
       </Form.Item>
-    </>
+
+      <StepButtonsPayment
+        handleBack={handleBack}
+        handleNext={handleSaveAddress}
+        current={current}
+        steps={steps}
+        form={form}
+      />
+    </Form>
   )
 }
 
