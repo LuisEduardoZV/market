@@ -57,10 +57,10 @@ const Payment = () => {
   const handleToSpecificStep = (step) => dispatch(setStep(step))
 
   const handleDone = () => {
+    navigate('/')
     setTimeout(() => {
-      navigate('/')
       dispatch(resetCart())
-    }, 500)
+    }, 150)
   }
 
   useEffect(() => {

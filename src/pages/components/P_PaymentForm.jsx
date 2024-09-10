@@ -1,9 +1,10 @@
 import { useState } from 'react'
 
 import { IconBrandPaypalFilled, IconCreditCard, IconCreditCardFilled } from '@tabler/icons-react'
-import { Collapse, Flex, Form, Input, Typography } from 'antd'
+import { Collapse, Flex, Form } from 'antd'
 
 import CreditCardForm from './extended/CreditCardForm'
+import OnlinePaymentForm from './extended/OnlinePaymentForm'
 import StepButtonsPayment from './extended/StepButtonsPayment'
 
 import { useDispatch, useSelector } from '../../store'
@@ -12,6 +13,7 @@ import { setPaymentData } from '../../store/cartSlice'
 const PPaymentForm = ({ handleBack, handleNext, current, steps }) => {
   const [debit] = Form.useForm()
   const [credit] = Form.useForm()
+  const [paypal] = Form.useForm()
 
   const { checkout } = useSelector(state => state.cart)
   const dispatch = useDispatch()
@@ -55,14 +57,7 @@ const PPaymentForm = ({ handleBack, handleNext, current, steps }) => {
           PayPal
         </Flex>
       ),
-      children: (
-        <Flex vertical>
-          <Typography.Paragraph>
-            Enter the email address affiliated to your PayPal account and follow the steps in the pop-up window when you finish the process:
-          </Typography.Paragraph>
-          <Input placeholder='Email' type='email' />
-        </Flex>
-      ),
+      children: (<OnlinePaymentForm form={paypal} initValues={initValues} handleFinish={handleSetPayment} name='paypal-payment-form' />),
       showArrow: false
     }
   ]

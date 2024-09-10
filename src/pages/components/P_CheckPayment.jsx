@@ -1,7 +1,7 @@
 import { Fragment, useMemo } from 'react'
 
-import { IconMap2 } from '@tabler/icons-react'
-import { Avatar, Button, Divider, Flex, Typography, theme } from 'antd'
+import { IconCashRegister, IconMap2 } from '@tabler/icons-react'
+import { Avatar, Button, Divider, Flex, Typography, message, theme } from 'antd'
 import dayjs from 'dayjs'
 
 import StepButtonsPayment from './extended/StepButtonsPayment'
@@ -11,6 +11,20 @@ import { useSelector } from '../../store'
 const PCheckPayment = ({ handleBack, handleNext, handleDone, steps, handleToSpecificStep }) => {
   const { checkout } = useSelector((state) => state.cart)
   const { token } = theme.useToken()
+  const [messageApi, contextHolder] = message.useMessage()
+
+  const handleConfirmPayment = () => {
+    messageApi
+      .open({
+        type: 'loading',
+        content: 'Making payment...',
+        duration: 2.5
+      })
+      .then(() => {
+        message.success('Payment successful1', 2.5)
+        handleDone()
+      })
+  }
 
   const finalPrice = useMemo(() => {
     let totalWithDiscount = 0
@@ -22,6 +36,7 @@ const PCheckPayment = ({ handleBack, handleNext, handleDone, steps, handleToSpec
 
   return (
     <Flex style={{ width: '100%', justifyContent: 'space-between', gap: 50 }}>
+      {contextHolder}
       <Flex vertical style={{ width: '100%', gap: 50 }}>
         <Flex vertical style={{ width: '100%', gap: 15 }}>
           <Typography.Title level={5} style={{ margin: 0 }}>
@@ -89,18 +104,33 @@ const PCheckPayment = ({ handleBack, handleNext, handleDone, steps, handleToSpec
           <Flex vertical style={{ width: '100%', backgroundColor: token.colorBgElevated, padding: '1.5%' }}>
             <Flex style={{ width: '100%' }}>
               <Flex style={{ width: '100%', marginLeft: 10 }}>
-                <Avatar style={{ backgroundColor: token.colorPrimary }} icon={<IconMap2 />} size='large' />
+                <Avatar style={{ backgroundColor: token.colorPrimary }} icon={<IconCashRegister />} size='large' />
                 <Flex vertical style={{ width: '100%', justifyContent: 'space-evenly', marginLeft: 10 }}>
-                  <Typography.Text>{checkout.payment.data.name}</Typography.Text>
-                  <Typography.Text type='secondary' italic>
-                    {checkout.payment.data.number}
-                  </Typography.Text>
-                  <Typography.Text type='secondary' italic>
-                    {dayjs(checkout.payment.data.expiry).format('MM/YY')}
-                  </Typography.Text>
-                  <Typography.Text type='secondary' italic>
-                    *Not available in interest-free months
-                  </Typography.Text>
+                  {checkout.payment.type !== 'paypal'
+                    ? (
+                      <>
+                        <Typography.Text>{checkout.payment.data.name}</Typography.Text>
+                        <Typography.Text type='secondary' italic>
+                          {checkout.payment.data.number}
+                        </Typography.Text>
+                        <Typography.Text type='secondary' italic>
+                          {dayjs(checkout.payment.data.expiry).format('MM/YY')}
+                        </Typography.Text>
+                        <Typography.Text type='secondary' italic>
+                          *Not available in interest-free months
+                        </Typography.Text>
+                      </>
+                      )
+                    : (
+                      <>
+                        <Typography.Text type='secondary' italic>
+                          The account affiliated to <span style={{ fontWeight: 'bold' }}>{checkout.payment.data.username}</span> was entered, a login will be required when confirming and paying in order to make the payment.
+                        </Typography.Text>
+                        <Typography.Text type='secondary' italic>
+                          *In case of error, no payment will be made.
+                        </Typography.Text>
+                      </>
+                      )}
                 </Flex>
               </Flex>
             </Flex>
@@ -133,7 +163,7 @@ const PCheckPayment = ({ handleBack, handleNext, handleDone, steps, handleToSpec
             <Typography.Text>Promo code ({checkout.code}):</Typography.Text>
             <Typography.Text>- ${checkout.discount ?? 0} %</Typography.Text>
           </Flex>
-          <Flex style={{ justifyContent: 'space-between' }}>
+          <Flex vertical style={{ justifyContent: 'end', alignItems: 'end' }}>
             <Typography.Text>Code discount:</Typography.Text>
             <Typography.Text>- ${finalPrice.discount} USD</Typography.Text>
           </Flex>
@@ -145,7 +175,7 @@ const PCheckPayment = ({ handleBack, handleNext, handleDone, steps, handleToSpec
           <Button
             type='primary'
             style={{ marginTop: 40, marginBottom: 10 }}
-            onClick={handleDone}
+            onClick={handleConfirmPayment}
           >
             Confirm & Pay
           </Button>
