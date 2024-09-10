@@ -1,4 +1,5 @@
 import { useGSAP } from '@gsap/react'
+import { motion } from 'framer-motion'
 import gsap from 'gsap'
 import { useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -10,6 +11,8 @@ const { Text, Title } = Typography
 const { useToken } = theme
 
 gsap.registerPlugin(useGSAP)
+
+const IconThumbUpMotion = motion.create(IconThumbUp)
 
 const BasicCardProduct = ({ id, title, rating, tags, images, price, typeCarousel, noRating, category, isLoading = false }) => {
   const { token } = useToken()
@@ -28,7 +31,9 @@ const BasicCardProduct = ({ id, title, rating, tags, images, price, typeCarousel
 
       tl.to(title, {
         backgroundColor: token.colorBgBase,
-        paddingInline: '4%'
+        paddingInline: '4%',
+        ease: 'expo.inOut',
+        duration: 0.5
       })
 
       card.addEventListener('mouseenter', () => tl.play())
@@ -52,12 +57,10 @@ const BasicCardProduct = ({ id, title, rating, tags, images, price, typeCarousel
         position: 'relative'
       }}
       onClick={() => {
-        console.log(category)
-
         navigate(`/${category}/product/${id}`)
       }}
     >
-      {isLoading ? <Skeleton.Image active style={{ height: '100%', minHeight: 350, width: '100%', minWidth: 350 }} /> : <img src={image} alt='Image' style={{ height: '100%', maxHeight: 350, width: 'fit-content' }} />}
+      {isLoading ? <Skeleton.Image active style={{ height: '100%', minHeight: 350, width: '100%', minWidth: 350 }} /> : <motion.img src={image} alt='Image' style={{ height: '100%', maxHeight: 350, width: 'fit-content' }} whileHover={{ scale: 1.05 }} transition={{ type: 'spring', stiffness: 400, damping: 10 }} />}
       <Flex vertical style={{ backgroundColor: token.colorPaper, alignItems: 'center', width: '100%', height: '100%' }}>
         <Row style={{ paddingBlock: '3%', alignSelf: 'start', width: '100%' }}>
           <Col span={18}>
@@ -74,8 +77,14 @@ const BasicCardProduct = ({ id, title, rating, tags, images, price, typeCarousel
           </Col>
           <Col span={6}>
             {(!noRating && !isLoading) && (
-              <Flex style={{ display: 'flex', alignItems: 'end', width: 'fit-content' }}>
-                <IconThumbUp color={token.colorPrimary} />
+              <Flex style={{ display: 'flex', alignItems: 'end', width: 'fit-content', zindIndex: 5, cursor: 'default', pointerEvents: 'fill', justifyContent: 'center' }}>
+                <IconThumbUpMotion
+                  whileHover={{ scale: 1.2 }}
+                  whileTap={{ scale: 0.9 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                  style={{ color: token.colorPrimary, outline: 'none' }}
+                  onClick={(e) => e.stopPropagation()}
+                />
                 <Text strong italic style={{ fontSize: '0.9rem' }}>{rating}%</Text>
               </Flex>
             )}
