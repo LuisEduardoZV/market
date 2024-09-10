@@ -1,4 +1,5 @@
 import { useGSAP } from '@gsap/react'
+import { motion } from 'framer-motion'
 import gsap from 'gsap'
 import { useMemo, useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -9,6 +10,8 @@ const { Title, Text } = Typography
 const { useToken } = theme
 
 gsap.registerPlugin(useGSAP)
+
+const FlexMotion = motion.create(Flex)
 
 const BigCardProduct = ({ id, rating, thumbnail, title, tags, brand, price, discountPercentage, category }) => {
   const { token } = useToken()
@@ -44,7 +47,16 @@ const BigCardProduct = ({ id, rating, thumbnail, title, tags, brand, price, disc
   }, { scope: container })
 
   return (
-    <Flex ref={container} id={`big-card-container-${id}`} vertical key={id} className='big-card-item' onClick={() => navigate(`${category}/product/${id}`)}>
+    <FlexMotion
+      ref={container}
+      id={`big-card-container-${id}`}
+      vertical
+      className='big-card-item'
+      onClick={() => navigate(`${category}/product/${id}`)}
+      whileHover={{ scale: 1.05, boxShadow: '2.8px 2.8px 2.2px rgba(0, 0, 0, 0.02), 6.7px 6.7px 5.3px rgba(0, 0, 0, 0.028), 12.5px 12.5px 10px rgba(0, 0, 0, 0.035), 22.3px 22.3px 17.9px rgba(0, 0, 0, 0.042), 41.8px 41.8px 33.4px rgba(0, 0, 0, 0.05), 100px 100px 80px rgba(0, 0, 0, 0.07)' }}
+      whileTap={{ scale: 0.9 }}
+      transition={{ type: 'spring', stiffness: 400, damping: 15 }}
+    >
       <Flex style={{
         position: 'absolute',
         top: 0,
@@ -100,7 +112,7 @@ const BigCardProduct = ({ id, rating, thumbnail, title, tags, brand, price, disc
           )}
         </Col>
       </Row>
-    </Flex>
+    </FlexMotion>
   )
 }
 
