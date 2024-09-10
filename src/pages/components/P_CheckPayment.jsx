@@ -17,11 +17,11 @@ const PCheckPayment = ({ handleBack, handleNext, handleDone, steps, handleToSpec
     messageApi
       .open({
         type: 'loading',
-        content: 'Making payment...',
+        content: 'Checking payment method...',
         duration: 2.5
       })
       .then(() => {
-        message.success('Payment successful1', 2.5)
+        message.success('Payment successfully completed.', 3)
         handleDone()
       })
   }

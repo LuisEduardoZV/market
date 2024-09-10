@@ -50,6 +50,17 @@ const Product = ({ hasDiscount }) => {
     }, 300)
   }
 
+  const buyDirectly = (product) => {
+    dispatch(addProduct({ product: [{ ...product, quantityAdded: quantity }], subtotal: product.price * quantity, total: (product.price * quantity).toFixed(2) }))
+    openNotification({
+      message: 'Product added. The entire cart will be purchased...',
+      type: 'info'
+    })
+    setTimeout(() => {
+      navigate('/payment')
+    }, 300)
+  }
+
   const infoReviews = useMemo(() => {
     if (data && data?.reviews) {
       return Array.from({ length: 5 }, (_, i) =>
@@ -179,7 +190,7 @@ const Product = ({ hasDiscount }) => {
                   ]}
                 />
               </Flex>
-              <Button type='primary' className='shadow-menu-subcategory'>Buy</Button>
+              <Button type='primary' className='shadow-menu-subcategory' onClick={() => buyDirectly(data)}>Buy</Button>
               <Button className='shadow-menu-subcategory' onClick={() => addToCart(data)}>Add to cart</Button>
             </Flex>
           </Flex>
