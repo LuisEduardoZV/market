@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from '../store'
 import { addPromoCode, removeProduct, updateProduct } from '../store/cartSlice'
 
 import { IconCreditCardPay } from '@tabler/icons-react'
+import emptyBox from '../assets/icons/empty-box.svg'
 
 const { Title, Text, Link, Paragraph } = Typography
 const { useToken } = theme
@@ -53,6 +54,14 @@ const Cart = () => {
           <Title level={4}>Shopping Cart</Title>
           <Divider />
           <Space direction='vertical'>
+            {checkout.products.length === 0 && (
+              <Flex vertical style={{ justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+                <img src={emptyBox} alt='Empty cart' style={{ maxHeight: 110, width: '100%', objectFit: 'contain' }} />
+                <Title level={4}>Shopping cart is empty!</Title>
+                <Text type='secondary' style={{ marginTop: 10 }}>Add products to cart to see the breakdown here.</Text>
+                <Button type='primary' onClick={() => navigate('/')} style={{ marginTop: 20 }} size='large'>Discover items</Button>
+              </Flex>
+            )}
             {checkout.products.map((op) => (
               <Flex key={op.id} style={{ width: '100%', gap: 20, justifyContent: 'space-between', borderBottom: `1px solid ${token.colorBorder}`, paddingBlock: '4%' }}>
                 <Flex style={{ backgroundColor: token.colorBgBase }}>
@@ -121,20 +130,24 @@ const Cart = () => {
             <Title level={2} underline style={{ color: 'inherit', margin: 0 }}>Total: </Title>
             <Title level={2} style={{ color: 'inherit', margin: 0 }}>${checkout.total}</Title>
           </Flex>
-          <Collapse
-            items={[{
-              key: 'code',
-              label: 'Apply promo code',
-              children: (<RedemCode handleAddPromoCode={handleAddPromoCode} />),
-              style: { padding: 0, margin: 0, color: 'white!important' }
-            }]}
-            style={{ border: 'none', color: 'white!important' }}
-            size='small'
-            className='class'
-          />
-          <Button type='default' style={{ width: '100%', marginTop: 15, marginBottom: 5 }} icon={<IconCreditCardPay />} onClick={(() => navigate('/payment'))}>
-            Go to payment
-          </Button>
+          {checkout.products.length > 0 && (
+            <>
+              <Collapse
+                items={[{
+                  key: 'code',
+                  label: 'Apply promo code',
+                  children: (<RedemCode handleAddPromoCode={handleAddPromoCode} />),
+                  style: { padding: 0, margin: 0, color: 'white!important' }
+                }]}
+                style={{ border: 'none', color: 'white!important' }}
+                size='small'
+                className='class'
+              />
+              <Button type='default' style={{ width: '100%', marginTop: 15, marginBottom: 5 }} icon={<IconCreditCardPay />} onClick={(() => navigate('/payment'))}>
+                Go to payment
+              </Button>
+            </>
+          )}
         </Flex>
       </Flex>
       <PromoBanner inCategory />
