@@ -251,3 +251,30 @@
 		}
 	}
 }
+
+.visa-bg-card {
+	background-image: radial-gradient(circle at center center, $visaColor, $visaColor),
+		repeating-radial-gradient(circle at center bottom, $visaColor, $visaColor, 80px, $primaryDark 192px, $visaColor 71px);
+	background-blend-mode: multiply;
+	background-color: $visaColor;
+}
+
+.mc-bg-card {
+	background-image: radial-gradient(circle at center center, $mastercardColor, $mastercardColor),
+		repeating-radial-gradient(circle at center bottom, $visaColor, $mastercardColor, 80px, $mastercardColorLight 192px, $mastercardColor 71px);
+	background-blend-mode: multiply;
+	background-color: $mastercardColor;
+}
+
+.amex-bg-card {
+	background-image: radial-gradient(circle at center center, $amexColor, $amexColor),
+		repeating-radial-gradient(circle at center bottom, $amexColor, $amexColor, 80px, $amexColorLight 192px, $amexColor 71px);
+	background-blend-mode: multiply;
+	background-color: $amexColor;
+}
+
+.default-bg-card {
+	background-image: radial-gradient(circle at center center, $grey600, $grey600), repeating-radial-gradient(circle at center bottom, $grey500, $grey500, 80px, $grey600 192px, $grey500 71px);
+	background-blend-mode: multiply;
+	background-color: $grey600;
+}

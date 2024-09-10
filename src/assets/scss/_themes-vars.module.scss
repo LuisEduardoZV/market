@@ -2,6 +2,12 @@
 $paper: #fff;
 $background: #ebebeb;
 
+$visaColor: #0e4595;
+$mastercardColor: #3c5463;
+$mastercardColorLight: #51575a;
+$amexColor: #2557d6;
+$amexColorLight: #3768e6;
+
 // primary
 $primaryLight: #d9e3fd;
 $primaryMain: #0a369d;
@@ -67,6 +73,9 @@ $darkTextSecondary: #757575;
 // ==============================|| JAVASCRIPT ||============================== //
 
 :export {
+	visaColor: $visaColor;
+	mastercardColor: $mastercardColor;
+
 	// paper & background
 	paper: $paper;
 	background: $background;

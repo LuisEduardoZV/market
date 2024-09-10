@@ -1,16 +1,24 @@
-import { Fragment } from 'react'
+import { Fragment, useMemo } from 'react'
 
-import { Button, Divider, Flex, Typography, theme } from 'antd'
+import { IconMap2 } from '@tabler/icons-react'
+import { Avatar, Button, Divider, Flex, Typography, theme } from 'antd'
+import dayjs from 'dayjs'
 
 import StepButtonsPayment from './extended/StepButtonsPayment'
 
 import { useSelector } from '../../store'
 
-const PCheckPayment = ({ handleBack, handleNext, handleDone, steps }) => {
+const PCheckPayment = ({ handleBack, handleNext, handleDone, steps, handleToSpecificStep }) => {
   const { checkout } = useSelector((state) => state.cart)
   const { token } = theme.useToken()
 
-  console.log(checkout)
+  const finalPrice = useMemo(() => {
+    let totalWithDiscount = 0
+    if (checkout?.code) {
+      totalWithDiscount = (checkout.discount * checkout.subtotal) / 100
+    }
+    return { total: checkout.subtotal - totalWithDiscount + checkout.shipping, discount: totalWithDiscount }
+  }, [checkout])
 
   return (
     <Flex style={{ width: '100%', justifyContent: 'space-between', gap: 50 }}>
@@ -45,27 +53,55 @@ const PCheckPayment = ({ handleBack, handleNext, handleDone, steps }) => {
           </Flex>
         </Flex>
         <Flex vertical style={{ width: '100%', gap: 15 }}>
-          <Typography.Title level={5} style={{ margin: 0 }}>
-            Shipping information
-          </Typography.Title>
+          <Flex style={{ width: '100%', justifyContent: 'space-between' }}>
+            <Typography.Title level={5} style={{ margin: 0 }}>
+              Shipping information - {checkout.billing.shipType === 1 ? 'No Rush' : checkout.billing.shipType === 2 ? 'Standard' : 'Express'}
+            </Typography.Title>
+            <Typography.Text underline style={{ cursor: 'pointer' }} onClick={() => handleToSpecificStep(0)}>Editar</Typography.Text>
+          </Flex>
           <Flex vertical style={{ width: '100%', backgroundColor: token.colorBgElevated, padding: '1.5%' }}>
             <Flex style={{ width: '100%' }}>
-              <Flex vertical style={{ width: '100%', justifyContent: 'space-evenly', marginLeft: 10 }}>
-                <Typography.Text>Direccion</Typography.Text>
-                <Typography.Text type='secondary' italic>Mas datos</Typography.Text>
+              <Flex style={{ width: '100%', marginLeft: 10 }}>
+                <Avatar style={{ backgroundColor: token.colorPrimary }} icon={<IconMap2 />} size='large' />
+                <Flex vertical style={{ width: '100%', justifyContent: 'space-evenly', marginLeft: 10 }}>
+                  <Typography.Text>{checkout.billing.fullName} ({checkout.billing.phone})</Typography.Text>
+                  <Typography.Text type='secondary' italic>
+                    {checkout.billing.address}
+                  </Typography.Text>
+                  <Typography.Text type='secondary' italic>
+                    CP: {checkout.billing.cp}
+                  </Typography.Text>
+                  <Typography.Paragraph type='secondary' italic ellipsis={{ rows: 1, expandable: true, symbol: '' }} style={{ margin: 0 }}>
+                    {checkout.billing.more}
+                  </Typography.Paragraph>
+                </Flex>
               </Flex>
             </Flex>
           </Flex>
         </Flex>
         <Flex vertical style={{ width: '100%', gap: 15 }}>
-          <Typography.Title level={5} style={{ margin: 0 }}>
-            Payment detail
-          </Typography.Title>
+          <Flex style={{ width: '100%', justifyContent: 'space-between' }}>
+            <Typography.Title level={5} style={{ margin: 0 }}>
+              Payment detail - <span style={{ textTransform: 'capitalize' }}>{(checkout.payment.type !== 'paypal') ? checkout.payment.type + ' Card' : checkout.payment.type}</span>
+            </Typography.Title>
+            <Typography.Text underline style={{ cursor: 'pointer' }} onClick={() => handleToSpecificStep(1)}>Editar</Typography.Text>
+          </Flex>
           <Flex vertical style={{ width: '100%', backgroundColor: token.colorBgElevated, padding: '1.5%' }}>
             <Flex style={{ width: '100%' }}>
-              <Flex vertical style={{ width: '100%', justifyContent: 'space-evenly', marginLeft: 10 }}>
-                <Typography.Text>Direccion</Typography.Text>
-                <Typography.Text type='secondary' italic>Mas datos</Typography.Text>
+              <Flex style={{ width: '100%', marginLeft: 10 }}>
+                <Avatar style={{ backgroundColor: token.colorPrimary }} icon={<IconMap2 />} size='large' />
+                <Flex vertical style={{ width: '100%', justifyContent: 'space-evenly', marginLeft: 10 }}>
+                  <Typography.Text>{checkout.payment.data.name}</Typography.Text>
+                  <Typography.Text type='secondary' italic>
+                    {checkout.payment.data.number}
+                  </Typography.Text>
+                  <Typography.Text type='secondary' italic>
+                    {dayjs(checkout.payment.data.expiry).format('MM/YY')}
+                  </Typography.Text>
+                  <Typography.Text type='secondary' italic>
+                    *Not available in interest-free months
+                  </Typography.Text>
+                </Flex>
               </Flex>
             </Flex>
           </Flex>
@@ -94,17 +130,22 @@ const PCheckPayment = ({ handleBack, handleNext, handleDone, steps }) => {
             <Typography.Text>+ ${checkout.shipping} USD</Typography.Text>
           </Flex>
           <Flex style={{ justifyContent: 'space-between' }}>
-            <Typography.Text>Promo code:</Typography.Text>
-            <Typography.Text>- ${checkout.code ?? 0} USD</Typography.Text>
+            <Typography.Text>Promo code ({checkout.code}):</Typography.Text>
+            <Typography.Text>- ${checkout.discount ?? 0} %</Typography.Text>
+          </Flex>
+          <Flex style={{ justifyContent: 'space-between' }}>
+            <Typography.Text>Code discount:</Typography.Text>
+            <Typography.Text>- ${finalPrice.discount} USD</Typography.Text>
           </Flex>
           <Divider />
           <Flex style={{ justifyContent: 'space-between' }}>
             <Typography.Text italic strong>Total:</Typography.Text>
-            <Typography.Text italic strong>${checkout.total} USD</Typography.Text>
+            <Typography.Text italic strong>${finalPrice.total} USD</Typography.Text>
           </Flex>
           <Button
             type='primary'
             style={{ marginTop: 40, marginBottom: 10 }}
+            onClick={handleDone}
           >
             Confirm & Pay
           </Button>

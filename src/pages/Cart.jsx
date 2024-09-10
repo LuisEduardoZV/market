@@ -108,8 +108,14 @@ const Cart = () => {
           </Flex>
           <Flex style={{ alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap' }}>
             <Text italic style={{ color: 'inherit', margin: 0 }}>Import costs: </Text>
-            <Text underline style={{ color: 'inherit', margin: 0 }}>${checkout.shipping?.toFixed(2)}</Text>
+            <Text underline style={{ color: 'inherit', margin: 0 }}>$0.00</Text>
           </Flex>
+          {checkout?.code && (
+            <Flex style={{ alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap' }}>
+              <Text italic style={{ color: 'inherit', margin: 0 }}>Promo code: </Text>
+              <Text style={{ color: 'inherit', margin: 0, fontWeight: 'bold' }}>{checkout.code}</Text>
+            </Flex>
+          )}
           <Divider style={{ borderColor: token.colorPrimaryBg, marginBlock: 10 }} />
           <Flex style={{ alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', paddingBlock: '5%' }}>
             <Title level={2} underline style={{ color: 'inherit', margin: 0 }}>Total: </Title>

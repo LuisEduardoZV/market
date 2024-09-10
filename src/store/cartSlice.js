@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 
 // project imports
 import { dispatch } from '.'
+import { SPECIAL_PROMO_CODES } from '../utils/contants'
 
 // ----------------------------------------------------------------------
 
@@ -78,6 +79,10 @@ const slice = createSlice({
     // ADD PROMO CODE
     addPromoCodeSuccess (state, action) {
       state.checkout.code = action.payload
+      const randomDiscount = Math.floor(Math.random() * 20) + 5
+      const code = String(state.checkout.code).toUpperCase()
+      if (SPECIAL_PROMO_CODES.includes(code)) state.checkout.discount = 100
+      else state.checkout.discount = randomDiscount
     },
 
     // SET STEP
@@ -101,44 +106,11 @@ const slice = createSlice({
       state.checkout.shipping = action.payload.shipping
     },
 
-    // SET DISCOUNT
-    setDiscountSuccess (state, action) {
-      let difference = 0
-      if (state.checkout.discount > 0) {
-        difference = state.checkout.discount
-      }
-
-      state.checkout.discount = action.payload.amount
-      state.checkout.total = state.checkout.total + difference - action.payload.amount
-    },
-
-    // SET SHIPPING CHARGE
-    setShippingChargeSuccess (state, action) {
-      state.checkout.shipping = action.payload.shipping
-      state.checkout.total += action.payload.newShipping
-      state.checkout.payment = {
-        ...state.checkout.payment,
-        type: action.payload.type
-      }
-    },
-
     // SET PAYMENT METHOD
-    setPaymentMethodSuccess (state, action) {
-      state.checkout.payment = {
-        ...state.checkout.payment,
-        method: action.payload.method
-      }
+    setPaymentSuccess (state, action) {
+      state.checkout.payment = action.payload
     },
 
-    // SET PAYMENT CARD
-    setPaymentCardSuccess (state, action) {
-      state.checkout.payment = {
-        ...state.checkout.payment,
-        card: action.payload.card
-      }
-    },
-
-    // RESET CART
     resetCardSuccess (state) {
       state.checkout = initialState.checkout
     }
@@ -218,6 +190,26 @@ export function setBillingAddress (billing) {
   }
 }
 
+export function setPaymentData (data) {
+  return async () => {
+    try {
+      dispatch(slice.actions.setPaymentSuccess(data))
+    } catch (error) {
+      dispatch(slice.actions.hasError(error))
+    }
+  }
+}
+
+export function resetCart () {
+  return async () => {
+    try {
+      dispatch(slice.actions.resetCardSuccess())
+    } catch (error) {
+      dispatch(slice.actions.hasError(error))
+    }
+  }
+}
+
 /*
 export function setDiscount (code, total) {
   return async () => {
@@ -241,17 +233,6 @@ export function setShippingCharge (charge, shipping) {
   }
 }
 
-export function setPaymentMethod (method) {
-  return async () => {
-    try {
-      const response = await axios.post('/api/cart/payment-method', { method })
-      dispatch(slice.actions.setPaymentMethodSuccess(response.data))
-    } catch (error) {
-      dispatch(slice.actions.hasError(error))
-    }
-  }
-}
-
 export function setPaymentCard (card) {
   return async () => {
     try {
@@ -263,14 +244,4 @@ export function setPaymentCard (card) {
   }
 }
 
-export function resetCart () {
-  return async () => {
-    try {
-      const response = await axios.post('/api/cart/reset')
-      dispatch(slice.actions.resetCardSuccess(response.data))
-    } catch (error) {
-      dispatch(slice.actions.hasError(error))
-    }
-  }
-}
  */

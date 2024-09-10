@@ -1,19 +1,9 @@
-import { useEffect, useState } from 'react'
+import { Button } from 'antd'
 
-import { Button, Form } from 'antd'
+import { useFormBtnValidate } from '../../../hooks/useFormBtnValidate'
 
-const StepButtonsPayment = ({ current, steps, handleBack, handleNext, form }) => {
-  const [disabled, setDisabled] = useState(false)
-  const values = Form.useWatch([], form)
-
-  useEffect(() => {
-    form
-      .validateFields({
-        validateOnly: true
-      })
-      .then(() => setDisabled(true))
-      .catch(() => setDisabled(false))
-  }, [form, values])
+const StepButtonsPayment = ({ current, steps, handleBack, handleNext, form, manualDisabled = false, noNext = false }) => {
+  const { disabled } = useFormBtnValidate(form)
 
   return (
     <div
@@ -31,8 +21,8 @@ const StepButtonsPayment = ({ current, steps, handleBack, handleNext, form }) =>
           Previous
         </Button>
       )}
-      {current < steps - 1 && (
-        <Button type='primary' disabled={!disabled} onClick={handleNext}>
+      {(current < steps - 1 && !noNext) && (
+        <Button type='primary' disabled={!disabled && !manualDisabled} onClick={handleNext}>
           Next
         </Button>
       )}

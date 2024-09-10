@@ -1,19 +1,28 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import { IconBrandPaypalFilled, IconCreditCard, IconCreditCardFilled } from '@tabler/icons-react'
-import { Collapse, Flex, Form } from 'antd'
+import { Collapse, Flex, Form, Input, Typography } from 'antd'
 
 import CreditCardForm from './extended/CreditCardForm'
 import StepButtonsPayment from './extended/StepButtonsPayment'
 
 import { useDispatch, useSelector } from '../../store'
+import { setPaymentData } from '../../store/cartSlice'
 
 const PPaymentForm = ({ handleBack, handleNext, current, steps }) => {
-  const [form] = Form.useForm()
+  const [debit] = Form.useForm()
+  const [credit] = Form.useForm()
+
   const { checkout } = useSelector(state => state.cart)
   const dispatch = useDispatch()
 
-  const [paymentType, setPaymentType] = useState(checkout.payment.type)
+  const [paymentType, setPaymentType] = useState(checkout.payment.type ?? '')
+  const [initValues] = useState(checkout.payment?.data ?? {})
+
+  const handleSetPayment = (data) => {
+    dispatch(setPaymentData({ type: paymentType, data }))
+    handleNext()
+  }
 
   const items = [
     {
@@ -24,18 +33,18 @@ const PPaymentForm = ({ handleBack, handleNext, current, steps }) => {
           Credit Card
         </Flex>
       ),
-      children: <CreditCardForm form={form} />,
+      children: <CreditCardForm form={credit} initValues={initValues} handleFinish={handleSetPayment} name='credit-payment-form' />,
       showArrow: false
     },
     {
-      key: 'card',
+      key: 'debit',
       label: (
         <Flex style={{ alignItems: 'center', gap: 5 }}>
           <IconCreditCardFilled />
           Debit Card
         </Flex>
       ),
-      children: <CreditCardForm form={form} />,
+      children: <CreditCardForm form={debit} initValues={initValues} handleFinish={handleSetPayment} name='debit-payment-form' />,
       showArrow: false
     },
     {
@@ -46,16 +55,17 @@ const PPaymentForm = ({ handleBack, handleNext, current, steps }) => {
           PayPal
         </Flex>
       ),
+      children: (
+        <Flex vertical>
+          <Typography.Paragraph>
+            Enter the email address affiliated to your PayPal account and follow the steps in the pop-up window when you finish the process:
+          </Typography.Paragraph>
+          <Input placeholder='Email' type='email' />
+        </Flex>
+      ),
       showArrow: false
     }
   ]
-
-  useEffect(() => {
-    form.setFieldValue('name', '')
-    form.setFieldValue('number', '')
-    form.setFieldValue('expiry', '')
-    form.setFieldValue('cvc', '')
-  }, [paymentType, form])
 
   return (
     <>
@@ -64,10 +74,10 @@ const PPaymentForm = ({ handleBack, handleNext, current, steps }) => {
       </Flex>
       <StepButtonsPayment
         handleBack={handleBack}
-        handleNext={handleNext}
+        handleNext={handleSetPayment}
         current={current}
         steps={steps}
-        form={form}
+        noNext
       />
     </>
   )

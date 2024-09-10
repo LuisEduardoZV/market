@@ -1,3 +1,6 @@
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+
 import { IconAddressBook, IconCreditCardFilled, IconCubeSend } from '@tabler/icons-react'
 import { Flex, Steps, theme } from 'antd'
 
@@ -7,7 +10,7 @@ import PAddresForm from './components/P_AddresForm'
 import PCheckPayment from './components/P_CheckPayment'
 import PPaymentForm from './components/P_PaymentForm'
 
-import { setBackStep, setNextStep } from '../store/cartSlice'
+import { resetCart, setBackStep, setNextStep, setStep } from '../store/cartSlice'
 
 const steps = [
   {
@@ -30,6 +33,7 @@ const steps = [
 const Payment = () => {
   const { checkout } = useSelector(state => state.cart)
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const { token } = theme.useToken()
 
@@ -50,6 +54,20 @@ const Payment = () => {
 
   const handleBack = () => dispatch(setBackStep())
   const handleNext = () => dispatch(setNextStep())
+  const handleToSpecificStep = (step) => dispatch(setStep(step))
+
+  const handleDone = () => {
+    setTimeout(() => {
+      navigate('/')
+      dispatch(resetCart())
+    }, 500)
+  }
+
+  useEffect(() => {
+    return () => {
+      dispatch(setStep(0))
+    }
+  }, [])
 
   return (
     <Flex style={{ paddingBlock: '4%', paddingInline: '8%', width: '100%', alignItems: 'center', justifyContent: 'center' }}>
@@ -77,6 +95,8 @@ const Payment = () => {
             <PCheckPayment
               handleBack={handleBack}
               handleNext={handleNext}
+              handleToSpecificStep={handleToSpecificStep}
+              handleDone={handleDone}
               steps={steps.length}
             />
           )}

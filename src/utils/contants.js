@@ -1,2 +1,3 @@
 export const CARDS_PER_PAGE = 6
 export const DATE_FORMAT_CARD = 'MM/YYYY'
+export const SPECIAL_PROMO_CODES = ['ALIBB', 'ALITZEL', 'ALGODON', 'GATO', 'ALIHERMOSA']
