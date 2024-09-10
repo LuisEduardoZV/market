@@ -17,7 +17,7 @@ const { Search } = Input
 const { Text, Link } = Typography
 const { useToken } = theme
 
-const HeaderContainer = ({ openMenu, handleToHome, currentSubCategory }) => {
+const HeaderContainer = ({ openMenu, handleToHome }) => {
   const { checkout } = useSelector((state) => state.cart)
 
   const { token } = useToken()

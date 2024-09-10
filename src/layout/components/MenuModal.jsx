@@ -1,3 +1,5 @@
+import { motion } from 'framer-motion'
+
 import { IconSquareRoundedXFilled } from '@tabler/icons-react'
 import { Button, Flex, Typography, theme } from 'antd'
 
@@ -6,6 +8,29 @@ import ModalMenuCards from '../../ui-components/extended/ModalMenuCards'
 
 const { Title } = Typography
 const { useToken } = theme
+
+const FlexMotion = motion.create(Flex)
+
+const dropIn = {
+  hidden: {
+    y: '-100vh',
+    opacity: 0
+  },
+  visible: {
+    y: '0',
+    opacity: 1,
+    transition: {
+      duration: 0.1,
+      type: 'spring',
+      damping: 25,
+      stiffness: 500
+    }
+  },
+  exit: {
+    y: '100vh',
+    opacity: 0
+  }
+}
 
 const MenuModal = ({ close, categories, setSelected, open }) => {
   const { token } = useToken()
@@ -27,7 +52,7 @@ const MenuModal = ({ close, categories, setSelected, open }) => {
 
   if (!open) return null
   return (
-    <Flex
+    <FlexMotion
       ref={container}
       style={{
         position: 'fixed',
@@ -43,25 +68,37 @@ const MenuModal = ({ close, categories, setSelected, open }) => {
         alignItems: 'center'
       }}
       vertical
+      animate={{ opacity: 1 }}
+      initial={{ opacity: 0 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.5 }}
     >
-      <Title level={2} className='titleModalMenu' style={{ marginBlock: '2.5%', paddingInline: '2%', alignSelf: 'start' }}>Choose a speci<span /> </Title>
-      <Button type='text' icon={<IconSquareRoundedXFilled />} style={{ position: 'absolute', top: '4%', right: '4%' }} onClick={close} />
-      <Flex
-        style={{
-          width: '100%',
-          height: '100%',
-          display: 'grid',
-          gridTemplateColumns: '1fr 1fr 1fr',
-          gridTemplateRows: '50% 50%',
-          position: 'relative',
-          gap: 30
-        }}
+      <motion.div
+        style={{ position: 'relative', width: '100%', height: '100%' }}
+        variants={dropIn}
+        initial='hidden'
+        animate='visible'
+        exit='exit'
       >
-        {categories && categories.map((op) => (
-          <ModalMenuCards key={op.id} item={op} setSelected={setSelected} />
-        ))}
-      </Flex>
-    </Flex>
+        <Title level={2} className='titleModalMenu' style={{ marginBlock: '2.5%', paddingInline: '2%', alignSelf: 'start' }}>Choose a speci<span /> </Title>
+        <Button type='text' icon={<IconSquareRoundedXFilled />} style={{ position: 'absolute', top: '4%', right: '4%' }} onClick={close} />
+        <Flex
+          style={{
+            width: '100%',
+            height: '100%',
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr 1fr',
+            gridTemplateRows: '50% 50%',
+            position: 'relative',
+            gap: 30
+          }}
+        >
+          {categories && categories.map((op) => (
+            <ModalMenuCards key={op.id} item={op} setSelected={setSelected} />
+          ))}
+        </Flex>
+      </motion.div>
+    </FlexMotion>
   )
 }
 

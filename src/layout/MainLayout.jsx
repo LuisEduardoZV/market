@@ -1,3 +1,4 @@
+import { AnimatePresence } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
 
@@ -48,12 +49,16 @@ const MainLayout = () => {
     >
       <HeaderContainer openMenu={() => { setShow(true) }} handleToHome={handleToHome} />
       <Content style={{ maxWidth: '100vw', marginTop: 40 }}>
-        <MenuModal
-          categories={categories}
-          open={show}
-          close={() => { setShow(false) }}
-          setSelected={handleCurrentCat}
-        />
+        <AnimatePresence initial={false} onExitComplete={() => null}>
+          {show && (
+            <MenuModal
+              categories={categories}
+              open={show}
+              close={() => { setShow(false) }}
+              setSelected={handleCurrentCat}
+            />
+          )}
+        </AnimatePresence>
         <Outlet context={[{ currentCategory: { ...currentCategory, subcategory: currentSubCategory }, categoriesInside, show, handleCurrentCat }]} />
       </Content>
       <FooterCustom />
