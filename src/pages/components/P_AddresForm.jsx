@@ -66,7 +66,8 @@ const PAddresForm = ({ handleBack, handleNext, current, steps }) => {
           {
             required: true,
             message: 'Please input your CP!'
-          }
+          },
+          { pattern: /^\d{3,4}$/, message: 'Please input a valid CP!' }
         ]}
       >
         <Input style={{ width: '50%' }} />
@@ -78,7 +79,8 @@ const PAddresForm = ({ handleBack, handleNext, current, steps }) => {
           {
             required: true,
             message: 'Please input your phone!'
-          }
+          },
+          { pattern: /^\d/, message: 'Please input a valid phone!' }
         ]}
       >
         <Input style={{ width: '50%' }} />
