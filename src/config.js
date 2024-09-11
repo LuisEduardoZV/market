@@ -1,4 +1,4 @@
-export const MAIN_PATH = '/'
+export const MAIN_PATH = 'market'
 export const NAME_APP = 'Market Store'
 
 export const BASE_URL_API = 'https://dummyjson.com'
