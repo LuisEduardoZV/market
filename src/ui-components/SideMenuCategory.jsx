@@ -113,28 +113,30 @@ const SideMenuCategory = ({ categoriesInside, filters, brands, prices, handleFil
           }}
         />
       </Flex>
-      <Flex vertical>
-        <Flex style={{ alignItems: 'center', justifyContent: 'space-between' }}>
-          <Title level={5} style={{ marginBottom: 0, paddingBottom: 0 }}>Brands</Title>
-          {filters.brand && <IconSquareRoundedX
-            size={18} color={token.colorPrimaryTextActive} style={{ cursor: 'pointer' }} onClick={() => {
-              handleChangeFilters('brand', null)
-              setBrand(null)
-            }}
-                            />}
+      {brands && brands.length > 0 && (
+        <Flex vertical>
+          <Flex style={{ alignItems: 'center', justifyContent: 'space-between' }}>
+            <Title level={5} style={{ marginBottom: 0, paddingBottom: 0 }}>Brands</Title>
+            {filters.brand && <IconSquareRoundedX
+              size={18} color={token.colorPrimaryTextActive} style={{ cursor: 'pointer' }} onClick={() => {
+                handleChangeFilters('brand', null)
+                setBrand(null)
+              }}
+                              />}
+          </Flex>
+          <Divider style={{ margin: 0, marginBottom: 10, backgroundColor: token.colorPrimary, width: '100%' }} />
+          <Radio.Group
+            onChange={(e) => {
+              handleChangeFilters('brand', e.target.value)
+              setBrand(e.target.value)
+            }} value={brand}
+          >
+            <Space direction='vertical'>
+              {brands && brands.map((op) => <ButtonCardMenu key={op} id={op} category={op ?? 'Sin Marca'} />)}
+            </Space>
+          </Radio.Group>
         </Flex>
-        <Divider style={{ margin: 0, marginBottom: 10, backgroundColor: token.colorPrimary, width: '100%' }} />
-        <Radio.Group
-          onChange={(e) => {
-            handleChangeFilters('brand', e.target.value)
-            setBrand(e.target.value)
-          }} value={brand}
-        >
-          <Space direction='vertical'>
-            {brands && brands.map((op) => <ButtonCardMenu key={op} id={op} category={op} />)}
-          </Space>
-        </Radio.Group>
-      </Flex>
+      )}
     </Flex>
   )
 }

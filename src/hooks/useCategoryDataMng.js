@@ -39,9 +39,9 @@ export function useCategoryDataMng (categoriesInside, category, subcategory) {
     setFilters(filters)
   }, [])
 
-  const nextPage = useCallback(() => {
+  const nextPage = () => {
     setPage(page + 1)
-  }, [])
+  }
 
   return { filters, page, extraInfo, maxPage, paginated, isLoading: currentLoadingMain, loadingFiltered, loadingPaginated, handleFilters, nextPage }
 }

@@ -19,11 +19,16 @@ export function getDataForSubMenuInCategory (subcategories) {
   const prices = subcategories.map((op) => op.price)
   const brands = subcategories.map((op) => op.brand)
 
+  const hasBrands = brands.reduce((average, amount) => {
+    if (!average) return !!amount
+    else return average || !!amount
+  })
+
   const min = Math.floor(Math.min(...prices))
   const max = Math.ceil(Math.max(...prices))
   const noRepeatBrands = new Set(brands)
 
-  return { prices: [min, max], brands: [...noRepeatBrands] }
+  return { prices: [min, max], brands: hasBrands ? [...noRepeatBrands] : null }
 }
 
 export async function filteringCategoryData (data, filters) {

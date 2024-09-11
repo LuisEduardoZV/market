@@ -35,28 +35,30 @@ const Category = () => {
   return (
     <Flex vertical style={{ width: '100%', position: 'relative', paddingLeft: '4%', minHeight: '100vh' }}>
       <Title style={{ marginBlock: 50, position: 'sticky', top: '8%', width: '100%', zIndex: 1, backgroundColor: token.colorWhite, paddingBottom: 10 }}>{state.title ?? category}</Title>
-      {extraInfo && <SideMenuCategory categoriesInside={categoriesInside} filters={filters} brands={extraInfo?.brands} prices={extraInfo?.prices} handleFilters={handleFilters} />}
-      {isLoading
-        ? (
-          <Flex style={{ width: '82%', gap: 30, display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', alignSelf: 'end', position: 'sticky', top: '8%', marginTop: '0', paddingRight: '5%' }}>
-            <BasicCardProduct id={1} typeCarousel='loading' isLoading />
-            <BasicCardProduct id={2} typeCarousel='loading' isLoading />
-            <BasicCardProduct id={3} typeCarousel='loading' isLoading />
-            <BasicCardProduct id={4} typeCarousel='loading' isLoading />
-            <BasicCardProduct id={5} typeCarousel='loading' isLoading />
-            <BasicCardProduct id={6} typeCarousel='loading' isLoading />
-          </Flex>
-          )
-        : (
-          <Flex style={{ width: '82%', gap: 30, display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', alignSelf: 'end', position: 'sticky', top: '5%', marginTop: '-80vh', paddingRight: '5%' }}>
-            {renderCards()}
-            <Flex style={{ gridColumn: 'span 3', justifyContent: 'center' }}>
-              {page < maxPage && (
-                <Button onClick={nextPage} loading={loadingPaginated} type='primary' style={{ borderRadius: 5 }} className='shadow-menu-subcategory'>Cargar más...</Button>
-              )}
+      <Flex style={{ justifyContent: 'space-around', width: '100%' }}>
+        {extraInfo && <SideMenuCategory categoriesInside={categoriesInside} filters={filters} brands={extraInfo?.brands} prices={extraInfo?.prices} handleFilters={handleFilters} />}
+        {isLoading
+          ? (
+            <Flex style={{ width: '82%', gap: 30, display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', alignSelf: 'end', position: 'sticky', top: '8%', marginTop: '0', paddingRight: '5%' }}>
+              <BasicCardProduct id={1} typeCarousel='loading' isLoading />
+              <BasicCardProduct id={2} typeCarousel='loading' isLoading />
+              <BasicCardProduct id={3} typeCarousel='loading' isLoading />
+              <BasicCardProduct id={4} typeCarousel='loading' isLoading />
+              <BasicCardProduct id={5} typeCarousel='loading' isLoading />
+              <BasicCardProduct id={6} typeCarousel='loading' isLoading />
             </Flex>
-          </Flex>
-          )}
+            )
+          : (
+            <Flex style={{ width: '80%', gap: 30, display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', alignSelf: 'end', top: 0, justifySelf: 'end' }}>
+              {renderCards()}
+              <Flex style={{ gridColumn: 'span 3', justifyContent: 'center' }}>
+                {page < maxPage && (
+                  <Button onClick={nextPage} loading={loadingPaginated} type='primary' style={{ borderRadius: 5 }} className='shadow-menu-subcategory'>Cargar más...</Button>
+                )}
+              </Flex>
+            </Flex>
+            )}
+      </Flex>
     </Flex>
   )
 }

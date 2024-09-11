@@ -48,7 +48,7 @@ const MainLayout = () => {
     }}
     >
       <HeaderContainer openMenu={() => { setShow(true) }} handleToHome={handleToHome} />
-      <Content style={{ maxWidth: '100vw', marginTop: 40 }}>
+      <Content style={{ maxWidth: '100vw', marginTop: 40, height: '100%', position: 'relative' }}>
         <AnimatePresence initial={false} onExitComplete={() => null}>
           {show && (
             <MenuModal

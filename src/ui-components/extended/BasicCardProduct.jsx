@@ -62,8 +62,14 @@ const BasicCardProduct = ({ id, title, rating, tags, images, price, typeCarousel
       }}
       whileHover={{ boxShadow: '5.9px 4.6px 10px rgba(0, 0, 0, 0.02), 47px 37px 80px rgba(0, 0, 0, 0.04)' }}
     >
-      {isLoading ? <Skeleton.Image active style={{ height: '100%', minHeight: 350, width: '100%', minWidth: 350 }} /> : <motion.img src={image} alt='Image' style={{ height: '100%', maxHeight: 350, width: 'fit-content' }} whileHover={{ scale: 1.05 }} transition={{ type: 'spring', stiffness: 400, damping: 10 }} />}
-      <Flex vertical style={{ backgroundColor: token.colorPaper, alignItems: 'center', width: '100%', height: '100%' }}>
+      {isLoading
+        ? <Skeleton.Image active style={{ height: '100%', minHeight: 350, width: '100%', minWidth: 350 }} />
+        : (
+          <div style={{ height: '100%', maxHeight: 350, minHeight: 350, width: '100%', maxWidth: 350, display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative' }}>
+            <motion.img src={image} alt='Image' style={{ height: '100%', maxHeight: 340, width: '100%', objectFit: 'contain' }} whileHover={{ scale: 1.05 }} transition={{ type: 'spring', stiffness: 400, damping: 10 }} />
+          </div>
+          )}
+      <Flex vertical style={{ backgroundColor: token.colorPaper, alignItems: 'center', width: '100%', height: '100%', alignSelf: 'end' }}>
         <Row style={{ paddingBlock: '3%', alignSelf: 'start', width: '100%' }}>
           <Col span={18}>
             <Flex vertical>
