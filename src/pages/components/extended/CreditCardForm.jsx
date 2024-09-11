@@ -1,8 +1,9 @@
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 
 import { IconCreditCardFilled } from '@tabler/icons-react'
 import { Button, DatePicker, Flex, Form, Input, theme, Typography } from 'antd'
 import dayjs from 'dayjs'
+import { motion } from 'framer-motion'
 
 import customParseFormat from 'dayjs/plugin/customParseFormat'
 import { useFormBtnValidate } from '../../../hooks/useFormBtnValidate'
@@ -15,8 +16,12 @@ import visa from '../../../assets/icons/visa-logo.svg'
 
 dayjs.extend(customParseFormat)
 
+const FlexMotion = motion.create(Flex)
+
 const CreditCardForm = ({ form, name, initValues, handleFinish }) => {
   const { token } = theme.useToken()
+  const [isFlipped, setIsFlipped] = useState(false)
+  const [isAnimating, setIsAnimating] = useState(false)
 
   const { disabled, values } = useFormBtnValidate(form)
 
@@ -36,6 +41,13 @@ const CreditCardForm = ({ form, name, initValues, handleFinish }) => {
     }
     return { logo: null, color: 'default-bg-card' }
   }, [values?.number])
+
+  function handleFlip () {
+    if (!isAnimating) {
+      setIsFlipped(!isFlipped)
+      setIsAnimating(true)
+    }
+  }
 
   return (
     <Form
@@ -82,29 +94,61 @@ const CreditCardForm = ({ form, name, initValues, handleFinish }) => {
                 pattern: /^[0-9]{3,4}$/, message: 'Invalid CVC'
               }]}
           >
-            <Input />
+            <Input
+              onBlur={handleFlip} onFocus={handleFlip}
+            />
           </Form.Item>
           <Button type='primary' htmlType='submit' disabled={!disabled}>
             Validate
           </Button>
         </Flex>
-        <Flex style={{ maxWidth: '50%', width: '100%', justifyContent: 'center', alignItems: 'center' }}>
-          <Flex vertical style={{ padding: '3%', maxWidth: '70%', width: '100%', height: '70%', backgroundColor: token.colorWhite, borderRadius: 10, position: 'relative', justifyContent: 'space-between', transition: 'all 0.3s ease-in-out' }} className={`shadow-card-payment ${logoCard.color}`}>
-            <Flex style={{ justifyContent: 'end', width: '100%' }}>
-              {logoCard.logo ? <img src={logoCard.logo} alt='Card logo' style={{ width: 50, height: 50 }} /> : <IconCreditCardFilled size={50} color={token.grey600} />}
-            </Flex>
-            <Flex style={{ width: '100%' }}>
-              <Typography.Title level={3} style={{ color: token.colorWhite }}>{values?.number ? values.number : '0000 0000 0000 0000'}</Typography.Title>
-            </Flex>
-            <Flex style={{ width: '100%', justifyContent: 'space-between', color: token.colorWhite }}>
-              <Flex vertical>
-                <Typography.Text style={{ color: token.grey500, fontSize: '0.7rem' }}>Card Holder</Typography.Text>
-                <Typography.Text style={{ color: 'inherit' }}>{values?.name ? values.name : 'Full Name'}</Typography.Text>
-              </Flex>
-              <Flex vertical>
-                <Typography.Text style={{ color: token.grey500, fontSize: '0.7rem' }}>Expires</Typography.Text>
-                <Typography.Text style={{ color: 'inherit' }}>{values?.expiry ? dayjs(values.expiry).format('MM/YY') : 'MM/YY'}</Typography.Text>
-              </Flex>
+        <Flex style={{ maxWidth: '50%', width: '100%' }}>
+
+          <Flex style={{ width: '100%', height: '100%' }}>
+            <Flex
+              className='flip-card'
+              style={{ width: '100%', height: '100%' }}
+            >
+              <FlexMotion
+                className='flip-card-inner'
+                style={{ width: '100%', height: '100%', alignItems: 'center', justifyContent: 'center' }}
+                initial={false}
+                animate={{ rotateY: isFlipped ? 180 : 360 }}
+                transition={{ duration: 0.4, animationDirection: 'normal' }}
+                onAnimationComplete={() => setIsAnimating(false)}
+              >
+                <Flex vertical style={{ padding: '3%', maxWidth: '70%', width: '100%', height: '70%', backgroundColor: token.colorWhite, borderRadius: 10, justifyContent: 'space-between', transition: 'all 0.3s ease-in-out' }} className={`shadow-card-payment ${logoCard.color} flip-card-front`}>
+                  <Flex style={{ justifyContent: 'end', width: '100%' }}>
+                    {logoCard.logo ? <img src={logoCard.logo} alt='Card logo' style={{ width: 50, height: 50 }} /> : <IconCreditCardFilled size={50} color={token.grey600} />}
+                  </Flex>
+                  <Flex style={{ width: '100%' }}>
+                    <Typography.Title level={3} style={{ color: token.colorWhite }}>{values?.number ? values.number : '0000 0000 0000 0000'}</Typography.Title>
+                  </Flex>
+                  <Flex style={{ width: '100%', justifyContent: 'space-between', color: token.colorWhite }}>
+                    <Flex vertical>
+                      <Typography.Text style={{ color: token.grey500, fontSize: '0.7rem' }}>Card Holder</Typography.Text>
+                      <Typography.Text style={{ color: 'inherit' }}>{values?.name ? values.name : 'Full Name'}</Typography.Text>
+                    </Flex>
+                    <Flex vertical>
+                      <Typography.Text style={{ color: token.grey500, fontSize: '0.7rem' }}>Expires</Typography.Text>
+                      <Typography.Text style={{ color: 'inherit' }}>{values?.expiry ? dayjs(values.expiry).format('MM/YY') : 'MM/YY'}</Typography.Text>
+                    </Flex>
+                  </Flex>
+                </Flex>
+
+                <Flex vertical style={{ maxWidth: '70%', width: '100%', height: '70%', backgroundColor: token.colorWhite, borderRadius: 10, position: 'relative', justifyContent: 'space-evenly', transition: 'all 0.3s ease-in-out' }} className={`shadow-card-payment ${logoCard.color} flip-card-back`}>
+                  <div style={{ width: '100%', height: '100%', backgroundColor: 'black', minHeight: 40, maxHeight: 40 }} />
+                  <Flex vertical style={{ width: '100%', justifyContent: 'flex-end', alignItems: 'flex-end', color: token.colorWhite, padding: '3%' }}>
+                    <Typography.Text style={{ color: token.grey500, fontSize: '0.7rem' }}>CVC</Typography.Text>
+                    <Flex style={{ width: '100%', height: '100%', backgroundColor: 'white', minHeight: 30, maxHeight: 30, color: 'black', alignItems: 'center', justifyContent: 'flex-end', paddingRight: 5 }}>
+                      {values?.cvc ? values.cvc : ''}
+                    </Flex>
+                  </Flex>
+                  <Flex style={{ justifyContent: 'end', width: '100%', padding: '3%' }}>
+                    {logoCard.logo ? <img src={logoCard.logo} alt='Card logo' style={{ width: 40, height: 40 }} /> : <IconCreditCardFilled size={40} color={token.grey600} />}
+                  </Flex>
+                </Flex>
+              </FlexMotion>
             </Flex>
           </Flex>
         </Flex>
