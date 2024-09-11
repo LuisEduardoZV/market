@@ -6,7 +6,7 @@ const { Text, Title } = Typography
 
 const PortraitBanner = () => {
   return (
-    <Row style={{ marginTop: 10, width: '100%', alignItems: 'start', justifyContent: 'space-around', paddingInline: '10%' }}>
+    <Row style={{ marginTop: 10, width: '100%', alignItems: 'start', justifyContent: 'space-around', paddingInline: '10%', paddingBottom: 5 }}>
       {interesting.map((op, idx) => (
         <Col key={idx} span={5} style={{ position: 'relative', display: 'flex', flexDirection: 'column', height: '100%' }}>
           <Flex style={{ width: '100%', minHeight: 200, height: '100%', flex: 1 }} vertical>

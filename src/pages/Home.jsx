@@ -101,7 +101,7 @@ const Home = () => {
       </Flex>
 
       <Flex vertical className='showAsApear' style={{ overflow: 'hidden' }}>
-        <Title level={3} style={{ marginBlock: '3%', paddingLeft: '2%' }}>You may also be interested in</Title>
+        <Title level={3} style={{ paddingBlock: '3%', paddingLeft: '2%' }}>You may also be interested in</Title>
         <PortraitBanner />
       </Flex>
 
