@@ -2,7 +2,7 @@ import { Fragment, useMemo, useRef, useState } from 'react'
 import { useQuery } from 'react-query'
 import { useNavigate, useParams } from 'react-router-dom'
 
-import { IconCubeSend, IconReceiptRefund, IconShieldCheckFilled, IconStarFilled, IconThumbUp, IconUserHexagon } from '@tabler/icons-react'
+import { IconCubeSend, IconReceiptRefund, IconShieldCheckFilled, IconStarFilled, IconUserHexagon } from '@tabler/icons-react'
 import { Avatar, Button, Carousel, Divider, Flex, Progress, Rate, Select, Space, theme, Typography } from 'antd'
 
 import dayjs from 'dayjs'
@@ -13,6 +13,7 @@ import { getProductById, getProductsByCategories } from '../services/productsFun
 import { useDispatch } from '../store'
 import { addProduct } from '../store/cartSlice'
 import IconBoxDimension from '../ui-components/extended/IconBoxDimension'
+import IconThumbUpMotion from '../ui-components/extended/IconThumbUpMotion'
 import CarouselProducts from './components/CarouselProducts'
 import PromoBanner from './components/PromoBanner'
 
@@ -160,7 +161,7 @@ const Product = ({ hasDiscount }) => {
                   <Divider type='vertical' style={{ borderColor: token.colorPrimaryBgHover }} />
                   <Text type='secondary'>{Number(Math.random() * 10000).toFixed(0)} sold</Text>
                 </Flex>
-                <IconThumbUp />
+                <IconThumbUpMotion />
               </Flex>
               {hasDiscount && <Text type='secondary' delete italic>${data.price}</Text>}
               <Flex style={{ alignItems: 'center', width: '100%' }}>

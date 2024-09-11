@@ -4,15 +4,13 @@ import gsap from 'gsap'
 import { useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import { IconThumbUp } from '@tabler/icons-react'
 import { Col, Flex, Row, Skeleton, Space, Typography, theme } from 'antd'
+import IconThumbUpMotion from './IconThumbUpMotion'
 
 const { Text, Title } = Typography
 const { useToken } = theme
 
 gsap.registerPlugin(useGSAP)
-
-const IconThumbUpMotion = motion.create(IconThumbUp)
 
 const BasicCardProduct = ({ id, title, rating, tags, images, price, typeCarousel, noRating, category, isLoading = false }) => {
   const { token } = useToken()
@@ -82,13 +80,7 @@ const BasicCardProduct = ({ id, title, rating, tags, images, price, typeCarousel
           <Col span={6}>
             {(!noRating && !isLoading) && (
               <Flex style={{ display: 'flex', alignItems: 'end', width: 'fit-content', zindIndex: 5, cursor: 'default', pointerEvents: 'fill', justifyContent: 'center' }}>
-                <IconThumbUpMotion
-                  whileHover={{ scale: 1.2 }}
-                  whileTap={{ scale: 0.9 }}
-                  transition={{ type: 'spring', stiffness: 400, damping: 17 }}
-                  style={{ color: token.colorPrimary, outline: 'none' }}
-                  onClick={(e) => e.stopPropagation()}
-                />
+                <IconThumbUpMotion />
                 <Text strong italic style={{ fontSize: '0.9rem' }}>{rating}%</Text>
               </Flex>
             )}
