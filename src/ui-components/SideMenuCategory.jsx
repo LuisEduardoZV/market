@@ -28,26 +28,12 @@ const SideMenuCategory = ({ categoriesInside, filters, brands, prices, handleFil
   if (isLoading) return null
   return (
     <Flex
-      vertical style={{
-        position: 'sticky',
-        top: '20%',
-        width: '100%',
-        height: '100%',
-        minHeight: '50vh',
-        maxHeight: '70vh',
-        zIndex: 1,
-        maxWidth: '14%',
-        backgroundColor: token.colorBgBase,
-        padding: '1%',
-        rowGap: 20,
-        overflowY: 'auto',
-        paddingBlock: 30
-      }}
-      className='shadow-menu-subcategory other-scrollbar'
+      vertical
+      className='shadow-menu-subcategory other-scrollbar aside-menu-category'
     >
       <Flex vertical>
-        <Flex style={{ alignItems: 'center', justifyContent: 'space-between' }}>
-          <Title level={5} style={{ marginBottom: 0, paddingBottom: 0 }}>Subcategories</Title>
+        <Flex className='submenu-category-container'>
+          <Title level={5}>Subcategories</Title>
           {filters.subcategory && <IconSquareRoundedX
             size={18} color={token.colorPrimaryTextActive} style={{ cursor: 'pointer' }} onClick={() => {
               handleChangeFilters('subcategory', null)
@@ -55,7 +41,7 @@ const SideMenuCategory = ({ categoriesInside, filters, brands, prices, handleFil
             }}
                                   />}
         </Flex>
-        <Divider style={{ margin: 0, marginBottom: 10, backgroundColor: token.colorPrimary, width: '100%' }} />
+        <Divider className='divider-aside-menu-category' />
         <Radio.Group
           onChange={(e) => {
             handleChangeFilters('subcategory', e.target.value)
@@ -68,8 +54,8 @@ const SideMenuCategory = ({ categoriesInside, filters, brands, prices, handleFil
         </Radio.Group>
       </Flex>
       <Flex vertical>
-        <Flex style={{ alignItems: 'center', justifyContent: 'space-between' }}>
-          <Title level={5} style={{ marginBottom: 0, paddingBottom: 0 }}>Rating</Title>
+        <Flex className='submenu-category-container'>
+          <Title level={5}>Rating</Title>
           {filters.rate && <IconSquareRoundedX
             size={18} color={token.colorPrimaryTextActive} style={{ cursor: 'pointer' }} onClick={() => {
               handleChangeFilters('rate', null)
@@ -77,7 +63,7 @@ const SideMenuCategory = ({ categoriesInside, filters, brands, prices, handleFil
             }}
                            />}
         </Flex>
-        <Divider style={{ margin: 0, marginBottom: 10, backgroundColor: token.colorPrimary, width: '100%' }} />
+        <Divider className='divider-aside-menu-category' />
         <Rate
           value={rate} onChange={(value) => {
             handleChangeFilters('rate', value)
@@ -86,8 +72,8 @@ const SideMenuCategory = ({ categoriesInside, filters, brands, prices, handleFil
         />
       </Flex>
       <Flex vertical>
-        <Flex style={{ alignItems: 'center', justifyContent: 'space-between' }}>
-          <Title level={5} style={{ marginBottom: 0, paddingBottom: 0 }}>Price</Title>
+        <Flex className='submenu-category-container'>
+          <Title level={5}>Price</Title>
           {filters.prices && <IconSquareRoundedX
             size={18} color={token.colorPrimaryTextActive} style={{ cursor: 'pointer' }} onClick={() => {
               handleChangeFilters('prices', null)
@@ -95,7 +81,7 @@ const SideMenuCategory = ({ categoriesInside, filters, brands, prices, handleFil
             }}
                              />}
         </Flex>
-        <Divider style={{ margin: 0, marginBottom: 10, backgroundColor: token.colorPrimary, width: '100%' }} />
+        <Divider className='divider-aside-menu-category' />
         <Text>${sliderValue[0]}.00 - ${sliderValue[1]}.00</Text>
         <Slider
           range
@@ -115,8 +101,8 @@ const SideMenuCategory = ({ categoriesInside, filters, brands, prices, handleFil
       </Flex>
       {brands && brands.length > 0 && (
         <Flex vertical>
-          <Flex style={{ alignItems: 'center', justifyContent: 'space-between' }}>
-            <Title level={5} style={{ marginBottom: 0, paddingBottom: 0 }}>Brands</Title>
+          <Flex className='submenu-category-container'>
+            <Title level={5}>Brands</Title>
             {filters.brand && <IconSquareRoundedX
               size={18} color={token.colorPrimaryTextActive} style={{ cursor: 'pointer' }} onClick={() => {
                 handleChangeFilters('brand', null)
@@ -124,7 +110,7 @@ const SideMenuCategory = ({ categoriesInside, filters, brands, prices, handleFil
               }}
                               />}
           </Flex>
-          <Divider style={{ margin: 0, marginBottom: 10, backgroundColor: token.colorPrimary, width: '100%' }} />
+          <Divider className='divider-aside-menu-category' />
           <Radio.Group
             onChange={(e) => {
               handleChangeFilters('brand', e.target.value)
