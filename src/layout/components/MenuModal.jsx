@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 
 import { IconSquareRoundedXFilled } from '@tabler/icons-react'
 import { Button, Flex, Typography, theme } from 'antd'
+import useBreakpoint from 'antd/lib/grid/hooks/useBreakpoint'
 
 import { useGsapAnim } from '../../hooks/useGsapAnim'
 import ModalMenuCards from '../../ui-components/extended/ModalMenuCards'
@@ -34,6 +35,7 @@ const dropIn = {
 
 const MenuModal = ({ close, categories, setSelected, open }) => {
   const { token } = useToken()
+  const screens = useBreakpoint()
   const { container, gsap, useGSAP } = useGsapAnim()
 
   useGSAP(() => {
@@ -87,10 +89,13 @@ const MenuModal = ({ close, categories, setSelected, open }) => {
             width: '100%',
             height: '100%',
             display: 'grid',
-            gridTemplateColumns: '1fr 1fr 1fr',
-            gridTemplateRows: '50% 50%',
+            gridTemplateColumns: screens.xs ? '1fr' : '1fr 1fr 1fr',
+            gridTemplateRows: screens.xs ? '1fr' : '50% 50%',
             position: 'relative',
-            gap: 30
+            overflowY: screens.xs ? 'auto' : 'hidden',
+            paddingTop: 40,
+            gap: 30,
+            paddingBottom: screens.xs && '20%'
           }}
         >
           {categories && categories.map((op) => (

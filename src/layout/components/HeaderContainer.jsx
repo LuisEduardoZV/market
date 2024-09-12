@@ -5,6 +5,7 @@ import { Link as LinkRoute, useNavigate } from 'react-router-dom'
 
 import { IconMenu, IconSquareRoundedXFilled, IconTruckDelivery, IconUserFilled } from '@tabler/icons-react'
 import { Badge, Button, Col, Divider, Flex, Input, Layout, Popover, Row, theme, Typography } from 'antd'
+import useBreakpoint from 'antd/lib/grid/hooks/useBreakpoint'
 
 import { useSelector } from '../../store'
 
@@ -19,6 +20,7 @@ const { useToken } = theme
 
 const HeaderContainer = ({ openMenu, handleToHome }) => {
   const { checkout } = useSelector((state) => state.cart)
+  const screens = useBreakpoint()
 
   const { token } = useToken()
   const navigate = useNavigate()
@@ -81,17 +83,21 @@ const HeaderContainer = ({ openMenu, handleToHome }) => {
         </Col>
         <Col span={16} style={{ height: 'max-content', position: 'relative' }}>
           <Flex gap={20} align='center' justify='end'>
-            <Popover overlayStyle={{ marginTop: 20 }} arrow={false} placement='bottomLeft' title={<Flex style={{ justifyContent: 'space-between' }}><Text>Search results</Text><IconSquareRoundedXFilled size={20} onClick={() => setOpen(false)} style={{ cursor: 'pointer', color: token.colorPrimary }} /></Flex>} content={renderContentSearch()} open={open}>
-              <Search placeholder='Buscar...' allowClear value={search} onSearch={onSearch} onChange={e => setSearch(e.target.value)} onFocus={() => setOpen(false)} style={{ maxWidth: '50%' }} loading={isLoading} />
-            </Popover>
-            <Button type='text' icon={<IconUserFilled />} />
-            <Flex style={{ alignItems: 'center', justifyContent: 'center', height: 'fit-content' }}>
-              <LinkRoute to='/shopping-cart' style={{ alignItems: 'center', justifyContent: 'center', height: 50, placeContent: 'center' }}>
-                <Badge count={checkout.products.length} size='small' color={token.colorPrimary} style={{ fontSize: '0.7rem' }}>
-                  <IconTruckDelivery size={25} />
-                </Badge>
-              </LinkRoute>
-            </Flex>
+            {!screens.xs && (
+              <>
+                <Popover overlayStyle={{ marginTop: 20 }} arrow={false} placement='bottomLeft' title={<Flex style={{ justifyContent: 'space-between' }}><Text>Search results</Text><IconSquareRoundedXFilled size={20} onClick={() => setOpen(false)} style={{ cursor: 'pointer', color: token.colorPrimary }} /></Flex>} content={renderContentSearch()} open={open}>
+                  <Search placeholder='Buscar...' allowClear value={search} onSearch={onSearch} onChange={e => setSearch(e.target.value)} onFocus={() => setOpen(false)} style={{ maxWidth: '50%' }} loading={isLoading} />
+                </Popover>
+                <Button type='text' icon={<IconUserFilled />} />
+                <Flex style={{ alignItems: 'center', justifyContent: 'center', height: 'fit-content' }}>
+                  <LinkRoute to='/shopping-cart' style={{ alignItems: 'center', justifyContent: 'center', height: 50, placeContent: 'center' }}>
+                    <Badge count={checkout.products.length} size='small' color={token.colorPrimary} style={{ fontSize: '0.7rem' }}>
+                      <IconTruckDelivery size={25} />
+                    </Badge>
+                  </LinkRoute>
+                </Flex>
+              </>
+            )}
             <Button type='text' icon={<IconMenu />} onClick={openMenu} />
           </Flex>
         </Col>

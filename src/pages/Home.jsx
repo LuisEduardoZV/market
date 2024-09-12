@@ -76,41 +76,41 @@ const Home = () => {
   }, [loading])
 
   return (
-    <Flex vertical ref={container} style={{ overflowX: 'hidden' }}>
-      <Flex style={{ width: '100%', overflow: 'hidden' }} vertical>
-        <Title level={3} style={{ marginBlock: '3%', paddingLeft: '2%' }}>People's favourite products!</Title>
+    <Flex vertical ref={container} style={{ overflowX: 'hidden' }} itemType='article'>
+      <Flex className='home-section' vertical itemType='section'>
+        <Title level={3}>People's favourite products!</Title>
         <CarouselFavProd products={topProducts} />
       </Flex>
 
-      <Flex className='showAsApear'>
+      <Flex className='showAsApear home-section' itemType='section'>
         <PromoBanner />
       </Flex>
 
-      <div className='showAsApear'>
+      <div className='showAsApear home-section' itemType='section'>
         <ShoesByGender />
       </div>
 
-      <Flex vertical className='showAsApear' style={{ width: '100%', overflowX: 'hidden' }}>
-        <Title level={3} style={{ marginBlock: '3%', paddingLeft: '2%' }}>Fashion to your taste!</Title>
+      <Flex vertical className='showAsApear home-section' itemType='section'>
+        <Title level={3}>Fashion to your taste!</Title>
         <CarouselProducts products={topClothes} typeCarousel='discProd' />
       </Flex>
 
-      <Flex style={{ width: '100%', overflow: 'hidden' }} vertical className='showAsApear'>
-        <Title level={3} style={{ marginBlock: '3%', paddingLeft: '2%' }}>Technology products</Title>
+      <Flex vertical className='showAsApear home-section' itemType='section'>
+        <Title level={3}>Technology products</Title>
         <CarouselProducts products={techProd} typeCarousel='techProd' />
       </Flex>
 
-      <Flex vertical className='showAsApear' style={{ overflow: 'hidden' }}>
-        <Title level={3} style={{ paddingBlock: '3%', paddingLeft: '2%' }}>You may also be interested in</Title>
+      <Flex vertical className='showAsApear home-section' itemType='section'>
+        <Title level={3}>You may also be interested in</Title>
         <PortraitBanner />
       </Flex>
 
       <Divider style={{ marginBlock: '5%' }} />
 
-      <Flex vertical style={{ maxWidth: '45%', width: '100%', alignItems: 'center', alignSelf: 'center', textAlign: 'center', gap: 10, paddingBottom: '2%' }} className='showAsApear'>
-        <Title level={2} style={{ fontWeight: 400 }}>Get a 5% discount</Title>
-        <Text type='secondary' italic style={{ fontSize: '1.1rem' }}>Subscribe to our newsletter and get a 5% discount on your next purchase and exclusive promotions.</Text>
-        <Flex className='button-borders' style={{ marginTop: 20 }}>
+      <Flex vertical className='showAsApear home-section newsletter-section' itemType='section'>
+        <Title level={2}>Get a 5% discount</Title>
+        <Text type='secondary' italic>Subscribe to our newsletter and get a 5% discount on your next purchase and exclusive promotions.</Text>
+        <Flex className='button-borders'>
           <button className='primary-button'>
             Subscribe
           </button>

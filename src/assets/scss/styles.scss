@@ -299,11 +299,54 @@
 	transform: rotateY(180deg);
 }
 
+/*HOME STYLES*/
+.home-section {
+	overflow: hidden;
+	width: 100%;
+	> h3 {
+		margin-block: 3%;
+		padding-left: 2%;
+	}
+}
+
+.newsletter-section {
+	max-width: 45%;
+	align-items: center;
+	align-self: center;
+	text-align: center;
+	gap: 10px;
+	padding-bottom: 2%;
+
+	> h2 {
+		font-weight: 400;
+	}
+
+	> span {
+		font-size: 1.1rem;
+	}
+
+	> div {
+		margin-top: 20px;
+	}
+}
+
 @keyframes rotateGradient {
 	0% {
 		background-position: 0% 0%;
 	}
 	100% {
 		background-position: 100% 100%;
+	}
+}
+
+@media screen and (max-width: 576px) {
+	.cardItemCarousel {
+		display: grid !important;
+		grid-template-columns: 1fr 1fr;
+		place-items: start;
+		justify-content: space-around;
+		gap: 30px;
+		padding-block: 3%;
+		padding-inline: 2%;
 	}
 }

@@ -11,8 +11,6 @@ const HomeLayout = ({ children }) => {
   const { categoriesInside, handleCurrentCat, currentCategory } = context
   const { category } = useParams()
 
-  console.log(categoriesInside)
-
   return (
     <Flex vertical>
       <Banner category={category?.replace('-', ' ')} />

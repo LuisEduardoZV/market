@@ -5,6 +5,7 @@ import { useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { Col, Flex, Row, Skeleton, Space, Typography, theme } from 'antd'
+import useBreakpoint from 'antd/lib/grid/hooks/useBreakpoint'
 import IconThumbUpMotion from './IconThumbUpMotion'
 
 const { Text, Title } = Typography
@@ -16,6 +17,8 @@ const BasicCardProduct = ({ id, title, rating, tags, images, price, typeCarousel
   const { token } = useToken()
   const card = useRef(null)
   const navigate = useNavigate()
+
+  const screens = useBreakpoint()
 
   let image = null
   if (!isLoading) image = images[0] ?? ''
@@ -63,10 +66,10 @@ const BasicCardProduct = ({ id, title, rating, tags, images, price, typeCarousel
       whileHover={{ boxShadow: '5.9px 4.6px 10px rgba(0, 0, 0, 0.02), 47px 37px 80px rgba(0, 0, 0, 0.04)' }}
     >
       {isLoading
-        ? <Skeleton.Image active style={{ height: '100%', minHeight: 350, width: '100%', minWidth: 350 }} />
+        ? <Skeleton.Image active style={{ height: '100%', minHeight: screens.xs ? 200 : 350, width: '100%', minWidth: screens.xs ? 200 : 350 }} />
         : (
-          <div style={{ height: '100%', maxHeight: 350, minHeight: 350, width: '100%', maxWidth: 350, display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative' }}>
-            <motion.img src={image} alt='Image' style={{ height: '100%', maxHeight: 340, width: '100%', objectFit: 'contain' }} whileHover={{ scale: 1.05 }} transition={{ type: 'spring', stiffness: 400, damping: 10 }} />
+          <div style={{ height: '100%', maxHeight: screens.xs ? 200 : 350, minHeight: screens.xs ? 200 : 350, width: '100%', maxWidth: screens.xs ? 200 : 350, display: 'flex', justifyContent: 'center', alignItems: 'center', position: 'relative' }}>
+            <motion.img src={image} alt='Image' style={{ height: '100%', maxHeight: screens.xs ? 190 : 340, width: '100%', objectFit: 'contain' }} whileHover={{ scale: 1.05 }} transition={{ type: 'spring', stiffness: 400, damping: 10 }} />
           </div>
           )}
       <Flex vertical style={{ backgroundColor: token.colorPaper, alignItems: 'center', width: '100%', height: '100%', alignSelf: 'end' }}>
@@ -75,7 +78,7 @@ const BasicCardProduct = ({ id, title, rating, tags, images, price, typeCarousel
             <Flex vertical>
               {isLoading ? <Skeleton.Button active block /> : <Title level={5} style={{ fontWeight: 500, fontStyle: 'italic', padding: 0, margin: 0, width: 'fit-content' }}>{title}</Title>}
               {!isLoading && (
-                <Space>
+                <Space style={{ flexWrap: 'wrap', width: '100%' }}>
                   {tags && tags.map((op, idx) => (
                     <Text key={idx} type='secondary' style={{ fontSize: '0.85rem' }}>{op} |</Text>
                   ))}
@@ -85,7 +88,7 @@ const BasicCardProduct = ({ id, title, rating, tags, images, price, typeCarousel
           </Col>
           <Col span={6}>
             {(!noRating && !isLoading) && (
-              <Flex style={{ display: 'flex', alignItems: 'end', width: 'fit-content', zindIndex: 5, cursor: 'default', pointerEvents: 'fill', justifyContent: 'center' }}>
+              <Flex style={{ display: 'flex', alignItems: screens.xs ? 'center' : 'end', width: 'fit-content', zindIndex: 5, cursor: 'default', pointerEvents: 'fill', justifyContent: 'center', flexDirection: screens.xs ? 'column-reverse' : 'row' }}>
                 <IconThumbUpMotion />
                 <Text strong italic style={{ fontSize: '0.9rem' }}>{rating}%</Text>
               </Flex>

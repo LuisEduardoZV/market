@@ -61,3 +61,14 @@ export async function filteringCategoryData (data, filters) {
 
   return newData
 }
+
+export function dividirEnSubarreglos (array, n) {
+  const subarreglos = []
+  const tamañoSubarreglo = Math.ceil(array.length / n)
+
+  for (let i = 0; i < array.length; i += tamañoSubarreglo) {
+    subarreglos.push(array.slice(i, i + tamañoSubarreglo))
+  }
+
+  return subarreglos
+}

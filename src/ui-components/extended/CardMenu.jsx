@@ -2,13 +2,16 @@ import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { useRef } from 'react'
 
-import { Col, Flex, Typography } from 'antd'
+import { Flex, Typography } from 'antd'
+import useBreakpoint from 'antd/lib/grid/hooks/useBreakpoint'
 
-const { Title } = Typography
+const { Title, Text } = Typography
 gsap.registerPlugin(useGSAP)
 
 const CardMenu = ({ img, category, id, setSelected }) => {
   const card = useRef(null)
+
+  const screens = useBreakpoint()
 
   useGSAP(() => {
     const cardElement = document.querySelector(`#shadow-img-menu-${id}`)
@@ -31,11 +34,11 @@ const CardMenu = ({ img, category, id, setSelected }) => {
   { scope: card })
 
   return (
-    <Col ref={card} id={`shadow-img-menu-${id}`} span={5} className='shadow-img-menu' style={{ position: 'relative', width: '100%', backgroundImage: `url(${img})`, minHeight: 140, backgroundSize: '100%', backgroundPosition: 'center', display: 'flex', justifyContent: 'center', alignItems: 'stretch', cursor: 'pointer' }} onClick={() => setSelected(id, category)}>
+    <Flex ref={card} id={`shadow-img-menu-${id}`} className='shadow-img-menu' style={{ position: 'relative', width: screens.xs ? '45%' : '100%', backgroundImage: `url(${img})`, minHeight: screens.xs ? 100 : 140, backgroundSize: '100%', backgroundPosition: 'center', display: 'flex', justifyContent: 'center', alignItems: 'stretch', cursor: 'pointer' }} onClick={() => setSelected(id, category)}>
       <Flex id={`card-title-${id}`} style={{ paddingBlock: '1.5%', paddingInline: '10%', backgroundColor: 'rgba(0,0,0,0.3)', backdropFilter: 'blur(5px)', display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', width: '100%' }}>
-        <Title level={5} style={{ color: 'white', textTransform: 'uppercase', padding: 0, margin: 0 }}>{category}</Title>
+        {screens.xs ? <Text style={{ color: 'white', fontWeight: 'bold' }}>{category}</Text> : <Title level={5} style={{ color: 'white', textTransform: 'uppercase', padding: 0, margin: 0 }}>{category}</Title>}
       </Flex>
-    </Col>
+    </Flex>
   )
 }
 
