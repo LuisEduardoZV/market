@@ -57,15 +57,7 @@ const BigCardProduct = ({ id, rating, thumbnail, title, tags, brand, price, disc
       whileTap={{ scale: 0.9 }}
       transition={{ type: 'spring', stiffness: 400, damping: 15 }}
     >
-      <Flex style={{
-        position: 'absolute',
-        top: 0,
-        right: 0,
-        padding: 10,
-        borderLeftWidth: 0,
-        backgroundColor: token.colorPaper
-      }}
-      >
+      <Flex className='rating-container'>
         <Rate
           disabled
           allowHalf
@@ -75,11 +67,11 @@ const BigCardProduct = ({ id, rating, thumbnail, title, tags, brand, price, disc
           }}
         />
       </Flex>
-      <Flex style={{ backgroundColor: token.colorBgBase }}><img src={thumbnail} alt={title} style={{ width: '100%', maxHeight: 400 }} /></Flex>
-      <Row>
+      <Flex style={{ backgroundColor: token.colorBgBase }}><img src={thumbnail} alt={title} /></Flex>
+      <Row className='big-card-info-container'>
         <Col span={16}>
-          <Flex vertical style={{ minHeight: 'max-content', height: '100%', backgroundColor: token.colorPaper, paddingBlock: '3%' }}>
-            <Title level={5} style={{ fontWeight: 500, fontStyle: 'italic', padding: 0, margin: 0, width: 'fit-content' }}>{title}</Title>
+          <Flex vertical className='big-card-title'>
+            <Title level={5}>{title}</Title>
             <Space>
               {tags && tags.map((tag, idx) => (
                 <Text key={idx} type='secondary' style={{ fontSize: '0.85rem' }}>{tag} |</Text>
@@ -90,24 +82,17 @@ const BigCardProduct = ({ id, rating, thumbnail, title, tags, brand, price, disc
         </Col>
         <Col span={8}>
           {infoPrice && (
-            <Flex style={{ position: 'relative', width: '100%', height: '100%' }}>
+            <Flex className='big-card-price-container'>
               <Flex
-                id={`big-card-${id}-oldprice`} style={{
-                  position: 'absolute',
-                  top: '55%',
-                  left: '15%',
-                  backgroundColor: token.colorBgBase,
-                  paddingInline: 10,
-                  paddingBottom: 5,
-                  paddingTop: 20
-                }}
+                id={`big-card-${id}-oldprice`}
+                className='big-card-oldprice'
               >
-                <span style={{ position: 'relative', fontSize: '0.9rem', fontStyle: 'italic' }}>
+                <span>
                   $ {infoPrice.oldPrice}
-                  <span style={{ position: 'absolute', width: '200%', backgroundColor: token.colorErrorDark, height: 0.5, top: '45%', left: '-50%', transform: 'translateY(-50%)' }} />
+                  <span className='underline-old-price' />
                 </span>
               </Flex>
-              <span id={`big-card-${id}-price`} style={{ position: 'absolute', top: '32%', right: '10%', backgroundColor: token.colorPaper, paddingInline: 10, paddingBlock: 5, border: '1px solid', borderColor: token.colorBgBase, fontWeight: 600, fontSize: '1.1rem' }}>$ {infoPrice.price}</span>
+              <span id={`big-card-${id}-price`} className='big-card-price'>$ {infoPrice.price}</span>
             </Flex>
           )}
         </Col>

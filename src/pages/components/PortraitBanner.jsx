@@ -6,9 +6,9 @@ const { Text, Title } = Typography
 
 const PortraitBanner = () => {
   return (
-    <Row style={{ marginTop: 10, width: '100%', alignItems: 'start', justifyContent: 'space-around', paddingInline: '10%', paddingBottom: 5 }}>
+    <Row className='portrait-banner'>
       {interesting.map((op, idx) => (
-        <Col key={idx} span={5} style={{ position: 'relative', display: 'flex', flexDirection: 'column', height: '100%' }}>
+        <Col key={idx} span={5} className='per-banner'>
           <Flex style={{ width: '100%', minHeight: 200, height: '100%', flex: 1 }} vertical>
             {(typeof op.img === 'string')
               ? (
@@ -21,7 +21,7 @@ const PortraitBanner = () => {
                   ))}
                 </Flex>
                 )}
-            <Flex vertical style={{ flex: 'none', justifyContent: 'space-between', height: 'max-content' }}>
+            <Flex vertical className='portrait-banner-info'>
               <Title level={5} style={{ fontSize: '1rem', paddingBlock: 10 }}>
                 {op.title}
               </Title>

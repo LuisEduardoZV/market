@@ -8,7 +8,6 @@ import { dividirEnSubarreglos } from '../../utils/func'
 
 const CarouselFavProd = ({ products }) => {
   const screens = useBreakpoint()
-  console.log(screens)
 
   const productsTable = useMemo(() => {
     if (products) {
