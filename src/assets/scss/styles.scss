@@ -648,6 +648,13 @@
 	}
 }
 
+.divider-aside-menu-category {
+	margin: 0;
+	margin-bottom: 10px;
+	background-color: $primaryMain;
+	width: 100%;
+}
+
 /*PRODUCT STYLES*/
 .product-page {
 	min-height: 100vh;
@@ -908,11 +915,104 @@
 	}
 }
 
-.divider-aside-menu-category {
-	margin: 0;
-	margin-bottom: 10px;
-	background-color: $primaryMain;
+/*CART STYLES*/
+.cart-page {
+	padding-block: 4%;
+	padding-inline: 8%;
 	width: 100%;
+	align-items: center;
+	justify-content: center;
+	> :first-child {
+		width: 100%;
+		justify-content: space-between;
+		> .list-cart-container {
+			width: 100%;
+			max-width: 70%;
+			background-color: $grey200;
+			padding: 1.5%;
+		}
+		.product-inside-cart-container {
+			width: 100%;
+			gap: 20px;
+			justify-content: space-between;
+			border-bottom: 1px solid $grey400;
+			padding-block: 4%;
+			img {
+				max-height: 200px;
+				width: 100%;
+				object-fit: contain;
+			}
+			> .product-details {
+				width: 100%;
+				justify-content: space-between;
+				> :first-child {
+					margin-block: 5px;
+					h5 {
+						margin: 0;
+					}
+					span {
+						font-size: 0.8rem;
+						font-style: italic;
+					}
+				}
+				> .description-product {
+					margin-block: 15px;
+				}
+				> .product-actions {
+					margin-top: 20px;
+					gap: 10px;
+					align-items: center;
+					> :first-child {
+						width: 130px;
+					}
+					> a {
+						font-size: 0.8rem;
+					}
+				}
+			}
+			> :last-child {
+				span {
+					font-weight: bold;
+					word-break: keep-all;
+				}
+			}
+		}
+		> .summary-cart-container {
+			width: 100%;
+			max-width: 25%;
+			background-color: $primaryMain;
+			height: fit-content;
+			padding: 1.5%;
+			color: $paper;
+			position: sticky;
+			top: 10%;
+			> div {
+				align-items: center;
+				justify-content: space-between;
+				flex-wrap: wrap;
+				> h5,
+				> span {
+					color: inherit;
+					margin: 0;
+				}
+			}
+		}
+	}
+}
+
+.empty-cart {
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	> img {
+		max-height: 110px;
+		width: 100%;
+		object-fit: contain;
+	}
+	> span {
+		margin-top: 10px;
+		margin-bottom: 20px;
+	}
 }
 
 .no-info-overlay {
