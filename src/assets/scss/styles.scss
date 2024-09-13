@@ -648,6 +648,266 @@
 	}
 }
 
+/*PRODUCT STYLES*/
+.product-page {
+	min-height: 100vh;
+	height: 100%;
+	padding-top: 4%;
+	padding-inline: 2%;
+	> .product-info-container {
+		width: 100%;
+		justify-content: space-between;
+		position: relative;
+		height: max-content;
+		min-height: 75vh;
+		> .product-image-container {
+			max-width: 30%;
+			width: 100%;
+			position: sticky;
+			top: 10%;
+			height: fit-content;
+			.product-image-preview {
+				max-height: 50px;
+				max-width: 50px;
+				cursor: pointer;
+				border-width: 1px;
+				border-style: solid;
+				border-color: $background;
+				img {
+					width: 50px;
+					object-fit: contain;
+					height: 50px;
+				}
+			}
+			.product-image-carousel {
+				max-height: 500px;
+				img {
+					width: auto;
+					object-fit: contain;
+					height: 500px;
+				}
+			}
+		}
+		> .product-info {
+			max-width: 40%;
+			width: 100%;
+			> h3,
+			> h5 {
+				margin: 0;
+			}
+			> h5 {
+				color: $primaryMain;
+				font-style: italic;
+				font-weight: 600;
+			}
+			> .info-dimensions-product {
+				margin-top: 50px;
+				gap: 50px;
+				> div {
+					align-items: center;
+					width: auto;
+					justify-content: center;
+					position: relative;
+					> svg {
+						width: 80%;
+					}
+					> span {
+						position: absolute;
+						transform: translate(-50%, -50%);
+						font-weight: 400;
+					}
+					> span:nth-child(2) {
+						top: 40%;
+						left: 80%;
+					}
+					> span:nth-child(3) {
+						top: 80%;
+						left: 70%;
+					}
+					> span:nth-child(4) {
+						top: 80%;
+						right: 70%;
+					}
+				}
+			}
+			> .info-codes-product {
+				margin-top: 50px;
+				> div {
+					justify-content: space-between;
+					margin-top: 40px;
+				}
+				> :last-child {
+					font-size: 0.8rem;
+				}
+			}
+		}
+		> .buy-product-container {
+			width: 100%;
+			max-width: 20%;
+			display: inline-block;
+			position: sticky;
+			top: 10%;
+			height: fit-content;
+			> .buy-product-price-container {
+				gap: 30px;
+				> .btns-payment-container {
+					gap: 10px;
+					> :first-child {
+						align-items: center;
+						gap: 10px;
+					}
+				}
+			}
+			.total-sold {
+				justify-content: space-between;
+				margin-bottom: 10px;
+				> :first-child {
+					align-items: center;
+				}
+			}
+			.buy-product-price {
+				align-items: center;
+				width: 100%;
+				> h3 {
+					margin: 0;
+					color: $grey200;
+					background-color: $primaryMain;
+					padding-block: 3%;
+					padding-left: 5%;
+					padding-right: 13%;
+				}
+				> span {
+					margin: 0;
+					font-size: 1.1rem;
+					width: max-content;
+					background-color: $grey200;
+					padding-block: 2%;
+					padding-inline: 5%;
+					translate: -20% 0;
+				}
+			}
+			> .guarantees-product-container {
+				div {
+					gap: 10px;
+				}
+			}
+			> .payment-methods-product-container {
+				div {
+					> span {
+						font-weight: 600;
+					}
+					> div {
+						flex-wrap: wrap;
+						gap: 10px;
+						img {
+							width: 45px;
+						}
+					}
+				}
+			}
+		}
+	}
+	> .related-products-container {
+		width: 100%;
+		overflow: hidden;
+		padding-inline: 5%;
+		> h3 {
+			margin-bottom: 3%;
+			padding-left: 2%;
+		}
+	}
+	> .customer-reviews-container {
+		padding-inline: 5%;
+		padding-bottom: 5%;
+		> div {
+			position: relative;
+			width: 100%;
+			padding-inline: 5%;
+			> .global-rating-container {
+				background-color: $primaryMain;
+				color: $background;
+				padding: 2.5%;
+				gap: 15px;
+				padding-right: 5%;
+				height: min-content;
+				> :first-child {
+					gap: 20px;
+					align-items: center;
+					color: $background;
+					> h1 {
+						margin: 0;
+						color: inherit;
+					}
+					> div {
+						align-items: center;
+						gap: 5px;
+						ul {
+							color: inherit;
+							font-size: 0.9rem;
+						}
+						span {
+							font-size: 0.8rem;
+							color: inherit;
+						}
+					}
+				}
+				> :last-child {
+					gap: 5px;
+					> div {
+						align-items: center;
+						gap: 10px;
+						> :first-child {
+							align-items: center;
+							gap: 4px;
+							span {
+								font-size: 0.8rem;
+								color: inherit;
+							}
+						}
+					}
+				}
+			}
+			> .featured-reviews-container {
+				background-color: $grey200;
+				padding-inline: 4%;
+				padding-block: 2%;
+				translate: -5% 15%;
+				max-width: 70%;
+				width: 100%;
+				gap: 20px;
+				> div {
+					gap: 2px;
+					> .review-header {
+						align-items: center;
+						justify-content: space-between;
+						ul {
+							font-size: 0.8rem;
+						}
+						span {
+							font-size: 0.8rem;
+						}
+					}
+					> .review-info-user {
+						align-items: center;
+						gap: 5px;
+					}
+					> .review-comment {
+						margin: 0;
+						margin-top: 2%;
+					}
+					> :last-child {
+						margin: 0;
+						margin-block: 1.5%;
+					}
+				}
+			}
+		}
+	}
+	> :last-child {
+		padding-inline: 5%;
+	}
+}
+
 .divider-aside-menu-category {
 	margin: 0;
 	margin-bottom: 10px;
