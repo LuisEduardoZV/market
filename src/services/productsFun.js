@@ -2,7 +2,11 @@ import { BASE_URL_API } from '../config'
 import { shuffle } from '../utils/func'
 
 export async function searchProducts (query) {
-  return await fetch(`${BASE_URL_API}/products/search?q=${query}`)
+  return await fetch(`${BASE_URL_API}/products/search?q=${query}`, {
+    headers: new Headers({
+      'Access-Control-Allow-Origin': '*'
+    })
+  })
     .then((res) => {
       if (!res.ok) throw new Error('Error en searchProducts')
       return res.json()
@@ -10,7 +14,11 @@ export async function searchProducts (query) {
 }
 
 export async function getCategories () {
-  return await fetch(`${BASE_URL_API}/products/categories`)
+  return await fetch(`${BASE_URL_API}/products/categories`, {
+    headers: new Headers({
+      'Access-Control-Allow-Origin': '*'
+    })
+  })
     .then((res) => {
       if (!res.ok) throw new Error('Error en getCategories')
       return res.json()
@@ -20,7 +28,11 @@ export async function getCategories () {
 export async function getProductsByCategories (categories) {
   const images = await Promise.all(categories.map(async (op) => {
     const { id } = op
-    return await fetch(`${BASE_URL_API}/products/category/${id}/`)
+    return await fetch(`${BASE_URL_API}/products/category/${id}/`, {
+      headers: new Headers({
+        'Access-Control-Allow-Origin': '*'
+      })
+    })
       .then((res) => {
         if (!res.ok) throw new Error('Error en getProductsByCategory')
         return res.json()
@@ -37,7 +49,11 @@ export async function getProductsByCategories (categories) {
 }
 
 export async function getTopProductsByCategory (category) {
-  return await fetch(`${BASE_URL_API}/products/category/${category}/?limit=4&sortBy=rating&order=desc`)
+  return await fetch(`${BASE_URL_API}/products/category/${category}/?limit=4&sortBy=rating&order=desc`, {
+    headers: new Headers({
+      'Access-Control-Allow-Origin': '*'
+    })
+  })
     .then((res) => {
       if (!res.ok) throw new Error('Error en getTopProductsByCategory')
       return res.json()
@@ -48,7 +64,11 @@ export async function getTopProductsByCategory (category) {
 }
 
 export async function getTopProducts () {
-  return await fetch(`${BASE_URL_API}/products/?limit=12&sortBy=rating&order=desc`)
+  return await fetch(`${BASE_URL_API}/products/?limit=12&sortBy=rating&order=desc`, {
+    headers: new Headers({
+      'Access-Control-Allow-Origin': '*'
+    })
+  })
     .then((res) => {
       if (!res.ok) throw new Error('Error en getTopProducts')
       return res.json()
@@ -84,7 +104,11 @@ export async function getTechProducts () {
 }
 
 export async function getDisscountProducts () {
-  return await fetch(`${BASE_URL_API}/products/?limit=12&sortBy=price&order=asc`)
+  return await fetch(`${BASE_URL_API}/products/?limit=12&sortBy=price&order=asc`, {
+    headers: new Headers({
+      'Access-Control-Allow-Origin': '*'
+    })
+  })
     .then((res) => {
       if (!res.ok) throw new Error('Error')
       return res.json()
@@ -97,7 +121,11 @@ export async function getDisscountProducts () {
 }
 
 export async function getProductById (id) {
-  return await fetch(`${BASE_URL_API}/products/${id}`)
+  return await fetch(`${BASE_URL_API}/products/${id}`, {
+    headers: new Headers({
+      'Access-Control-Allow-Origin': '*'
+    })
+  })
     .then((res) => {
       if (!res.ok) throw new Error('Error')
       return res.json()

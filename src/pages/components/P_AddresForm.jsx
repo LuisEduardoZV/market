@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from '../../store'
 import { setBillingAddress } from '../../store/cartSlice'
 import StepButtonsPayment from './extended/StepButtonsPayment'
 
+import { SHIPPINGS } from '../../utils/contants'
+
 const PAddresForm = ({ handleBack, handleNext, current, steps }) => {
   const [form] = Form.useForm()
   const { checkout } = useSelector(state => state.cart)
@@ -28,9 +30,7 @@ const PAddresForm = ({ handleBack, handleNext, current, steps }) => {
       wrapperCol={{
         flex: 1
       }}
-      style={{
-        maxWidth: '100%'
-      }}
+      className='paypage-addres-form'
       initialValues={checkout.billing}
         /* onFinishFailed={onFinishFailed} */
       autoComplete='off'
@@ -93,67 +93,31 @@ const PAddresForm = ({ handleBack, handleNext, current, steps }) => {
         <Input.TextArea />
       </Form.Item>
       <Divider />
-      <Form.Item name='shipType' label='Type of shipment'>
-        <Radio.Group style={{ width: '100%' }}>
-          <Space direction='vertical' style={{ width: '100%' }}>
-            <Radio.Button value={1} style={{ width: '100%', height: 'auto' }}>
-              <Flex style={{ width: '100%' }}>
-                <Flex vertical style={{ width: '100%' }}>
-                  <Flex style={{ alignItems: 'center', gap: 5 }}>
-                    <Typography.Title level={5} style={{ margin: 0 }}>No Rush</Typography.Title>
-                    <Typography.Text style={{ margin: 0 }}> (Economy Shipping)</Typography.Text>
+      <Form.Item name='shipType' label='Type of shipment' className='paypage-ship-type-container'>
+        <Radio.Group>
+          <Space direction='vertical'>
+            {SHIPPINGS.map(({ id, name, deliveryTime, desc, price, subtitle }) => (
+              <Radio.Button key={`shipping-${id}`} value={id} className='paypage-ship-type'>
+                <Flex>
+                  <Flex vertical className='paypage-ship-type-info'>
+                    <Flex>
+                      <Typography.Title level={5}>{name}</Typography.Title>
+                      <Typography.Text>{' ' + subtitle}</Typography.Text>
+                    </Flex>
+                    <Divider />
+                    <Typography.Text type='secondary'>{desc}</Typography.Text>
+                    <Flex>
+                      <Typography.Text style={{ fontWeight: 500 }}>Estimated delivery time: </Typography.Text>
+                      <Typography.Text>{deliveryTime}</Typography.Text>
+                    </Flex>
                   </Flex>
-                  <Divider style={{ margin: 0, marginBlock: '1%' }} />
-                  <Typography.Text type='secondary'>Save on shipping cost if you are not in a hurry. Ideal for orders you don't need right away.</Typography.Text>
-                  <Flex style={{ alignItems: 'center', gap: 5, marginTop: '1%' }}>
-                    <Typography.Text style={{ fontWeight: 500 }}>Estimated delivery time: </Typography.Text>
-                    <Typography.Text>7 to 10 business days.</Typography.Text>
-                  </Flex>
-                </Flex>
-                <Divider type='vertical' style={{ height: 'auto', marginBlock: '1%' }} />
-                <Flex style={{ minWidth: '15%', justifyContent: 'center', alignItems: 'center' }}>
-                  <Typography.Title level={5} italic style={{ fontWeight: 700 }}>FREE</Typography.Title>
-                </Flex>
-              </Flex>
-            </Radio.Button>
-            <Radio.Button value={2} style={{ width: '100%', height: 'auto' }}>
-              <Flex style={{ width: '100%' }}>
-                <Flex vertical style={{ width: '100%' }}>
-                  <Flex style={{ alignItems: 'center', gap: 5 }}>
-                    <Typography.Title level={5} style={{ margin: 0 }}>Standard</Typography.Title>
-                  </Flex>
-                  <Divider style={{ margin: 0, marginBlock: '1%' }} />
-                  <Typography.Text type='secondary'>The most balanced option between cost and speed. Receive your order in a reasonable time.</Typography.Text>
-                  <Flex style={{ alignItems: 'center', gap: 5, marginTop: '1%' }}>
-                    <Typography.Text style={{ fontWeight: 500 }}>Estimated delivery time: </Typography.Text>
-                    <Typography.Text>3 to 5 business days.</Typography.Text>
+                  <Divider type='vertical' style={{ height: 'auto', marginBlock: '1%' }} />
+                  <Flex className='paypage-ship-type-price'>
+                    <Typography.Title level={5} italic>{price}</Typography.Title>
                   </Flex>
                 </Flex>
-                <Divider type='vertical' style={{ height: 'auto', marginBlock: '1%' }} />
-                <Flex style={{ minWidth: '15%', justifyContent: 'center', alignItems: 'center' }}>
-                  <Typography.Title level={5} italic style={{ fontWeight: 700 }}>+5 USD</Typography.Title>
-                </Flex>
-              </Flex>
-            </Radio.Button>
-            <Radio.Button value={3} style={{ width: '100%', height: 'auto' }}>
-              <Flex style={{ width: '100%' }}>
-                <Flex vertical style={{ width: '100%' }}>
-                  <Flex style={{ alignItems: 'center', gap: 5 }}>
-                    <Typography.Title level={5} style={{ margin: 0 }}>Express</Typography.Title>
-                  </Flex>
-                  <Divider style={{ margin: 0, marginBlock: '1%' }} />
-                  <Typography.Text type='secondary'>Need your order fast? This is the fastest shipping for urgent deliveries.</Typography.Text>
-                  <Flex style={{ alignItems: 'center', gap: 5, marginTop: '1%' }}>
-                    <Typography.Text style={{ fontWeight: 500 }}>Estimated delivery time: </Typography.Text>
-                    <Typography.Text>1 to 2 business days.</Typography.Text>
-                  </Flex>
-                </Flex>
-                <Divider type='vertical' style={{ height: 'auto', marginBlock: '1%' }} />
-                <Flex style={{ minWidth: '15%', justifyContent: 'center', alignItems: 'center' }}>
-                  <Typography.Title level={5} italic style={{ fontWeight: 700 }}>+10 USD</Typography.Title>
-                </Flex>
-              </Flex>
-            </Radio.Button>
+              </Radio.Button>
+            ))}
           </Space>
         </Radio.Group>
       </Form.Item>

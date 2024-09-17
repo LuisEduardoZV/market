@@ -16,9 +16,7 @@ const OnlinePaymentForm = ({ form, name, initValues, handleFinish }) => {
       wrapperCol={{
         flex: 1
       }}
-      style={{
-        maxWidth: '100%'
-      }}
+      className='paypal-form'
       initialValues={{
         ...initValues,
         username: initValues?.username ? initValues.username : ''

@@ -30,7 +30,7 @@ const PPaymentForm = ({ handleBack, handleNext, current, steps }) => {
     {
       key: 'credit',
       label: (
-        <Flex style={{ alignItems: 'center', gap: 5 }}>
+        <Flex className='payment-type'>
           <IconCreditCard />
           Credit Card
         </Flex>
@@ -41,7 +41,7 @@ const PPaymentForm = ({ handleBack, handleNext, current, steps }) => {
     {
       key: 'debit',
       label: (
-        <Flex style={{ alignItems: 'center', gap: 5 }}>
+        <Flex className='payment-type'>
           <IconCreditCardFilled />
           Debit Card
         </Flex>
@@ -52,7 +52,7 @@ const PPaymentForm = ({ handleBack, handleNext, current, steps }) => {
     {
       key: 'paypal',
       label: (
-        <Flex style={{ alignItems: 'center', gap: 5 }}>
+        <Flex className='payment-type'>
           <IconBrandPaypalFilled />
           PayPal
         </Flex>
@@ -64,7 +64,7 @@ const PPaymentForm = ({ handleBack, handleNext, current, steps }) => {
 
   return (
     <>
-      <Flex style={{ width: '100%' }}>
+      <Flex className='paypage-payment-form'>
         <Collapse accordion items={items} defaultActiveKey={[paymentType]} style={{ width: '100%' }} onChange={key => setPaymentType(key[0])} />
       </Flex>
       <StepButtonsPayment

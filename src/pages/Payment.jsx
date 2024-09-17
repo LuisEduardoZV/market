@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { IconAddressBook, IconCreditCardFilled, IconCubeSend } from '@tabler/icons-react'
-import { Flex, Steps, theme } from 'antd'
+import { Flex, Steps } from 'antd'
 
 import { useDispatch, useSelector } from '../store'
 
@@ -35,22 +35,11 @@ const Payment = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const { token } = theme.useToken()
-
   const items = steps.map((item) => ({
     key: item.title,
     title: item.title,
     icon: item.icon
   }))
-
-  const contentStyle = {
-    minHeight: 300,
-    color: token.colorTextTertiary,
-    backgroundColor: token.colordivider,
-    borderRadius: token.borderRadiusLG,
-    marginTop: 16,
-    padding: '2%'
-  }
 
   const handleBack = () => dispatch(setBackStep())
   const handleNext = () => dispatch(setNextStep())
@@ -70,10 +59,10 @@ const Payment = () => {
   }, [])
 
   return (
-    <Flex style={{ paddingBlock: '4%', paddingInline: '8%', width: '100%', alignItems: 'center', justifyContent: 'center' }}>
-      <Flex vertical style={{ width: '100%' }}>
+    <Flex className='payment-page'>
+      <Flex vertical>
         <Steps current={checkout.step} items={items} />
-        <div style={contentStyle}>
+        <div className='payment-steps-container'>
 
           {checkout.step === 0 && (
             <PAddresForm

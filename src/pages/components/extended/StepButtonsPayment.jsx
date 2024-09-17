@@ -6,16 +6,9 @@ const StepButtonsPayment = ({ current, steps, handleBack, handleNext, form, manu
   const { disabled } = useFormBtnValidate(form)
 
   return (
-    <div
-      style={{
-        marginTop: 24
-      }}
-    >
+    <div className='paypage-step-buttons'>
       {current > 0 && (
         <Button
-          style={{
-            margin: '0 8px'
-          }}
           onClick={handleBack}
         >
           Previous
