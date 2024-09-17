@@ -84,24 +84,24 @@ const MarqueePromo = ({ position, direction = 'right' }) => {
   })
 
   return (
-    <Flex ref={container} style={{ position: 'absolute', zIndex: 5, left: 0, color: 'white', alignItems: 'center', fontSize: '1.5rem', paddingBlock: 15, overflow: 'hidden', width: '100%', ...(position === 'top' ? { top: 0 } : { bottom: 0 }) }}>
-      <Flex style={{ position: 'relative', display: 'flex', alignItems: 'center', flexWrap: 'nowrap', overflow: 'hidden', width: '100%', justifyContent: 'space-between' }}>
-        <Text className='marqueElement' style={{ color: 'white', fontSize: '1.5rem', textTransform: 'uppercase', padding: 0, margin: 0, wordSpacing: '1rem' }}>
+    <Flex ref={container} style={{ position: 'absolute', zIndex: 5, left: 0, color: 'white', alignItems: 'center', fontSize: '1.5rem', paddingBlock: 10, overflow: 'hidden', width: '100%', ...(position === 'top' ? { top: 0 } : { bottom: 0 }) }}>
+      <Flex className='marquee-promo-banner'>
+        <Text className='marqueElement'>
           Sale
         </Text>
         <span className='marqueElement'><IconShoppingBagDiscount /></span>
-        <Text className='marqueElement' style={{ color: 'white', textTransform: 'uppercase', fontSize: '1.5rem', padding: 0, margin: 0, wordSpacing: '1rem' }}>
+        <Text className='marqueElement'>
           Sale
         </Text>
         <span className='marqueElement'><IconRosetteDiscountFilled /></span>
-        <Text className='marqueElement' style={{ color: 'white', textTransform: 'uppercase', fontSize: '1.5rem', padding: 0, margin: 0, wordSpacing: '1rem' }}>
+        <Text className='marqueElement'>
           Sale
         </Text>
         <span className='marqueElement'><IconShoppingBagDiscount /></span>
-        <Text className='marqueElement' style={{ color: 'white', fontSize: '1.5rem', textTransform: 'uppercase', padding: 0, margin: 0, wordSpacing: '1rem' }}>
+        <Text className='marqueElement'>
           Sale
         </Text>
-        <span className='marqueElement' style={{ paddingRight: 60 }}><IconRosetteDiscountFilled /></span>
+        <span className='marqueElement'><IconRosetteDiscountFilled /></span>
       </Flex>
     </Flex>
   )

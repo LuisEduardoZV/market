@@ -1,18 +1,23 @@
 import { useMemo } from 'react'
 
 import { Carousel, Flex } from 'antd'
+import useBreakpoint from 'antd/lib/grid/hooks/useBreakpoint'
 
 import BasicCardProduct from '../../ui-components/extended/BasicCardProduct'
+import { dividirEnSubarreglos } from '../../utils/func'
 
 const CarouselProducts = ({ products, typeCarousel = 'products' }) => {
+  const screens = useBreakpoint()
+
   const info = useMemo(() => {
     if (products) {
-      const uno = products.slice(0, 4)
-      const dos = products.slice(4, 8)
-      return [uno, dos]
+      console.log(products, typeCarousel)
+
+      if (screens.xs) return dividirEnSubarreglos(products, 6)
+      else return dividirEnSubarreglos(products, 3)
     }
     return null
-  }, [products])
+  }, [products, screens])
 
   return (
     <Flex style={{ position: 'relative' }}>

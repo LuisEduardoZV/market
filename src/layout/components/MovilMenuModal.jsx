@@ -17,7 +17,7 @@ const MovilMenuModal = ({ open, onClose, setSelected, categories }) => {
     },
     rest: {
       paddingInline: 0,
-      backgroundColor: token.colorPaper,
+      backgroundColor: token.colorBgBase,
       color: token.grey900,
       scale: 1
     }

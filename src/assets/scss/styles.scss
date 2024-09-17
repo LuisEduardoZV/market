@@ -44,11 +44,14 @@
 
 .cardItemCarousel {
 	display: grid !important;
-	grid-template-columns: repeat(auto-fill, minmax(20%, 23%));
+	//grid-template-columns: repeat(auto-fill, minmax(20%, 23%));
+	grid-template-columns: 1fr 1fr;
 	place-items: start;
 	justify-content: space-around;
-	gap: 15;
-	padding-block: 3%;
+	gap: 15px;
+	padding-top: 2%;
+	padding-bottom: 4%;
+	padding-inline: 4%;
 }
 
 .slick-prev,
@@ -142,10 +145,10 @@
 }
 
 .button-borders {
-	margin-top: 40px;
+	margin-top: 30px;
 	position: relative;
 	width: fit-content;
-	height: fit-content;
+	height: 30px;
 }
 
 .button-borders:before {
@@ -157,7 +160,6 @@
 	top: -0.3em;
 	border: 1px solid $darkPaper;
 	border-bottom: 0px;
-	/* opacity: 0.3; */
 }
 
 .button-borders:after {
@@ -384,7 +386,7 @@
 	> .image-menu-item {
 		position: relative;
 		width: 100%;
-		min-height: 140px;
+		min-height: 100px;
 		background-size: 100%;
 		background-position: center;
 		display: flex;
@@ -412,21 +414,18 @@
 }
 
 .newsletter-section {
-	max-width: 45%;
+	max-width: 100%;
 	align-items: center;
 	align-self: center;
 	text-align: center;
 	gap: 10px;
 	padding-bottom: 2%;
-
 	> h2 {
 		font-weight: 400;
 	}
-
 	> span {
 		font-size: 1.1rem;
 	}
-
 	> div {
 		margin-top: 20px;
 	}
@@ -452,17 +451,17 @@
 
 .image-product-card {
 	height: 100%;
-	max-height: 350px;
-	min-height: 350px;
+	max-height: 250px;
+	min-height: 250px;
 	width: 100%;
-	max-width: 350px;
+	max-width: 250px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	position: relative;
 	> img {
 		height: 100%;
-		max-height: 340px;
+		max-height: 250px;
 		width: 100%;
 		object-fit: contain;
 	}
@@ -505,25 +504,50 @@
 
 /*PROMO BANNER STYLES*/
 .promo-banner {
-	margin-top: 70px;
+	margin-top: 10px;
 	width: 100%;
 	position: relative;
+	.marquee-promo-banner {
+		position: relative;
+		display: flex;
+		align-items: center;
+		flex-wrap: nowrap;
+		overflow: hidden;
+		width: 100%;
+		justify-content: space-between;
+		> .marqueElement {
+			color: $paper;
+			font-size: 1rem;
+			text-transform: uppercase;
+			padding: 0;
+			margin: 0;
+			word-spacing: 1rem;
+		}
+		> :last-child {
+			padding-right: 60px;
+		}
+	}
 	.left-side {
 		display: flex;
 		flex-direction: column;
-		align-self: end;
+		align-self: start;
+		translate: 0 80%;
+		.promo-icons {
+			width: 1.2rem;
+			height: 1.2rem;
+		}
 		> div {
 			padding-inline: 10%;
-			padding-bottom: 15%;
+			padding-bottom: 0%;
 			h2 {
 				color: $paper;
-				font-size: 3.5rem;
+				font-size: 1.5rem;
 				text-transform: uppercase;
-				line-height: 0.7;
+				line-height: 0.2;
 			}
 			span {
 				color: $paper;
-				font-size: 1.1rem;
+				font-size: 0.8rem;
 				line-height: 1.2;
 			}
 		}
@@ -537,7 +561,7 @@
 			padding: 0;
 			padding-inline: 7%;
 			width: 100%;
-			padding-top: 35%;
+			padding-top: 40%;
 			> span {
 				width: fit-content;
 				line-height: 1;
@@ -545,14 +569,15 @@
 				text-transform: uppercase;
 			}
 			> span:nth-child(1) {
-				font-size: 3rem;
+				font-size: 1.8rem;
 			}
 			> span:nth-child(2) {
-				font-size: 9rem;
+				font-size: 3.4rem;
 				align-self: center;
+				width: fit-content;
 			}
 			> span:nth-child(3) {
-				font-size: 3rem;
+				font-size: 1.8rem;
 				align-self: end;
 			}
 		}
@@ -560,20 +585,20 @@
 }
 
 .promo-banner-default {
-	max-height: 700;
-	height: 700;
+	max-height: 300px;
+	height: 300px;
 }
 
 .promo-banner-inCategory {
-	max-height: 500;
-	height: 500;
+	max-height: 500px;
+	height: 500px;
 }
 
 /*SHOES BY GENDER STYLES*/
 .shoes-by-gender {
 	margin-top: 50px;
 	padding-inline: 10%;
-	padding-bottom: 7%;
+	padding-bottom: 15%;
 	> div {
 		padding-block: 3%;
 		width: 100%;
@@ -590,7 +615,7 @@
 	min-height: 310px;
 	height: 100%;
 	width: 100%;
-	max-width: 40%;
+	max-width: 80%;
 	border: 2px solid;
 	border-color: $paper;
 	cursor: pointer;
@@ -607,7 +632,7 @@
 
 	> div > img {
 		width: 100%;
-		max-height: 400px;
+		max-height: 300px;
 	}
 
 	> .big-card-info-container {
@@ -678,11 +703,15 @@
 	justify-content: space-around;
 	padding-inline: 10%;
 	padding-bottom: 5px;
+	flex-wrap: wrap;
+	row-gap: 40px;
 	> .per-banner {
 		position: relative;
 		display: flex;
 		flex-direction: column;
 		height: 100%;
+		width: 100%;
+		max-width: 40%;
 	}
 	> .per-banner > .portrait-banner-info {
 		flex: none;
@@ -1490,14 +1519,7 @@
 		gap: 30px;
 	}
 	.cardItemCarousel {
-		display: grid !important;
-		grid-template-columns: 1fr 1fr;
-		place-items: start;
-		justify-content: space-around;
-		gap: 30px;
-		padding-block: 3%;
-		padding-inline: 2%;
-		background-color: red;
+		grid-template-columns: repeat(auto-fill, minmax(20%, 23%));
 	}
 }
 

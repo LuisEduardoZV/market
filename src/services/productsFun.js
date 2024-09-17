@@ -98,9 +98,10 @@ export async function getTechProducts () {
   const tablets = await getTopProductsByCategory('tablets')
 
   const res = [...laptops, ...mobAcc, ...smartphones, ...tablets]
-  shuffle(res)
+  const data = res.splice(0, 12)
+  shuffle(data)
 
-  return res
+  return data
 }
 
 export async function getDisscountProducts () {

@@ -1,4 +1,4 @@
-import { Col, Flex, Row, Typography } from 'antd'
+import { Flex, Typography } from 'antd'
 
 import interesting from '../../utils/interestingCards.json'
 
@@ -6,9 +6,9 @@ const { Text, Title } = Typography
 
 const PortraitBanner = () => {
   return (
-    <Row className='portrait-banner'>
+    <Flex className='portrait-banner'>
       {interesting.map((op, idx) => (
-        <Col key={idx} span={5} className='per-banner'>
+        <Flex key={idx} className='per-banner'>
           <Flex style={{ width: '100%', minHeight: 200, height: '100%', flex: 1 }} vertical>
             {(typeof op.img === 'string')
               ? (
@@ -33,9 +33,9 @@ const PortraitBanner = () => {
               </Flex>
             </Flex>
           </Flex>
-        </Col>
+        </Flex>
       ))}
-    </Row>
+    </Flex>
   )
 }
 

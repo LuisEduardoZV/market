@@ -42,11 +42,11 @@ const PromoBanner = ({ inCategory = false }) => {
       <Col span={11} className='left-side'>
         <Flex vertical>
           <Title level={2} strong>
-            <IconShoppingCart size='2.5rem' stroke={1.5} color='white' />
-            <IconShoppingBag size='2.5rem' stroke={1.5} color='white' style={{ marginInline: '1%' }} />
+            <IconShoppingCart stroke={1.5} color='white' className='promo-icons' />
+            <IconShoppingBag stroke={1.5} color='white' style={{ marginInline: '1%' }} className='promo-icons' />
             Hot Sale
-            <IconShoppingBag size='2.5rem' stroke={1.5} color='white' style={{ marginInline: '1%' }} />
-            <IconShoppingCart size='2.5rem' stroke={1.5} color='white' />
+            <IconShoppingBag stroke={1.5} color='white' style={{ marginInline: '1%' }} className='promo-icons' />
+            <IconShoppingCart stroke={1.5} color='white' className='promo-icons' />
           </Title>
           <Text>Use the code *MARKET15* and get an additional 15% discount on your end of season purchases.</Text>
           <Flex className='button-borders'>
