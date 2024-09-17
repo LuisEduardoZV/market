@@ -124,9 +124,9 @@ const Cart = () => {
             </Flex>
           )}
           <Divider style={{ borderColor: token.colorPrimaryBg, marginBlock: 10 }} />
-          <Flex style={{ paddingBlock: '5%' }}>
-            <Title level={2} underline style={{ color: 'inherit', margin: 0 }}>Total: </Title>
-            <Title level={2} style={{ color: 'inherit', margin: 0 }}>${checkout.total}</Title>
+          <Flex className='sumary-cart-total'>
+            <Title level={2} underline>Total: </Title>
+            <Title level={2}>${checkout.total}</Title>
           </Flex>
           {checkout.products.length > 0 && (
             <>
@@ -134,14 +134,12 @@ const Cart = () => {
                 items={[{
                   key: 'code',
                   label: 'Apply promo code',
-                  children: (<RedemCode handleAddPromoCode={handleAddPromoCode} />),
-                  style: { padding: 0, margin: 0, color: 'white!important' }
+                  children: (<RedemCode handleAddPromoCode={handleAddPromoCode} />)
                 }]}
-                style={{ border: 'none', color: 'white!important' }}
                 size='small'
-                className='class'
+                className='promo-code-container'
               />
-              <Button type='default' style={{ width: '100%', marginTop: 15, marginBottom: 5 }} icon={<IconCreditCardPay />} onClick={(() => navigate('/payment'))}>
+              <Button type='default' icon={<IconCreditCardPay />} onClick={(() => navigate('/payment'))}>
                 Go to payment
               </Button>
             </>

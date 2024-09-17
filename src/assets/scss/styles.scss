@@ -219,27 +219,6 @@
 		41.8px 41.8px 33.4px rgba(0, 0, 0, 0.05), 100px 100px 80px rgba(0, 0, 0, 0.07);
 }
 
-.class {
-	& > .ant-collapse-item {
-		> .ant-collapse-header {
-			padding: 0;
-			color: $grey400;
-		}
-		> .ant-collapse-content {
-			background-color: $primaryMain;
-			border: none;
-			> .ant-collapse-content-box {
-				padding: 0;
-				margin: 0;
-				padding-block: 0.5rem;
-				display: flex;
-				align-items: center;
-				column-gap: 10px;
-			}
-		}
-	}
-}
-
 .visa-bg-card {
 	background-image: radial-gradient(circle at center center, $visaColor, $visaColor),
 		repeating-radial-gradient(circle at center bottom, $visaColor, $visaColor, 80px, $primaryDark 192px, $visaColor 71px);
@@ -995,6 +974,40 @@
 					color: inherit;
 					margin: 0;
 				}
+			}
+			> .sumary-cart-total {
+				padding-block: 5%;
+				h2 {
+					margin: 0;
+					color: inherit;
+				}
+			}
+			> .promo-code-container {
+				border: none;
+				color: $background !important;
+				& > .ant-collapse-item {
+					> .ant-collapse-header {
+						padding: 0;
+						color: $grey400;
+					}
+					> .ant-collapse-content {
+						background-color: $primaryMain;
+						border: none;
+						> .ant-collapse-content-box {
+							padding: 0;
+							margin: 0;
+							padding-block: 0.5rem;
+							display: flex;
+							align-items: center;
+							column-gap: 10px;
+						}
+					}
+				}
+			}
+			> button {
+				width: 100%;
+				margin-top: 15px;
+				margin-bottom: 5px;
 			}
 		}
 	}
