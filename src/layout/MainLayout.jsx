@@ -2,18 +2,19 @@ import { AnimatePresence } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
 
-import { Layout, theme } from 'antd'
+import { Layout } from 'antd'
+import useBreakpoint from 'antd/lib/grid/hooks/useBreakpoint'
 
 import { useGetCategories } from '../hooks/useGetCategories'
 import FooterCustom from './components/FooterCustom'
 import HeaderContainer from './components/HeaderContainer'
 import MenuModal from './components/MenuModal'
+import MovilMenuModal from './components/MovilMenuModal'
 
 const { Content } = Layout
-const { useToken } = theme
 
 const MainLayout = () => {
-  const { token } = useToken()
+  const screens = useBreakpoint()
   const navigate = useNavigate()
   const [currentCategory, setCurrentCat] = useState(null)
   const [currentSubCategory, setCurrentSubCat] = useState(null)
@@ -41,23 +42,28 @@ const MainLayout = () => {
   }, [currentCategory])
 
   return (
-    <Layout style={{
-      minHeight: '100vh',
-      position: 'relative',
-      backgroundColor: token.colorPaper
-    }}
-    >
+    <Layout className='main'>
       <HeaderContainer openMenu={() => { setShow(true) }} handleToHome={handleToHome} />
-      <Content style={{ maxWidth: '100vw', marginTop: 40, height: '100%', position: 'relative' }}>
+      <Content className='mainContent'>
         <AnimatePresence initial={false} onExitComplete={() => null}>
-          {show && (
-            <MenuModal
-              categories={categories}
-              open={show}
-              close={() => { setShow(false) }}
-              setSelected={handleCurrentCat}
-            />
-          )}
+          {(screens.xs && show) &&
+            (
+              <MovilMenuModal
+                open={show}
+                onClose={() => { setShow(false) }}
+                categories={categories}
+                setSelected={handleCurrentCat}
+              />
+            )}
+          {(!screens.xs && show) &&
+            (
+              <MenuModal
+                categories={categories}
+                open={show}
+                close={() => { setShow(false) }}
+                setSelected={handleCurrentCat}
+              />
+            )}
         </AnimatePresence>
         <Outlet context={[{ currentCategory: { ...currentCategory, subcategory: currentSubCategory }, categoriesInside, show, handleCurrentCat }]} />
       </Content>

@@ -246,6 +246,122 @@
 	background-color: $grey600;
 }
 
+/*LAYOUT STYLES*/
+.main {
+	min-height: 100vh;
+	position: relative;
+	background-color: $paper;
+	> .mainContent {
+		max-width: 100vw;
+		margin-top: 40px;
+		height: 100%;
+		position: relative;
+	}
+}
+
+.header {
+	background-color: $paper;
+	position: fixed;
+	top: 0;
+	z-index: 50;
+	> div {
+		width: 100%;
+		height: 100%;
+		justify-content: center;
+		align-items: center;
+		position: relative;
+		place-items: center;
+		> .logo {
+			align-items: center;
+			img {
+				mix-blend-mode: multiply;
+				max-width: 15%;
+				cursor: pointer;
+			}
+		}
+	}
+}
+
+.modal-menu-container {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: $paper;
+	max-height: 100vh;
+	height: 100%;
+	z-index: 50;
+	display: flex;
+	align-items: center;
+	> div {
+		position: relative;
+		width: 100%;
+		height: 100%;
+	}
+	.titleModalMenu {
+		margin-block: 2.5%;
+		padding-inline: 2%;
+		align-self: start;
+	}
+	button {
+		position: absolute;
+		top: 4%;
+		right: 4%;
+	}
+	.modal-menu-list {
+		width: 100%;
+		height: 100%;
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr;
+		grid-template-rows: 50% 50%;
+		position: relative;
+		overflow-y: hidden;
+		padding-top: 40px;
+		gap: 30px;
+		> .modal-menu-card-category {
+			width: 100%;
+			align-self: start;
+			align-items: center;
+			height: 100%;
+			position: relative;
+			padding-inline: 3%;
+			> h5 {
+				cursor: pointer;
+				background-color: $background;
+				padding-inline: 5%;
+				padding-block: 2px;
+			}
+			> .menu-list-categories {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				width: 100%;
+				justify-items: center;
+				row-gap: 10px;
+				> span {
+					cursor: pointer;
+					font-size: 0.9rem;
+					background-color: $paper;
+				}
+			}
+		}
+	}
+}
+
+.movile-menu-list {
+	row-gap: 30px;
+	width: 100%;
+	height: 100%;
+	.movile-menu-list-categories {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-template-rows: 1fr;
+		position: relative;
+		overflow-y: hidden;
+		row-gap: 5px;
+	}
+}
+
 /*HOME STYLES*/
 .home-section {
 	overflow: hidden;
@@ -253,6 +369,45 @@
 	> h3 {
 		margin-top: 3%;
 		padding-left: 2%;
+	}
+}
+
+.image-menu {
+	width: 100%;
+	padding-block: 10px;
+	margin-top: 40px;
+	padding-inline: 10%;
+	justify-content: space-between;
+	row-gap: 20px;
+	column-gap: 0;
+	flex-wrap: wrap;
+	> .image-menu-item {
+		position: relative;
+		width: 100%;
+		min-height: 140px;
+		background-size: 100%;
+		background-position: center;
+		display: flex;
+		justify-content: center;
+		align-items: stretch;
+		cursor: pointer;
+		> div {
+			padding-block: 1.5%;
+			padding-inline: 10%;
+			background-color: rgba(0, 0, 0, 0.3);
+			backdrop-filter: blur(5px);
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 100%;
+			width: 100%;
+			h5 {
+				color: $paper;
+				text-transform: uppercase;
+				padding: 0;
+				margin: 0;
+			}
+		}
 	}
 }
 
@@ -1322,7 +1477,31 @@
 	}
 }
 
-@media screen and (max-width: 576px) {
+@media screen and (min-width: 576px) {
+	.modal-menu-list {
+		width: 100%;
+		height: 100%;
+		display: grid;
+		grid-template-columns: 1fr;
+		grid-template-rows: 50%;
+		position: relative;
+		overflow-y: hidden;
+		padding-top: 40px;
+		gap: 30px;
+	}
+	.cardItemCarousel {
+		display: grid !important;
+		grid-template-columns: 1fr 1fr;
+		place-items: start;
+		justify-content: space-around;
+		gap: 30px;
+		padding-block: 3%;
+		padding-inline: 2%;
+		background-color: red;
+	}
+}
+
+/* @media screen and (max-width: 576px) {
 	.cardItemCarousel {
 		display: grid !important;
 		grid-template-columns: 1fr 1fr;
@@ -1332,4 +1511,4 @@
 		padding-block: 3%;
 		padding-inline: 2%;
 	}
-}
+} */

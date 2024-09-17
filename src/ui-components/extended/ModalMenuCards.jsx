@@ -13,6 +13,7 @@ const ModalMenuCards = ({ item, setSelected }) => {
   useGSAP(() => {
     if (container.current) {
       const title = document.querySelector(`#${item.id}-title`)
+      console.log(item.id)
 
       const tl = gsap.timeline({ paused: true })
       tl.to(title, {
@@ -31,19 +32,18 @@ const ModalMenuCards = ({ item, setSelected }) => {
     <Flex
       id={item.id}
       ref={container}
-      style={{ width: '100%', alignSelf: 'start', alignItems: 'center', height: '100%', position: 'relative', paddingInline: '3%' }}
+      className='modal-menu-card-category'
       vertical
     >
       <Title
         id={`${item.id}-title`}
         level={5}
-        style={{ cursor: 'pointer', backgroundColor: token.colorBgBase, paddingInline: '5%', paddingBlock: 2 }}
         onClick={() => setSelected(item.id, item.category)}
       >
         {item.category}
       </Title>
       <Divider style={{ margin: 0, padding: 0, paddingBlock: 10 }} />
-      <Flex vertical style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', width: '100%', justifyItems: 'center', rowGap: 10 }}>
+      <Flex vertical className='menu-list-categories'>
         {item.subcategories.map((op) => (
           <MenuItem key={op.id} item={item} setSelected={setSelected} {...op} />
         ))}

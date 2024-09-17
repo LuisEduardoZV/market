@@ -17,6 +17,8 @@ const CarouselFavProd = ({ products }) => {
     return null
   }, [products, screens])
 
+  // console.log(screens)
+
   return (
     <Flex style={{ position: 'relative' }}>
       <div style={{ width: '100%' }}>

@@ -76,28 +76,24 @@ const HeaderContainer = ({ openMenu, handleToHome }) => {
   }
 
   return (
-    <Header style={{ backgroundColor: token.colorPaper, position: 'fixed', top: 0, zIndex: 50 }}>
-      <Row style={{ width: '100%', height: '100%', justifyContent: 'center', alignItems: 'center', position: 'relative', placeItems: 'center' }}>
-        <Col span={8} style={{ alignItems: 'center' }}>
-          <img src={logo} alt='Logo image' style={{ mixBlendMode: 'multiply', maxWidth: '15%', cursor: 'pointer' }} onClick={() => handleToHome()} />
+    <Header className='header'>
+      <Row>
+        <Col span={8} className='logo'>
+          <img src={logo} alt='Logo image' onClick={() => handleToHome()} />
         </Col>
-        <Col span={16} style={{ height: 'max-content', position: 'relative' }}>
+        <Col span={16} className='main-actions'>
           <Flex gap={20} align='center' justify='end'>
-            {!screens.xs && (
-              <>
-                <Popover overlayStyle={{ marginTop: 20 }} arrow={false} placement='bottomLeft' title={<Flex style={{ justifyContent: 'space-between' }}><Text>Search results</Text><IconSquareRoundedXFilled size={20} onClick={() => setOpen(false)} style={{ cursor: 'pointer', color: token.colorPrimary }} /></Flex>} content={renderContentSearch()} open={open}>
-                  <Search placeholder='Buscar...' allowClear value={search} onSearch={onSearch} onChange={e => setSearch(e.target.value)} onFocus={() => setOpen(false)} style={{ maxWidth: '50%' }} loading={isLoading} />
-                </Popover>
-                <Button type='text' icon={<IconUserFilled />} />
-                <Flex style={{ alignItems: 'center', justifyContent: 'center', height: 'fit-content' }}>
-                  <LinkRoute to='/shopping-cart' style={{ alignItems: 'center', justifyContent: 'center', height: 50, placeContent: 'center' }}>
-                    <Badge count={checkout.products.length} size='small' color={token.colorPrimary} style={{ fontSize: '0.7rem' }}>
-                      <IconTruckDelivery size={25} />
-                    </Badge>
-                  </LinkRoute>
-                </Flex>
-              </>
-            )}
+            <Popover overlayStyle={{ marginTop: 20 }} arrow={false} placement='bottomLeft' title={<Flex style={{ justifyContent: 'space-between' }}><Text>Search results</Text><IconSquareRoundedXFilled size={20} onClick={() => setOpen(false)} style={{ cursor: 'pointer', color: token.colorPrimary }} /></Flex>} content={renderContentSearch()} open={open}>
+              <Search placeholder='Buscar...' allowClear value={search} onSearch={onSearch} onChange={e => setSearch(e.target.value)} onFocus={() => setOpen(false)} style={{ maxWidth: '50%' }} loading={isLoading} />
+            </Popover>
+            <Button type='text' icon={<IconUserFilled />} />
+            <Flex style={{ alignItems: 'center', justifyContent: 'center', height: 'fit-content' }}>
+              <LinkRoute to='/shopping-cart' style={{ alignItems: 'center', justifyContent: 'center', height: 50, placeContent: 'center' }}>
+                <Badge count={checkout.products.length} size='small' color={token.colorPrimary} style={{ fontSize: '0.7rem' }}>
+                  <IconTruckDelivery size={25} />
+                </Badge>
+              </LinkRoute>
+            </Flex>
             <Button type='text' icon={<IconMenu />} onClick={openMenu} />
           </Flex>
         </Col>

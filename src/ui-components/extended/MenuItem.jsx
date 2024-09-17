@@ -27,7 +27,6 @@ const MenuItem = ({ item, id, setSelected, category }) => {
     <Text
       className={`${item.id}-submenu-item`}
       ref={container}
-      style={{ cursor: 'pointer', fontSize: '0.9rem', backgroundColor: token.colorPaper }}
       onClick={() => {
         setSelected(item.id, item.category, id)
       }}
