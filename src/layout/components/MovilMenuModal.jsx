@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom'
+
 import { Divider, Drawer, Flex, Input, Typography, theme } from 'antd'
 import { motion } from 'framer-motion'
 
@@ -9,6 +11,8 @@ const TextMotion = motion.create(Typography.Text)
 const TitleMotion = motion.create(Typography.Title)
 
 const MovilMenuModal = ({ open, onClose, setSelected, categories }) => {
+  const navigate = useNavigate()
+
   const { token } = theme.useToken()
   const { data, isLoading, onSearch, searching, setSearching } = useSearchProducts()
 
@@ -40,13 +44,19 @@ const MovilMenuModal = ({ open, onClose, setSelected, categories }) => {
     }
   }
 
+  const handleClickProduct = (op) => {
+    onClose()
+    setSearching(null)
+    navigate(`${op.category}/product/${op.id}`)
+  }
+
   return (
     <Drawer title='Choose a category' onClose={onClose} open={open}>
       <Flex vertical>
         <Input.Search placeholder='Buscar...' allowClear onSearch={onSearch} loading={isLoading} style={{ marginBottom: 20 }} onFocus={() => setSearching(null)} />
         {(data && searching) && (
           <Flex vertical className='movile-menu-search-results'>
-            <ListSearchResult data={data} onClick={null} />
+            <ListSearchResult data={data} onClick={handleClickProduct} />
           </Flex>
         )}
         <Flex className='movile-menu-list' vertical>
