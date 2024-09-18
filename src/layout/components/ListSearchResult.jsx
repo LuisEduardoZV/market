@@ -11,7 +11,7 @@ const ListSearchResult = ({ data, onClick }) => {
   const renderProducts = newData.map((op) => (
     <Fragment key={op.id}>
       <Flex
-        className='hoverProductSearching' style={{ paddingBlock: 10, paddingRight: 10, transition: 'background-color 0.3s ease-in-out' }} onClick={onClick}
+        className='hoverProductSearching' style={{ paddingBlock: 10, paddingRight: 10, transition: 'background-color 0.3s ease-in-out' }} onClick={() => onClick(op)}
       >
         <img src={op.thumbnail} alt='Product image' style={{ width: 80, height: 80, objectFit: 'cover' }} />
         <Flex vertical>
