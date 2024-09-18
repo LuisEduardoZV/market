@@ -1,5 +1,8 @@
-import { Divider, Drawer, Flex, Typography, theme } from 'antd'
+import { Divider, Drawer, Flex, Input, Typography, theme } from 'antd'
 import { motion } from 'framer-motion'
+
+import { useSearchProducts } from '../../hooks/useSearchProducts'
+import ListSearchResult from './ListSearchResult'
 
 const FlexMotion = motion.create(Flex)
 const TextMotion = motion.create(Typography.Text)
@@ -7,6 +10,7 @@ const TitleMotion = motion.create(Typography.Title)
 
 const MovilMenuModal = ({ open, onClose, setSelected, categories }) => {
   const { token } = theme.useToken()
+  const { data, isLoading, onSearch, searching, setSearching } = useSearchProducts()
 
   const titleVariants = {
     hover: {
@@ -38,7 +42,13 @@ const MovilMenuModal = ({ open, onClose, setSelected, categories }) => {
 
   return (
     <Drawer title='Choose a category' onClose={onClose} open={open}>
-      <Flex>
+      <Flex vertical>
+        <Input.Search placeholder='Buscar...' allowClear onSearch={onSearch} loading={isLoading} style={{ marginBottom: 20 }} onFocus={() => setSearching(null)} />
+        {(data && searching) && (
+          <Flex vertical className='movile-menu-search-results'>
+            <ListSearchResult data={data} onClick={null} />
+          </Flex>
+        )}
         <Flex className='movile-menu-list' vertical>
           {categories && categories.map((op) =>
             (
@@ -59,7 +69,6 @@ const MovilMenuModal = ({ open, onClose, setSelected, categories }) => {
                 <Flex
                   className='movile-menu-list-categories' onPointerDownCapture={(e) => {
                     e.stopPropagation()
-                    console.log('entro')
                   }}
                 >
                   {op.subcategories.map((item) => (
