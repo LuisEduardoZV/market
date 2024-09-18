@@ -491,13 +491,13 @@
 	}
 	.rate-product-card {
 		display: flex;
-		align-items: end;
+		flex-direction: column;
+		align-items: center;
 		width: fit-content;
 		z-index: 5;
 		cursor: default;
 		pointer-events: fill;
 		justify-content: center;
-		flex-direction: row;
 	}
 	.price-product-card {
 		background-color: $paper;
@@ -594,8 +594,8 @@
 }
 
 .promo-banner-inCategory {
-	max-height: 500px;
-	height: 500px;
+	max-height: 310px;
+	height: 310px;
 }
 
 /*SHOES BY GENDER STYLES*/
