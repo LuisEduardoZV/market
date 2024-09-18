@@ -33,10 +33,12 @@ export function getDataForSubMenuInCategory (subcategories) {
 
 export async function filteringCategoryData (data, filters) {
   let newData = [].concat(data)
+  console.log(filters)
 
   for (const type in filters) {
     if (Object.prototype.hasOwnProperty.call(filters, type)) {
       const filter = filters[type]
+      console.log(filter)
       if (!filter) continue
 
       switch (type) {
@@ -47,10 +49,16 @@ export async function filteringCategoryData (data, filters) {
           newData = newData.filter(product => product.brand === filter)
           break
         case 'rate':
-          newData = newData.filter(product => Math.floor(product.rating) === filter)
+          newData = newData.filter(product => Math.floor(Number(product.rating)) === filter)
           break
         case 'prices':
-          newData = newData.filter(product => product.price >= filter[0] && product.price <= filter[1])
+          if (typeof filter === 'string') {
+            console.log(filter)
+
+            if (filter.includes('def')) newData = [].concat(data)
+            else if (filter.includes('asc')) newData = newData.sort((a, b) => a.price - b.price)
+            else newData = newData.sort((a, b) => b.price - a.price)
+          } else newData = newData.filter(product => product.price >= filter[0] && product.price <= filter[1])
           break
         default:
           newData = newData.filter(product => product[type] === filter)

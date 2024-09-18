@@ -728,12 +728,12 @@
 .main-category {
 	width: 100%;
 	position: relative;
-	padding-left: 4%;
+	padding-inline: 2% 0%;
 	min-height: 100vh;
 	> h1 {
-		margin-block: 50px;
+		margin-block: 40px 20px;
 		position: sticky;
-		top: 8%;
+		top: 9%;
 		width: 100%;
 		z-index: 1;
 		background-color: $paper;
@@ -742,20 +742,22 @@
 	> div {
 		justify-content: space-around;
 		width: 100%;
+		flex-direction: column;
 		> .list-products-container {
-			width: 80%;
-			gap: 30px;
+			width: 100%;
+			column-gap: 10px;
+			row-gap: 40px;
 			display: grid;
-			grid-template-columns: 1fr 1fr 1fr;
+			grid-template-columns: 1fr 1fr;
 			align-self: end;
 			top: 0;
 			justify-self: end;
 			> .load-more-container {
-				grid-column: span 3;
+				grid-column: span 2;
 				justify-content: center;
 			}
 			> .banner-container-category {
-				grid-column: span 3;
+				grid-column: span 2;
 			}
 		}
 		> .list-products-skeleton-container {
@@ -773,6 +775,7 @@
 }
 
 .aside-menu-category {
+	display: none;
 	position: sticky;
 	top: 20%;
 	width: 100%;
@@ -793,6 +796,45 @@
 			margin-bottom: 0;
 			padding-bottom: 0;
 		}
+	}
+}
+
+.movile-menu-category-container {
+	> .movile-menu-category {
+		width: 100%;
+		overflow-x: auto;
+		overflow-y: hidden;
+		justify-content: center;
+		background-color: $paper;
+		position: sticky;
+		top: 17%;
+		margin: 0;
+		padding: 0;
+		z-index: 1;
+	}
+	> .movile-menu-price-filter {
+		margin-block: 4% 1%;
+		font-size: 0.9rem;
+		color: $primaryMain;
+		font-weight: 500;
+		width: fit-content;
+		display: flex;
+		align-items: center;
+		align-self: flex-end;
+		transition: color 0.2s ease-in-out, font-weight 0.1s ease-in-out;
+		&:hover {
+			color: $primaryDark;
+			cursor: pointer;
+			font-weight: 600;
+		}
+		.movile-menu-price-filter-dropdown {
+			background-color: $primaryMain !important;
+			color: white;
+		}
+	}
+	.movile-menu-price-filter-dropdown {
+		background-color: $primaryMain !important;
+		color: white;
 	}
 }
 
@@ -1511,6 +1553,21 @@
 }
 
 @media screen and (min-width: 576px) {
+	.main-category {
+		> div {
+			flex-direction: row;
+			> .list-products-container {
+				width: 80%;
+			}
+		}
+	}
+
+	.aside-menu-category {
+		display: block;
+	}
+	.movile-menu-category {
+		display: none;
+	}
 	.modal-menu-list {
 		width: 100%;
 		height: 100%;

@@ -31,7 +31,7 @@ const MainLayout = () => {
   const handleToHome = () => {
     setCurrentCat(null)
     setCurrentSubCat(null)
-    navigate('/', { replace: true })
+    navigate('//')
   }
 
   useEffect(() => {

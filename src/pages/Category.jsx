@@ -3,6 +3,7 @@ import { useLocation, useOutletContext, useParams } from 'react-router-dom'
 import { Button, Flex, Typography } from 'antd'
 
 import BasicCardProduct from '../ui-components/extended/BasicCardProduct'
+import MovileMenuCategory from '../ui-components/MovileMenuCategory'
 import NoInfoOverlay from '../ui-components/NoInfoOverlay'
 import SideMenuCategory from '../ui-components/SideMenuCategory'
 import PromoBanner from './components/PromoBanner'
@@ -35,6 +36,7 @@ const Category = () => {
       <Title level={1}>{state.title ?? category}</Title>
       <Flex>
         {extraInfo && <SideMenuCategory categoriesInside={categoriesInside} filters={filters} brands={extraInfo?.brands} prices={extraInfo?.prices} handleFilters={handleFilters} />}
+        {extraInfo && <MovileMenuCategory categoriesInside={categoriesInside} filters={filters} brands={extraInfo?.brands} handleFilters={handleFilters} />}
         {isLoading
           ? (
             <Flex className='list-products-skeleton-container'>
