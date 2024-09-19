@@ -558,6 +558,11 @@
 	}
 	.right-side {
 		align-self: start;
+		position: absolute;
+		width: 100%;
+		right: 0;
+		top: 40%;
+		translate: -15% -70%;
 		> div {
 			position: relative;
 			gap: 0;

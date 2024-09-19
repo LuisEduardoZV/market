@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 
 import { IconArrowNarrowRight, IconShoppingBag, IconShoppingCart } from '@tabler/icons-react'
 import { Col, Flex, Row, Typography } from 'antd'
+import useBreakpoint from 'antd/lib/grid/hooks/useBreakpoint'
 
 import usePexelsClient from '../../hooks/usePexelsClient'
 import { getImageById } from '../../services/imagesFunc'
@@ -12,6 +13,7 @@ const { Text, Title } = Typography
 
 const PromoBanner = ({ inCategory = false }) => {
   const { client } = usePexelsClient()
+  const screens = useBreakpoint()
 
   const [promo, setPromo] = useState()
 
@@ -39,7 +41,7 @@ const PromoBanner = ({ inCategory = false }) => {
       className={`promo-banner ${inCategory ? 'promo-banner-inCategory' : 'promo-banner-default'}`}
     >
       <MarqueePromo position='top' direction='left' />
-      <Col span={11} className='left-side'>
+      <Col span={screens.xs ? 15 : 11} className='left-side'>
         <Flex vertical>
           <Title level={2} strong>
             <IconShoppingCart stroke={1.5} color='white' className='promo-icons' />
@@ -56,12 +58,12 @@ const PromoBanner = ({ inCategory = false }) => {
           </Flex>
         </Flex>
       </Col>
-      <Col span={inCategory ? 6 : 7} style={{ position: 'relative' }}>
+      <Col span={screens.xs ? 8 : inCategory ? 6 : 7} style={{ position: 'relative' }}>
         <Flex>
           <img src={promo.url} alt={promo.alt} className={`${inCategory ? 'promo-banner-inCategory' : 'promo-banner-default'}`} style={{ width: '100%' }} />
         </Flex>
       </Col>
-      <Col span={inCategory ? 7 : 6} className='right-side'>
+      <Col span={screens.xs ? 8 : inCategory ? 7 : 6} className='right-side'>
         <Flex vertical>
           <Text strong italic>Up to</Text>
           <Text strong italic>50%</Text>
