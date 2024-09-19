@@ -297,7 +297,7 @@
 	background-color: $paper;
 	max-height: 100vh;
 	height: 100%;
-	z-index: 50;
+	z-index: 9999999;
 	display: flex;
 	align-items: center;
 	> div {
@@ -1109,8 +1109,7 @@
 				background-color: $grey200;
 				padding-inline: 4%;
 				padding-block: 2%;
-				//translate: -5% 15%;
-				max-width: 100; //70%;
+				max-width: 100;
 				width: 100%;
 				gap: 30px;
 				> div {
@@ -1715,6 +1714,144 @@
 	.image-product-card {
 		> img {
 			max-height: 240px;
+		}
+	}
+}
+
+@media screen and (min-width: 768px) {
+	.cardItemCarousel {
+		grid-template-columns: 1fr 1fr 1fr;
+	}
+	.image-product-card {
+		max-height: 230px;
+		min-height: 230px;
+		> img {
+			max-height: 220px;
+		}
+	}
+	.promo-banner-default,
+	.promo-banner-inCategory {
+		max-height: 410px;
+		height: 410px;
+	}
+	.promo-banner {
+		.left-side {
+			.promo-icons {
+				width: 1.8rem;
+				height: 1.8rem;
+			}
+			> div {
+				padding-inline: 8%;
+				h2 {
+					font-size: 2.4rem;
+				}
+				span {
+					font-size: 1rem;
+				}
+			}
+		}
+		.right-side {
+			> div {
+				padding-inline: 0%;
+				> span:nth-child(1) {
+					font-size: 2.2rem;
+				}
+				> span:nth-child(2) {
+					font-size: 6.5rem;
+					align-self: center;
+					width: fit-content;
+				}
+				> span:nth-child(3) {
+					font-size: 2.2rem;
+					align-self: end;
+				}
+			}
+		}
+	}
+	.big-card-item {
+		max-width: 60%;
+	}
+	.main-category {
+		> div {
+			> .list-products-container {
+				grid-template-columns: 1fr 1fr 1fr;
+				> .load-more-container {
+					grid-column: span 3;
+				}
+				> .banner-container-category {
+					grid-column: span 3;
+				}
+			}
+			> .list-products-skeleton-container {
+				grid-template-columns: 1fr 1fr 1fr;
+			}
+		}
+	}
+	.product-page {
+		> .customer-reviews-container {
+			padding-bottom: 15%;
+			> div {
+				flex-direction: row;
+				> .global-rating-container {
+					padding-right: 5%;
+					flex-direction: column;
+				}
+				> .featured-reviews-container {
+					translate: -5% 15%;
+					max-width: 65%;
+				}
+			}
+		}
+	}
+	.cart-page {
+		padding-inline: 8%;
+		> :first-child {
+			flex-direction: row;
+			align-items: start;
+			> .list-cart-container {
+				max-width: 65%;
+				margin-block: 0;
+			}
+			> .summary-cart-container {
+				max-width: 30%;
+				padding: 3%;
+				//position: static;
+				top: 10%;
+				> .sumary-cart-total {
+					padding-block: 10%;
+					h2 {
+						font-size: 1.2rem;
+					}
+				}
+			}
+			.product-inside-cart-container {
+				> .product-details {
+					flex-direction: row;
+					> :last-child {
+						align-self: flex-start;
+					}
+					.product-info {
+						> :last-child {
+							align-self: start;
+						}
+					}
+				}
+			}
+		}
+	}
+	.payment-page {
+		> div {
+			> :first-child {
+				display: flex;
+			}
+		}
+		.credit-card-form {
+			.credit-card-interactive-container {
+				.flip-card-front,
+				.flip-card-back {
+					max-width: 60%;
+				}
+			}
 		}
 	}
 }

@@ -19,8 +19,8 @@ const RedemCode = ({ handleAddPromoCode }) => {
 
   return (
     <>
-      <Input placeholder='Enter promo code' value={code} onChange={(e) => setCode(e.target.value)} style={{ width: '100%' }} />
-      <Button type='primary' disabled={!code} onClick={() => handleAddPromoCode(code)}>Add</Button>
+      <Input placeholder='Enter promo code' value={code} onChange={(e) => setCode(e.target.value)} size='small' style={{ width: '100%' }} />
+      <Button type='primary' size='small' disabled={!code} onClick={() => handleAddPromoCode(code)}>Add</Button>
     </>
   )
 }

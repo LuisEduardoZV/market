@@ -11,8 +11,7 @@ const CarouselProducts = ({ products, typeCarousel = 'products' }) => {
 
   const info = useMemo(() => {
     if (products) {
-      console.log(products.length)
-
+      if (screens.md) return dividirEnSubarreglos(products, 4)
       if (screens.xs || screens.sm) return dividirEnSubarreglos(products, 6)
       else return dividirEnSubarreglos(products, 3)
     }

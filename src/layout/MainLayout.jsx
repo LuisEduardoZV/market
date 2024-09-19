@@ -46,7 +46,7 @@ const MainLayout = () => {
       <HeaderContainer openMenu={() => { setShow(true) }} handleToHome={handleToHome} />
       <Content className='mainContent'>
         <AnimatePresence initial={false} onExitComplete={() => null}>
-          {((screens.xs || screens.sm) && show) &&
+          {((screens.xs || screens.sm) && show && !screens.md) &&
             (
               <MovilMenuModal
                 open={show}

@@ -8,10 +8,12 @@ import { dividirEnSubarreglos } from '../../utils/func'
 
 const CarouselFavProd = ({ products }) => {
   const screens = useBreakpoint()
+  console.log(screens)
 
   const productsTable = useMemo(() => {
     if (products) {
-      if (screens.xs || screens.sm) return dividirEnSubarreglos(products, 6)
+      if (screens.md) return dividirEnSubarreglos(products, 4)
+      else if (screens.xs || screens.sm) return dividirEnSubarreglos(products, 6)
       else return dividirEnSubarreglos(products, 3)
     }
     return null
