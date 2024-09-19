@@ -448,9 +448,9 @@
 
 .skeleton-img-product {
 	height: 100%;
-	min-height: 350px;
+	min-height: 240px;
 	width: 100%;
-	min-width: 350px;
+	min-width: 240px;
 }
 
 .image-product-card {
@@ -749,6 +749,7 @@
 		width: 100%;
 		flex-direction: column;
 		> .list-products-container {
+			overflow-x: hidden;
 			width: 100%;
 			column-gap: 10px;
 			row-gap: 40px;
@@ -766,10 +767,10 @@
 			}
 		}
 		> .list-products-skeleton-container {
-			width: 82%;
+			width: 100%;
 			gap: 30px;
 			display: grid;
-			grid-template-columns: 1fr 1fr 1fr;
+			grid-template-columns: 1fr 1fr;
 			align-self: end;
 			position: sticky;
 			top: 8%;
