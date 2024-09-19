@@ -735,7 +735,7 @@
 		position: sticky;
 		top: 9%;
 		width: 100%;
-		z-index: 1;
+		z-index: 999;
 		background-color: $paper;
 		padding-bottom: 10px;
 	}
@@ -800,17 +800,19 @@
 }
 
 .movile-menu-category-container {
+	position: sticky;
+	top: 17%;
+	z-index: 999;
+	background-color: $paper;
 	> .movile-menu-category {
 		width: 100%;
 		overflow-x: auto;
 		overflow-y: hidden;
 		justify-content: center;
-		background-color: $paper;
-		position: sticky;
-		top: 17%;
+		background-color: inherit;
 		margin: 0;
 		padding: 0;
-		z-index: 1;
+		z-index: 999;
 	}
 	> .movile-menu-price-filter {
 		margin-block: 4% 1%;
@@ -830,11 +832,13 @@
 		.movile-menu-price-filter-dropdown {
 			background-color: $primaryMain !important;
 			color: white;
+			z-index: 999999;
 		}
 	}
 	.movile-menu-price-filter-dropdown {
 		background-color: $primaryMain !important;
 		color: white;
+		z-index: 999999;
 	}
 }
 
@@ -857,11 +861,13 @@
 		position: relative;
 		height: max-content;
 		min-height: 75vh;
+		flex-direction: row; // row
+		flex-wrap: wrap;
 		> .product-image-container {
-			max-width: 30%;
+			max-width: 90%; // 30%;
 			width: 100%;
-			position: sticky;
-			top: 10%;
+			position: relative; // sticky;
+			//top: 10%;
 			height: fit-content;
 			.product-image-preview {
 				max-height: 50px;
@@ -877,29 +883,40 @@
 				}
 			}
 			.product-image-carousel {
-				max-height: 500px;
+				max-height: 300px; //500px;
+				justify-content: center;
+				align-items: center;
+				width: 100%;
+				display: flex !important;
 				img {
 					width: auto;
 					object-fit: contain;
-					height: 500px;
+					object-position: center;
+					height: 300px; //500px;
 				}
 			}
 		}
 		> .product-info {
-			max-width: 40%;
+			max-width: 60%; //40%;
 			width: 100%;
+			border-right: 1px solid $grey300;
+			padding-right: 1%;
 			> h3,
 			> h5 {
 				margin: 0;
-			}
-			> h5 {
 				color: $primaryMain;
 				font-style: italic;
 				font-weight: 600;
 			}
+			> .ant-divider {
+				margin-block: 15px;
+			}
 			> .info-dimensions-product {
-				margin-top: 50px;
-				gap: 50px;
+				margin-top: 20px;
+				gap: 30px;
+				> h3 {
+					font-size: 1.3rem;
+				}
 				> div {
 					align-items: center;
 					width: auto;
@@ -912,38 +929,45 @@
 						position: absolute;
 						transform: translate(-50%, -50%);
 						font-weight: 400;
+						font-size: 0.75rem;
 					}
 					> span:nth-child(2) {
 						top: 40%;
-						left: 80%;
+						left: 83%;
 					}
 					> span:nth-child(3) {
-						top: 80%;
+						top: 83%;
 						left: 70%;
 					}
 					> span:nth-child(4) {
-						top: 80%;
+						top: 83%;
 						right: 70%;
 					}
 				}
 			}
 			> .info-codes-product {
-				margin-top: 50px;
+				margin-top: 20px;
+				> h3 {
+					font-size: 1.3rem;
+				}
 				> div {
 					justify-content: space-between;
 					margin-top: 40px;
+					flex-direction: column;
+					gap: 15px;
 				}
 				> :last-child {
 					font-size: 0.8rem;
+					margin-top: 15px;
 				}
 			}
 		}
 		> .buy-product-container {
 			width: 100%;
-			max-width: 20%;
+			max-width: 38%; //20%;
 			display: inline-block;
-			position: sticky;
-			top: 10%;
+			position: relative; // sticky;
+			//top: 10%;
 			height: fit-content;
 			> .buy-product-price-container {
 				gap: 30px;
@@ -1020,6 +1044,7 @@
 			position: relative;
 			width: 100%;
 			padding-inline: 5%;
+			flex-direction: column;
 			> .global-rating-container {
 				background-color: $primaryMain;
 				color: $background;
@@ -1027,13 +1052,17 @@
 				gap: 15px;
 				padding-right: 5%;
 				height: min-content;
+				flex-direction: row; //column;
 				> :first-child {
 					gap: 20px;
 					align-items: center;
 					color: $background;
+					width: 100%;
 					> h1 {
 						margin: 0;
 						color: inherit;
+						font-size: 2rem;
+						word-break: keep-all;
 					}
 					> div {
 						align-items: center;
@@ -1049,7 +1078,9 @@
 					}
 				}
 				> :last-child {
-					gap: 5px;
+					gap: 0px;
+					flex-direction: column;
+					width: 100%;
 					> div {
 						align-items: center;
 						gap: 10px;
@@ -1068,10 +1099,10 @@
 				background-color: $grey200;
 				padding-inline: 4%;
 				padding-block: 2%;
-				translate: -5% 15%;
-				max-width: 70%;
+				//translate: -5% 15%;
+				max-width: 100; //70%;
 				width: 100%;
-				gap: 20px;
+				gap: 30px;
 				> div {
 					gap: 2px;
 					> .review-header {

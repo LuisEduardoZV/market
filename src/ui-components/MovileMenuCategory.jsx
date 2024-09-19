@@ -28,6 +28,7 @@ const MovileMenuCategory = ({ categoriesInside, filters, brands, handleFilters, 
   const [orderPrice, setOrderPrice] = useState('def')
 
   const onClick = (e) => {
+    setOrderPrice('def')
     const keys = Object.keys(filters)
     const resetFilters = {}
 
@@ -35,14 +36,13 @@ const MovileMenuCategory = ({ categoriesInside, filters, brands, handleFilters, 
       resetFilters[key] = null
     })
 
-    if (e.key.includes(current)) {
-      setCurrent('')
-      handleFilters(resetFilters)
-    } else if (e.keyPath.length === 2) {
+    if (e.keyPath.length === 2) {
       setCurrent(e.key)
       const value = isNaN(Number(e.keyPath[0])) ? e.keyPath[0] : Number(e.keyPath[0])
-
       handleFilters({ ...resetFilters, [e.keyPath[1]]: value })
+    } else if (e.key === current) {
+      setCurrent('')
+      handleFilters(resetFilters)
     }
   }
 

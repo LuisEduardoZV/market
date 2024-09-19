@@ -247,7 +247,7 @@ const Product = ({ hasDiscount }) => {
 
         <Title level={2}>Customer reviews</Title>
         <Flex>
-          <Flex vertical className='global-rating-container shadow-menu-subcategory'>
+          <Flex className='global-rating-container shadow-menu-subcategory'>
             <Flex>
               <Title level={1}>{data.rating}</Title>
               <Flex vertical>
@@ -255,7 +255,7 @@ const Product = ({ hasDiscount }) => {
                 <Text>{data.reviews.length} reviews</Text>
               </Flex>
             </Flex>
-            <Flex vertical>
+            <Flex>
               {infoReviews && infoReviews.map((item, idx) => (
                 <Flex key={idx}>
                   <Flex>
@@ -293,9 +293,7 @@ const Product = ({ hasDiscount }) => {
           </Flex>
         </Flex>
       </Flex>
-      <Flex>
-        <PromoBanner inCategory />
-      </Flex>
+      <PromoBanner inCategory />
     </Flex>
   )
 }
