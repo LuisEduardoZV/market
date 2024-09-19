@@ -46,7 +46,7 @@ const MainLayout = () => {
       <HeaderContainer openMenu={() => { setShow(true) }} handleToHome={handleToHome} />
       <Content className='mainContent'>
         <AnimatePresence initial={false} onExitComplete={() => null}>
-          {(screens.xs && show) &&
+          {((screens.xs || screens.sm) && show) &&
             (
               <MovilMenuModal
                 open={show}
@@ -55,7 +55,7 @@ const MainLayout = () => {
                 setSelected={handleCurrentCat}
               />
             )}
-          {(!screens.xs && show) &&
+          {(screens.md && show) &&
             (
               <MenuModal
                 categories={categories}

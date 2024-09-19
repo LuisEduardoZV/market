@@ -35,13 +35,13 @@ const PromoBanner = ({ inCategory = false }) => {
     <Row
       style={{
         background: `radial-gradient(50% 50% at 100% 0,${promo.color} 0%  5% ,${colorLight} 6%  15%,${promo.color} 16% 25%,${colorLight} 26% 35%,${promo.color} 36% 45%, ${colorLight} 46% 55%,${promo.color} 56% 65%,${colorLight} 66% 75%,${promo.color} 76% 85%,${colorLight} 86% 95%, #0000 96%), radial-gradient(50% 50% at 0 100%,${promo.color} 0%  5% ,${colorLight} 6%  15%,${promo.color} 16% 25%,${colorLight} 26% 35%,${promo.color} 36% 45%, ${colorLight} 46% 55%,${promo.color} 56% 65%,${colorLight} 66% 75%,${promo.color} 76% 85%,${colorLight} 86% 95%, #0000 96%), radial-gradient(50% 50%,${promo.color} 0%  5% ,${colorLight} 6%  15%,${promo.color} 16% 25%,${colorLight} 26% 35%,${promo.color} 36% 45%, ${colorLight} 46% 55%,${promo.color} 56% 65%,${colorLight} 66% 75%,${promo.color} 76% 85%,${colorLight} 86% 95%, #0000 96%), radial-gradient(50% 50%,${promo.color} 0%  5% ,${colorLight} 6%  15%,${promo.color} 16% 25%,${colorLight} 26% 35%,${promo.color} 36% 45%, ${colorLight} 46% 55%,${promo.color} 56% 65%,${colorLight} 66% 75%,${promo.color} 76% 85%,${colorLight} 86% 95%, #0000 96%) 16px 16px`,
-        backgroundSize: '32px 32px',
+        backgroundSize: '42px 42px',
         backgroundColor: `${promo.color}`
       }}
       className={`promo-banner ${inCategory ? 'promo-banner-inCategory' : 'promo-banner-default'}`}
     >
       <MarqueePromo position='top' direction='left' />
-      <Col span={screens.xs ? 15 : 11} className='left-side'>
+      <Col span={(screens.xs || screens.sm) ? 15 : 11} className='left-side'>
         <Flex vertical>
           <Title level={2} strong>
             <IconShoppingCart stroke={1.5} color='white' className='promo-icons' />
@@ -58,12 +58,12 @@ const PromoBanner = ({ inCategory = false }) => {
           </Flex>
         </Flex>
       </Col>
-      <Col span={screens.xs ? 8 : inCategory ? 6 : 7} style={{ position: 'relative' }}>
+      <Col span={(screens.xs || screens.sm) ? 8 : inCategory ? 6 : 7} style={{ position: 'relative' }}>
         <Flex>
           <img src={promo.url} alt={promo.alt} className={`${inCategory ? 'promo-banner-inCategory' : 'promo-banner-default'}`} style={{ width: '100%' }} />
         </Flex>
       </Col>
-      <Col span={screens.xs ? 8 : inCategory ? 7 : 6} className='right-side'>
+      <Col span={(screens.xs || screens.sm) ? 8 : inCategory ? 7 : 6} className='right-side'>
         <Flex vertical>
           <Text strong italic>Up to</Text>
           <Text strong italic>50%</Text>

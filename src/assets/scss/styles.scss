@@ -397,6 +397,7 @@
 		justify-content: center;
 		align-items: stretch;
 		cursor: pointer;
+		transition: width 0.3s ease-in-out;
 		> div {
 			padding-block: 1.5%;
 			padding-inline: 10%;
@@ -961,6 +962,9 @@
 					margin-top: 40px;
 					flex-direction: column;
 					gap: 15px;
+					img {
+						width: 90%;
+					}
 				}
 				> :last-child {
 					font-size: 0.8rem;
@@ -1631,21 +1635,6 @@
 }
 
 @media screen and (min-width: 576px) {
-	.main-category {
-		> div {
-			flex-direction: row;
-			> .list-products-container {
-				width: 80%;
-			}
-		}
-	}
-
-	.aside-menu-category {
-		display: block;
-	}
-	.movile-menu-category {
-		display: none;
-	}
 	.modal-menu-list {
 		width: 100%;
 		height: 100%;
@@ -1657,12 +1646,85 @@
 		padding-top: 40px;
 		gap: 30px;
 	}
-	.cardItemCarousel {
-		grid-template-columns: repeat(auto-fill, minmax(20%, 23%));
+	.image-menu {
+		> .image-menu-item {
+			max-width: 48%;
+		}
+	}
+	.promo-banner-default {
+		max-height: 350px;
+		height: 350px;
+	}
+	.promo-banner-inCategory {
+		max-height: 370px;
+		height: 370px;
+	}
+	.promo-banner {
+		.left-side {
+			translate: 0 130%;
+		}
+		.right-side {
+			> div {
+				padding-inline: 0%;
+				> span:nth-child(1) {
+					font-size: 2rem;
+				}
+				> span:nth-child(2) {
+					font-size: 5.4rem;
+					align-self: center;
+					width: fit-content;
+				}
+				> span:nth-child(3) {
+					font-size: 2rem;
+					align-self: end;
+				}
+			}
+		}
+	}
+	.product-page {
+		> .product-info-container {
+			> .product-info {
+				> .info-codes-product {
+					> div {
+						img {
+							width: 60%;
+						}
+					}
+				}
+			}
+		}
+	}
+	.cart-page {
+		> :first-child {
+			> .summary-cart-container {
+				padding-block: 1%;
+				padding-inline: 2.5%;
+			}
+		}
+	}
+	.payment-page {
+		.credit-card-form {
+			.credit-card-interactive-container {
+				.flip-card-front,
+				.flip-card-back {
+					max-width: 75%;
+				}
+			}
+		}
+	}
+	.image-product-card {
+		> img {
+			max-height: 240px;
+		}
 	}
 }
 
-/* @media screen and (max-width: 576px) {
+/* 
+.cardItemCarousel {
+		grid-template-columns: repeat(auto-fill, minmax(20%, 23%));
+	}
+
+@media screen and (max-width: 576px) {
 	.cardItemCarousel {
 		display: grid !important;
 		grid-template-columns: 1fr 1fr;

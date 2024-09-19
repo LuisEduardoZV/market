@@ -21,6 +21,7 @@ const { useToken } = theme
 const HeaderContainer = ({ openMenu, handleToHome }) => {
   const { checkout } = useSelector((state) => state.cart)
   const screens = useBreakpoint()
+  console.log(screens)
 
   const { token } = useToken()
   const navigate = useNavigate()
@@ -52,7 +53,7 @@ const HeaderContainer = ({ openMenu, handleToHome }) => {
         </Col>
         <Col span={16} className='main-actions'>
           <Flex gap={20} align='center' justify='end'>
-            {(!screens.xs) && (
+            {(screens.md) && (
               <>
                 <Popover
                   overlayStyle={{ marginTop: 20 }}

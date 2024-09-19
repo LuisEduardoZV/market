@@ -1,4 +1,5 @@
 import { Divider, Flex, Form, Input, Radio, Space, Typography } from 'antd'
+import useBreakpoint from 'antd/lib/grid/hooks/useBreakpoint'
 import { useDispatch, useSelector } from '../../store'
 
 import { setBillingAddress } from '../../store/cartSlice'
@@ -7,6 +8,7 @@ import StepButtonsPayment from './extended/StepButtonsPayment'
 import { SHIPPINGS } from '../../utils/contants'
 
 const PAddresForm = ({ handleBack, handleNext, current, steps }) => {
+  const screens = useBreakpoint()
   const [form] = Form.useForm()
   const { checkout } = useSelector(state => state.cart)
   const dispatch = useDispatch()
@@ -25,14 +27,13 @@ const PAddresForm = ({ handleBack, handleNext, current, steps }) => {
       name='address-form'
       labelWrap
       labelCol={{
-        span: 4
+        span: screens.xs ? 4 : 6
       }}
       wrapperCol={{
         flex: 1
       }}
       className='paypage-addres-form'
       initialValues={checkout.billing}
-        /* onFinishFailed={onFinishFailed} */
       autoComplete='off'
     >
       <Form.Item
