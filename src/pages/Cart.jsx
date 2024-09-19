@@ -70,39 +70,42 @@ const Cart = () => {
                     alt={`Thumbnail of ${op.title}`}
                   />
                 </Flex>
-                <Flex vertical className='product-details'>
-                  <Flex vertical>
-                    <Title level={5}>{op.title}</Title>
-                    <Text type='success'>In Stock</Text>
+                <Flex className='product-details'>
+                  <Flex vertical className='product-info'>
+                    <Flex vertical>
+                      <Title level={5}>{op.title}</Title>
+                      <Text type='success'>In Stock</Text>
+                    </Flex>
+                    <Paragraph
+                      ellipsis={{
+                        rows: 1,
+                        expandable: true,
+                        symbol: 'more'
+                      }}
+                      className='description-product'
+                    >
+                      {op.description}
+                    </Paragraph>
+                    <Text type='secondary' italic>Product sent by MarketStore</Text>
+                    <Flex className='product-actions'>
+                      <Select
+                        defaultValue={op.quantityAdded}
+                        size='small'
+                        onChange={(value) => handleUpdate(value, op)}
+                        options={Array.from({ length: 10 }, (_, i) => ({
+                          value: i + 1,
+                          label: `${i + 1} units`
+                        }))}
+                      />
+                      <Divider type='vertical' style={{ borderColor: token.colorPrimaryBg }} />
+                      <Link onClick={() => handleDelete(op.id)}>Delete</Link>
+                      <Divider type='vertical' style={{ borderColor: token.colorPrimaryBg }} />
+                      <Link>Save to favs</Link>
+                    </Flex>
                   </Flex>
-                  <Paragraph
-                    ellipsis={{
-                      rows: 1,
-                      expandable: true,
-                      symbol: 'more'
-                    }}
-                    className='description-product'
-                  >
-                    {op.description}
-                  </Paragraph>
-                  <Text type='secondary' italic>Product sent by MarketStore</Text>
-                  <Flex className='product-actions'>
-                    <Select
-                      defaultValue={op.quantityAdded}
-                      onChange={(value) => handleUpdate(value, op)}
-                      options={Array.from({ length: 10 }, (_, i) => ({
-                        value: i + 1,
-                        label: `${i + 1} units`
-                      }))}
-                    />
-                    <Divider type='vertical' style={{ borderColor: token.colorPrimaryBg }} />
-                    <Link onClick={() => handleDelete(op.id)}>Delete</Link>
-                    <Divider type='vertical' style={{ borderColor: token.colorPrimaryBg }} />
-                    <Link>Save to favs</Link>
+                  <Flex>
+                    <Text>${op.price}</Text>
                   </Flex>
-                </Flex>
-                <Flex>
-                  <Text>${op.price}</Text>
                 </Flex>
               </Flex>
             ))}
