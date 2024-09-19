@@ -1,8 +1,8 @@
-import { useEffect } from 'react'
+import { useEffect, useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { IconAddressBook, IconCreditCardFilled, IconCubeSend } from '@tabler/icons-react'
-import { Flex, Steps } from 'antd'
+import { Flex, Steps, Typography } from 'antd'
 
 import { useDispatch, useSelector } from '../store'
 
@@ -14,18 +14,21 @@ import { resetCart, setBackStep, setNextStep, setStep } from '../store/cartSlice
 
 const steps = [
   {
+    key: 0,
     title: 'Address',
-    content: 'First-content',
+    desc: 'Enter the information of the address where you will receive the package to continue.',
     icon: <IconAddressBook size={28} />
   },
   {
+    key: 1,
     title: 'Payment',
-    content: 'Second-content',
+    desc: 'Select your preferred payment method and fill in all requested fields to continue.',
     icon: <IconCreditCardFilled size={28} />
   },
   {
+    key: 2,
     title: 'Check & Confirm',
-    content: 'Last-content',
+    desc: 'Verify all your entered data and confirm your payment.',
     icon: <IconCubeSend size={28} />
   }
 ]
@@ -52,6 +55,8 @@ const Payment = () => {
     }, 150)
   }
 
+  const currentStep = useMemo(() => (steps.find((step) => step.key === checkout.step)), [checkout.step])
+
   useEffect(() => {
     return () => {
       dispatch(setStep(0))
@@ -62,6 +67,14 @@ const Payment = () => {
     <Flex className='payment-page'>
       <Flex vertical>
         <Steps current={checkout.step} items={items} />
+        <Flex vertical className='payment-title-movil'>
+          <Typography.Title level={2}>
+            {currentStep?.title}
+          </Typography.Title>
+          <Typography.Text type='secondary'>
+            {currentStep?.desc}
+          </Typography.Text>
+        </Flex>
         <div className='payment-steps-container'>
 
           {checkout.step === 0 && (

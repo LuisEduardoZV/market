@@ -140,6 +140,12 @@ const PCheckPayment = ({ handleBack, handleNext, handleDone, steps, handleToSpec
           current={checkout.step}
           steps={steps}
         />
+        <Button
+          type='primary'
+          onClick={handleConfirmPayment}
+        >
+          Confirm & Pay
+        </Button>
       </Flex>
 
       <Flex vertical className='purchase-summary'>
