@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types'
-import { Fragment, useState } from 'react'
+import { useState } from 'react'
 import { Link as LinkRoute, useNavigate } from 'react-router-dom'
 
 import { IconMenu, IconSquareRoundedXFilled, IconTruckDelivery, IconUserFilled } from '@tabler/icons-react'
-import { Badge, Button, Col, Flex, Input, Layout, Popover, Row, theme, Typography } from 'antd'
+import { Badge, Button, Flex, Input, Layout, Popover, theme, Typography } from 'antd'
 import useBreakpoint from 'antd/lib/grid/hooks/useBreakpoint'
 
 import { useSelector } from '../../store'
@@ -15,7 +15,7 @@ import logo from '../../assets/img/logo.png'
 
 const { Header } = Layout
 const { Search } = Input
-const { Text } = Typography
+const { Text, Title } = Typography
 const { useToken } = theme
 
 const HeaderContainer = ({ openMenu, handleToHome }) => {
@@ -46,11 +46,12 @@ const HeaderContainer = ({ openMenu, handleToHome }) => {
 
   return (
     <Header className='header'>
-      <Row>
-        <Col span={8} className='logo'>
-          <img src={logo} alt='Logo image' onClick={() => handleToHome()} />
-        </Col>
-        <Col span={16} className='main-actions'>
+      <Flex>
+        <Flex className='logo' onClick={() => handleToHome()}>
+          <img src={logo} alt='Logo image' />
+          <Title level={1} italic>SimuShop</Title>
+        </Flex>
+        <Flex className='main-actions'>
           <Flex gap={20} align='center' justify='end'>
             {(screens.md) && (
               <>
@@ -78,8 +79,8 @@ const HeaderContainer = ({ openMenu, handleToHome }) => {
             </Flex>
             <Button type='text' icon={<IconMenu />} onClick={openMenu} />
           </Flex>
-        </Col>
-      </Row>
+        </Flex>
+      </Flex>
     </Header>
   )
 }

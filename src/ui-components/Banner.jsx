@@ -1,10 +1,11 @@
-import { Carousel, Flex, Skeleton, Space, Typography } from 'antd'
+import { Carousel, Flex, Skeleton, Space, Typography, theme } from 'antd'
 
 import { useBannerImages } from '../hooks/useBannerImages'
 
 const { Text, Title } = Typography
 
 const Banner = ({ category }) => {
+  const { token } = theme.useToken()
   const { banner, isLoading } = useBannerImages(category)
 
   return (
@@ -27,9 +28,10 @@ const Banner = ({ category }) => {
           </Carousel>
         )}
       </div>
-      <Space direction='vertical' style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', width: '100%', textAlign: 'center', paddingBlock: 25, backgroundColor: 'rgba(255,255,255,0.2)', backdropFilter: 'blur(10px)', color: 'black', zIndex: 10 }}>
-        <Title level={1}>Market Store</Title>
-        <Text strong>Ropa a la moda y de tendencia de grandes diseñadores</Text>
+      <Space direction='vertical' style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%,-50%)', width: '100%', textAlign: 'center', paddingBlock: 25, backgroundColor: 'rgba(0,0,0,0.2)', backdropFilter: 'blur(10px)', zIndex: 10 }}>
+        <Title level={1} style={{ color: token.colorPaper }}>SimuShop</Title>
+        <Text style={{ color: token.colorPaper }}>Simulate, Experiment, Shop!</Text>
+        <Text style={{ color: token.colorPaper }}>Explore our store, simulate your favorite shopping and have fun creating the shopping cart of your dreams, all without compromise!</Text>
       </Space>
     </Flex>
   )

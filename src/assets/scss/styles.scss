@@ -263,21 +263,35 @@
 .header {
 	background-color: $paper;
 	position: fixed;
-	top: 0;
 	z-index: 50;
+	width: 100%;
+	justify-content: stretch;
 	> div {
 		width: 100%;
 		height: 100%;
-		justify-content: center;
-		align-items: center;
 		position: relative;
-		place-items: center;
+		justify-content: space-between;
 		> .logo {
 			align-items: center;
+			gap: 5px;
+			cursor: pointer;
+			width: auto;
 			img {
 				mix-blend-mode: multiply;
-				max-width: 15%;
-				cursor: pointer;
+				max-width: 13%;
+			}
+			h1 {
+				font-size: 1.4rem;
+				margin: 0;
+				padding: 0;
+				width: fit-content;
+			}
+		}
+		> .main-actions {
+			max-width: 100%;
+			width: 100%;
+			> div {
+				width: 100%;
 			}
 		}
 	}
