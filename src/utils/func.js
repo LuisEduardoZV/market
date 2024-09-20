@@ -69,10 +69,9 @@ export async function filteringCategoryData (data, filters) {
 
 export function dividirEnSubarreglos (array, n) {
   const subarreglos = []
-  const tamañoSubarreglo = Math.ceil(array.length / n)
 
-  for (let i = 0; i < array.length; i += tamañoSubarreglo) {
-    subarreglos.push(array.slice(i, i + tamañoSubarreglo))
+  for (let i = 0; i < array.length; i += n) {
+    subarreglos.push(array.slice(i, i + n))
   }
 
   return subarreglos

@@ -21,7 +21,6 @@ const { useToken } = theme
 const HeaderContainer = ({ openMenu, handleToHome }) => {
   const { checkout } = useSelector((state) => state.cart)
   const screens = useBreakpoint()
-  console.log(screens)
 
   const { token } = useToken()
   const navigate = useNavigate()

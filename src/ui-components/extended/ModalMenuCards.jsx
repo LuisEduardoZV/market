@@ -13,7 +13,6 @@ const ModalMenuCards = ({ item, setSelected }) => {
   useGSAP(() => {
     if (container.current) {
       const title = document.querySelector(`#${item.id}-title`)
-      console.log(item.id)
 
       const tl = gsap.timeline({ paused: true })
       tl.to(title, {

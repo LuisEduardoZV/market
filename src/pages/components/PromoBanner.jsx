@@ -29,7 +29,6 @@ const PromoBanner = ({ inCategory = false }) => {
   }, [])
 
   const colorLight = useMemo(() => (lightenColor(promo?.color ?? '', 20)), [promo])
-  console.log(screens)
 
   const colSpanByScreen = useMemo(() => {
     if (screens.xl && !inCategory) return { left: 11, center: 6, right: 7 }
