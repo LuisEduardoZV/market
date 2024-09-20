@@ -32,6 +32,7 @@ const PromoBanner = ({ inCategory = false }) => {
   console.log(screens)
 
   const colSpanByScreen = useMemo(() => {
+    if (screens.xl && !inCategory) return { left: 11, center: 6, right: 7 }
     if (screens.lg && !inCategory) return { left: 11, center: 7, right: 6 }
     return { left: 15, center: 8, right: 8 }
   }, [screens])

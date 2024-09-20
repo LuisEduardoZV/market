@@ -67,7 +67,7 @@ const Payment = () => {
     <Flex className='payment-page'>
       <Flex vertical>
         <Steps current={checkout.step} items={items} />
-        <Flex vertical className='payment-title-movil'>
+        <Flex vertical className='payment-title'>
           <Typography.Title level={2}>
             {currentStep?.title}
           </Typography.Title>

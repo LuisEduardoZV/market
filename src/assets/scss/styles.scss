@@ -44,7 +44,6 @@
 
 .cardItemCarousel {
 	display: grid !important;
-	//grid-template-columns: repeat(auto-fill, minmax(20%, 23%));
 	grid-template-columns: 1fr 1fr;
 	place-items: start;
 	justify-content: space-around;
@@ -1111,7 +1110,7 @@
 				background-color: $grey200;
 				padding-inline: 4%;
 				padding-block: 2%;
-				max-width: 100;
+				max-width: 100%;
 				width: 100%;
 				gap: 30px;
 				> div {
@@ -1948,7 +1947,7 @@
 			position: block;
 			right: 0;
 			top: 0;
-			translate: 0 0;
+			translate: 0 -20%;
 			> div {
 				padding-inline: 5%;
 				> span:nth-child(1) {
@@ -1956,12 +1955,9 @@
 				}
 				> span:nth-child(2) {
 					font-size: 6.7rem;
-					align-self: center;
-					width: fit-content;
 				}
 				> span:nth-child(3) {
 					font-size: 2.1rem;
-					align-self: end;
 				}
 			}
 		}
@@ -2091,5 +2087,208 @@
 @media screen and (min-width: 1200px) {
 	.cardItemCarousel {
 		grid-template-columns: repeat(auto-fill, minmax(20%, 23%));
+		gap: 0px;
+	}
+	.image-product-card {
+		max-height: 280px;
+		min-height: 280px;
+		> img {
+			max-height: 280px;
+		}
+	}
+	.info-product-card {
+		.rate-product-card {
+			flex-direction: row;
+		}
+	}
+	.promo-banner-default {
+		max-height: 550px;
+		height: 550px;
+	}
+	.promo-banner-inCategory {
+		max-height: 480px;
+		height: 480px;
+	}
+	.promo-banner {
+		.left-side {
+			.promo-icons {
+				width: 2rem;
+				height: 2rem;
+			}
+			> div {
+				padding-inline: 8%;
+				h2 {
+					font-size: 3.2rem;
+				}
+				span {
+					font-size: 1.3rem;
+				}
+			}
+		}
+		.right-side {
+			> div {
+				padding-inline: 5%;
+				gap: 15px;
+				> span:nth-child(1) {
+					font-size: 3rem;
+				}
+				> span:nth-child(2) {
+					font-size: 9rem;
+				}
+				> span:nth-child(3) {
+					font-size: 3rem;
+				}
+			}
+		}
+	}
+	.shoes-by-gender {
+		margin-top: 20px;
+		padding-bottom: 5%;
+		> div {
+			padding-block: 2%;
+			justify-content: space-around;
+			row-gap: 60px;
+		}
+	}
+	.big-card-item {
+		max-width: 40%;
+		min-height: 350px;
+		> div > img {
+			width: 100%;
+			max-height: 350px;
+		}
+	}
+	.portrait-banner {
+		> .per-banner {
+			max-width: 20%;
+		}
+	}
+	.newsletter-section {
+		padding-block: 12%;
+	}
+	.main-category {
+		> div {
+			> .list-products-container {
+				column-gap: 30px;
+				padding-inline: 2%;
+			}
+			> .list-products-skeleton-container {
+				padding-right: 5%;
+			}
+		}
+	}
+	.cart-page {
+		> :first-child {
+			.product-inside-cart-container {
+				img {
+					max-height: 250px;
+				}
+				> .product-details {
+					width: 100%;
+					.product-info {
+						padding-right: 5%;
+						> :first-child {
+							margin-block: 5px;
+							h5 {
+								font-weight: 600;
+							}
+							span {
+								font-size: 0.9rem;
+								font-style: italic;
+							}
+						}
+						> .description-product {
+							display: flex;
+						}
+						> .product-actions {
+							> :first-child {
+								width: 150px;
+							}
+							> a {
+								font-size: 0.85rem;
+							}
+						}
+					}
+				}
+			}
+			> .summary-cart-container {
+				> div {
+					> h5 {
+						font-size: 1rem;
+					}
+				}
+				> .sumary-cart-total {
+					h2 {
+						font-size: 1.8rem;
+					}
+				}
+			}
+		}
+	}
+	.payment-page {
+		.payment-title {
+			padding-top: 3%;
+		}
+		.credit-card-form {
+			.credit-card-form-container {
+				max-width: 50%;
+			}
+			.credit-card-interactive-container {
+				max-width: 50%;
+				.flip-card-front,
+				.flip-card-back {
+					max-width: 65%;
+					height: 70%;
+				}
+			}
+		}
+		.paypage-check-payment {
+			> .summary-container {
+				> .summary-products {
+					> .summary-products-container {
+						img {
+							width: 130px;
+							height: 130px;
+						}
+					}
+				}
+			}
+		}
+	}
+	.product-page {
+		> .product-info-container {
+			> .product-image-container {
+				max-width: 30%;
+				position: sticky;
+				top: 10%;
+				align-items: center;
+				.product-image-carousel {
+					max-height: 500px;
+					img {
+						height: 500px;
+					}
+				}
+			}
+			> .product-info {
+				max-width: 40%;
+				border-left: 1px solid $grey300;
+				padding-left: 1%;
+			}
+			> .buy-product-container {
+				max-width: 20%;
+				position: sticky;
+				top: 10%;
+				padding-inline: 1%;
+			}
+		}
+		> .related-products-container {
+			width: 100%;
+			overflow: hidden;
+			padding-inline: 5%;
+			> h3 {
+				margin-bottom: 3%;
+				padding-left: 2%;
+			}
+		}
 	}
 }

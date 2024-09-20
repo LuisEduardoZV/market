@@ -12,9 +12,9 @@ const CarouselFavProd = ({ products }) => {
 
   const productsTable = useMemo(() => {
     if (products) {
+      if (screens.xl) return dividirEnSubarreglos(products, 3)
       if (screens.md) return dividirEnSubarreglos(products, 4)
-      else if (screens.xs || screens.sm) return dividirEnSubarreglos(products, 6)
-      else return dividirEnSubarreglos(products, 3)
+      return dividirEnSubarreglos(products, 6)
     }
     return null
   }, [products, screens])
