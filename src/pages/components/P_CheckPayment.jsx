@@ -2,6 +2,8 @@ import { Fragment, useMemo } from 'react'
 
 import { IconCashRegister, IconMap2 } from '@tabler/icons-react'
 import { Avatar, Button, Divider, Flex, Typography, message, theme } from 'antd'
+import useBreakpoint from 'antd/lib/grid/hooks/useBreakpoint'
+
 import dayjs from 'dayjs'
 
 import StepButtonsPayment from './extended/StepButtonsPayment'
@@ -9,6 +11,8 @@ import StepButtonsPayment from './extended/StepButtonsPayment'
 import { useSelector } from '../../store'
 
 const PCheckPayment = ({ handleBack, handleNext, handleDone, steps, handleToSpecificStep }) => {
+  const screens = useBreakpoint()
+
   const { checkout } = useSelector((state) => state.cart)
   const { token } = theme.useToken()
   const [messageApi, contextHolder] = message.useMessage()
@@ -140,12 +144,14 @@ const PCheckPayment = ({ handleBack, handleNext, handleDone, steps, handleToSpec
           current={checkout.step}
           steps={steps}
         />
-        <Button
-          type='primary'
-          onClick={handleConfirmPayment}
-        >
-          Confirm & Pay
-        </Button>
+        {!screens.lg && (
+          <Button
+            type='primary'
+            onClick={handleConfirmPayment}
+          >
+            Confirm & Pay
+          </Button>
+        )}
       </Flex>
 
       <Flex vertical className='purchase-summary'>

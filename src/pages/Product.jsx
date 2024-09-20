@@ -4,6 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 
 import { IconCubeSend, IconReceiptRefund, IconShieldCheckFilled, IconStarFilled, IconUserHexagon } from '@tabler/icons-react'
 import { Avatar, Button, Carousel, Divider, Flex, Progress, Rate, Select, Space, theme, Typography } from 'antd'
+import useBreakpoint from 'antd/lib/grid/hooks/useBreakpoint'
 
 import dayjs from 'dayjs'
 import Barcode from 'react-barcode'
@@ -31,6 +32,7 @@ const Product = ({ hasDiscount }) => {
   const dispatch = useDispatch()
   const { openNotification } = useNotification()
   const navigate = useNavigate()
+  const screens = useBreakpoint()
 
   const ref = useRef()
   const { token } = useToken()
@@ -293,7 +295,7 @@ const Product = ({ hasDiscount }) => {
           </Flex>
         </Flex>
       </Flex>
-      <PromoBanner inCategory />
+      <PromoBanner {...!screens.lg && { inCategory: true }} />
     </Flex>
   )
 }

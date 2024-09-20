@@ -785,23 +785,25 @@
 	display: none;
 	position: sticky;
 	top: 20%;
-	width: 100%;
+	width: max(13%, 16%);
 	height: 100%;
 	min-height: 50vh;
 	max-height: 70vh;
 	z-index: 1;
-	max-width: 14%;
 	background-color: $background;
 	padding: 1%;
-	row-gap: 20px;
 	overflow-y: auto;
 	padding-block: 30px;
-	> div > .submenu-category-container {
-		align-items: center;
-		justify-content: space-between;
-		> h5 {
-			margin-bottom: 0;
-			padding-bottom: 0;
+	gap: 10px;
+	> div {
+		gap: 5px;
+		> .submenu-category-container {
+			align-items: center;
+			justify-content: space-between;
+			> h5 {
+				margin-bottom: 0;
+				padding-bottom: 0;
+			}
 		}
 	}
 }
@@ -1856,19 +1858,238 @@
 	}
 }
 
-/* 
-.cardItemCarousel {
+@media screen and (min-width: 992px) {
+	.image-menu {
+		> .image-menu-item {
+			max-width: 23%;
+			div {
+				padding-block: 5%;
+			}
+		}
+	}
+	.promo-banner-default {
+		max-height: 510px;
+		height: 510px;
+	}
+	.promo-banner-inCategory {
+		max-height: 480px;
+		height: 480px;
+	}
+	.promo-banner.promo-banner-inCategory {
+		.marquee-promo-banner {
+			> .marqueElement {
+				font-size: 1.5rem;
+				word-spacing: 1rem;
+			}
+			> :last-child {
+				padding-right: 10px;
+			}
+		}
+		.left-side {
+			.promo-icons {
+				width: 1.95rem;
+				height: 1.95rem;
+			}
+			> div {
+				padding-inline: 8%;
+				h2 {
+					font-size: 2.7rem;
+				}
+				span {
+					font-size: 1.1rem;
+				}
+			}
+		}
+		.right-side {
+			translate: -12% -15%;
+			> div {
+				padding-inline: 2%;
+				> span:nth-child(1) {
+					font-size: 1.1rem;
+				}
+				> span:nth-child(2) {
+					font-size: 6.7rem;
+					align-self: center;
+					width: fit-content;
+				}
+				> span:nth-child(3) {
+					font-size: 1.1rem;
+					align-self: end;
+				}
+			}
+		}
+	}
+	.promo-banner {
+		.marquee-promo-banner {
+			> .marqueElement {
+				font-size: 1.5rem;
+				word-spacing: 1rem;
+			}
+			> :last-child {
+				padding-right: 10px;
+			}
+		}
+		.left-side {
+			.promo-icons {
+				width: 1.95rem;
+				height: 1.95rem;
+			}
+			> div {
+				padding-inline: 8%;
+				h2 {
+					font-size: 2.7rem;
+				}
+				span {
+					font-size: 1.1rem;
+				}
+			}
+		}
+		.right-side {
+			position: block;
+			right: 0;
+			top: 0;
+			translate: 0 0;
+			> div {
+				padding-inline: 5%;
+				> span:nth-child(1) {
+					font-size: 2.1rem;
+				}
+				> span:nth-child(2) {
+					font-size: 6.7rem;
+					align-self: center;
+					width: fit-content;
+				}
+				> span:nth-child(3) {
+					font-size: 2.1rem;
+					align-self: end;
+				}
+			}
+		}
+	}
+	.big-card-item {
+		min-height: 310px;
+		max-width: 45%;
+	}
+	.shoes-by-gender {
+		margin-top: 50px;
+		padding-inline: 10%;
+		padding-bottom: 6%;
+		background-color: transparent;
+	}
+	.newsletter-section {
+		padding-block: 5%;
+	}
+	.home-section {
+		> h3 {
+			margin-top: 5%;
+			padding-left: 4%;
+		}
+	}
+	.movile-menu-category-container {
+		display: none;
+	}
+	.aside-menu-category {
+		display: block;
+		overflow-x: hidden;
+	}
+	.main-category {
+		> div {
+			flex-direction: row;
+
+			> .list-products-container {
+				width: max(75%, 78%);
+			}
+		}
+	}
+	.product-page {
+		> .product-info-container {
+			> .product-info {
+				max-width: 73%; //40%;
+				> .info-codes-product {
+					> h3 {
+						font-size: 1.5rem;
+					}
+					> div {
+						flex-direction: row;
+						gap: 15px;
+						img {
+							width: 100%;
+						}
+					}
+				}
+				> .info-dimensions-product {
+					> h3 {
+						font-size: 1.5rem;
+					}
+					> div {
+						> svg {
+							width: 55%;
+						}
+						> span {
+							font-size: 0.9rem;
+						}
+						> span:nth-child(2) {
+							top: 40%;
+							left: 71%;
+						}
+						> span:nth-child(3) {
+							top: 83%;
+							left: 60%;
+						}
+						> span:nth-child(4) {
+							top: 83%;
+							right: 60%;
+						}
+					}
+				}
+			}
+			> .buy-product-container {
+				max-width: 25%;
+			}
+		}
+	}
+	.payment-page {
+		.credit-card-form {
+			max-width: 100%;
+			> div {
+				flex-direction: row;
+			}
+			.credit-card-form-container {
+				flex-wrap: wrap;
+				max-width: 40%;
+				gap: 0px;
+				justify-content: space-between;
+				padding-right: 0px;
+			}
+			.credit-card-interactive-container {
+				max-width: 60%;
+				.flip-card {
+					min-height: 200px;
+					transform: translateY(0);
+				}
+				.flip-card-front,
+				.flip-card-back {
+					max-width: 70%;
+					height: 65%;
+					min-height: 200px;
+				}
+			}
+		}
+		.paypage-check-payment {
+			flex-direction: row;
+			gap: 30px;
+			> .summary-container {
+				width: 100%;
+			}
+			> .purchase-summary {
+				max-width: 35%;
+			}
+		}
+	}
+}
+
+@media screen and (min-width: 1200px) {
+	.cardItemCarousel {
 		grid-template-columns: repeat(auto-fill, minmax(20%, 23%));
 	}
-
-@media screen and (max-width: 576px) {
-	.cardItemCarousel {
-		display: grid !important;
-		grid-template-columns: 1fr 1fr;
-		place-items: start;
-		justify-content: space-around;
-		gap: 30px;
-		padding-block: 3%;
-		padding-inline: 2%;
-	}
-} */
+}

@@ -27,7 +27,7 @@ const PAddresForm = ({ handleBack, handleNext, current, steps }) => {
       name='address-form'
       labelWrap
       labelCol={{
-        span: screens.xs ? 4 : 6
+        span: (screens.xs || screens.lg) ? 4 : 6
       }}
       wrapperCol={{
         flex: 1

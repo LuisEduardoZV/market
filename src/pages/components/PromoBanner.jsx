@@ -29,6 +29,12 @@ const PromoBanner = ({ inCategory = false }) => {
   }, [])
 
   const colorLight = useMemo(() => (lightenColor(promo?.color ?? '', 20)), [promo])
+  console.log(screens)
+
+  const colSpanByScreen = useMemo(() => {
+    if (screens.lg && !inCategory) return { left: 11, center: 7, right: 6 }
+    return { left: 15, center: 8, right: 8 }
+  }, [screens])
 
   if (!promo) return null
   return (
@@ -41,7 +47,7 @@ const PromoBanner = ({ inCategory = false }) => {
       className={`promo-banner ${inCategory ? 'promo-banner-inCategory' : 'promo-banner-default'}`}
     >
       <MarqueePromo position='top' direction='left' />
-      <Col span={(screens.xs || screens.sm) ? 15 : 11} className='left-side'>
+      <Col span={colSpanByScreen.left} className='left-side'>
         <Flex vertical>
           <Title level={2} strong>
             <IconShoppingCart stroke={1.5} color='white' className='promo-icons' />
@@ -58,12 +64,12 @@ const PromoBanner = ({ inCategory = false }) => {
           </Flex>
         </Flex>
       </Col>
-      <Col span={(screens.xs || screens.sm) ? 8 : inCategory ? 6 : 7} style={{ position: 'relative' }}>
+      <Col span={colSpanByScreen.center} style={{ position: 'relative' }}>
         <Flex>
           <img src={promo.url} alt={promo.alt} className={`${inCategory ? 'promo-banner-inCategory' : 'promo-banner-default'}`} style={{ width: '100%' }} />
         </Flex>
       </Col>
-      <Col span={(screens.xs || screens.sm) ? 8 : inCategory ? 7 : 6} className='right-side'>
+      <Col span={colSpanByScreen.right} className='right-side'>
         <Flex vertical>
           <Text strong italic>Up to</Text>
           <Text strong italic>50%</Text>
