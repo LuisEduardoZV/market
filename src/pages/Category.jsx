@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useLocation, useOutletContext, useParams } from 'react-router-dom'
 
 import { Button, Flex, Typography } from 'antd'
@@ -11,6 +12,7 @@ import PromoBanner from './components/PromoBanner'
 import { useCategoryDataMng } from '../hooks/useCategoryDataMng'
 
 const { Title } = Typography
+const PROMO_QUERYS = ['tennis', 'golf', 'fashion', 'shoes', 'style', 'relax']
 
 const Category = () => {
   const { state } = useLocation()
@@ -20,11 +22,19 @@ const Category = () => {
 
   const { extraInfo, filters, handleFilters, isLoading, maxPage, page, loadingPaginated, paginated, nextPage } = useCategoryDataMng(categoriesInside, category, state?.subcategory)
 
+  const [banners, setBanners] = useState([])
+
   const renderCards = () => {
     let info = []
     if (paginated) info = paginated.map((op) => (<BasicCardProduct key={op.id} {...op} />))
 
-    for (let i = 5; i < info.length; i += 7) info.splice(i + 1, 0, <div key={'banner' + i} className='banner-container-category'><PromoBanner inCategory /></div>)
+    for (let i = 5; i < info.length; i += 7) {
+      if (!banners[i]) {
+        const newBanner = <div key={'banner' + i} className='banner-container-category'><PromoBanner inCategory promoBanner={PROMO_QUERYS[Math.floor(Math.random() * PROMO_QUERYS.length)]} /></div>
+        setBanners(prev => [...prev, newBanner])
+      }
+      info.splice(i + 1, 0, banners[i])
+    }
 
     if (info.length === 0) info.push(<NoInfoOverlay key='noInfo' />)
 

@@ -1,32 +1,21 @@
-import { useEffect, useMemo, useState } from 'react'
+import { memo, useMemo } from 'react'
 
 import { IconArrowNarrowRight, IconShoppingBag, IconShoppingCart } from '@tabler/icons-react'
-import { Col, Flex, Row, Typography } from 'antd'
+import { Col, Flex, Row, Skeleton, Typography } from 'antd'
 import useBreakpoint from 'antd/lib/grid/hooks/useBreakpoint'
 
-import usePexelsClient from '../../hooks/usePexelsClient'
-import { getImageById } from '../../services/imagesFunc'
+import { useBannerImages } from '../../hooks/useBannerImages'
 import { lightenColor } from '../../utils/func'
 import MarqueePromo from './MarqueePromo'
 
 const { Text, Title } = Typography
 
-const PromoBanner = ({ inCategory = false }) => {
-  const { client } = usePexelsClient()
+// 21855879
+
+const PromoBanner = memo(({ inCategory, promoBanner = 'shoes' }) => {
   const screens = useBreakpoint()
 
-  const [promo, setPromo] = useState()
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const images = await getImageById(client, 21855879)
-        setPromo(images)
-      } catch (error) {
-
-      }
-    })()
-  }, [])
+  const { promo, isLoadingPromo } = useBannerImages(null, promoBanner)
 
   const colorLight = useMemo(() => (lightenColor(promo?.color ?? '', 20)), [promo])
 
@@ -36,11 +25,19 @@ const PromoBanner = ({ inCategory = false }) => {
     return { left: 15, center: 8, right: 8 }
   }, [screens])
 
-  if (!promo) return null
+  if (isLoadingPromo) {
+    return (
+      <Row className={`promo-banner ${inCategory ? 'promo-banner-inCategory' : 'promo-banner-default'}`}>
+        <Col span={24}>
+          <Skeleton active />
+        </Col>
+      </Row>
+    )
+  }
   return (
     <Row
       style={{
-        background: `radial-gradient(50% 50% at 100% 0,${promo.color} 0%  5% ,${colorLight} 6%  15%,${promo.color} 16% 25%,${colorLight} 26% 35%,${promo.color} 36% 45%, ${colorLight} 46% 55%,${promo.color} 56% 65%,${colorLight} 66% 75%,${promo.color} 76% 85%,${colorLight} 86% 95%, #0000 96%), radial-gradient(50% 50% at 0 100%,${promo.color} 0%  5% ,${colorLight} 6%  15%,${promo.color} 16% 25%,${colorLight} 26% 35%,${promo.color} 36% 45%, ${colorLight} 46% 55%,${promo.color} 56% 65%,${colorLight} 66% 75%,${promo.color} 76% 85%,${colorLight} 86% 95%, #0000 96%), radial-gradient(50% 50%,${promo.color} 0%  5% ,${colorLight} 6%  15%,${promo.color} 16% 25%,${colorLight} 26% 35%,${promo.color} 36% 45%, ${colorLight} 46% 55%,${promo.color} 56% 65%,${colorLight} 66% 75%,${promo.color} 76% 85%,${colorLight} 86% 95%, #0000 96%), radial-gradient(50% 50%,${promo.color} 0%  5% ,${colorLight} 6%  15%,${promo.color} 16% 25%,${colorLight} 26% 35%,${promo.color} 36% 45%, ${colorLight} 46% 55%,${promo.color} 56% 65%,${colorLight} 66% 75%,${promo.color} 76% 85%,${colorLight} 86% 95%, #0000 96%) 16px 16px`,
+        backgroundImage: `radial-gradient(50% 50% at 100% 0, ${promo.color} 0% 5%, ${colorLight} 6% 15%, ${promo.color} 16% 25%, ${colorLight} 26% 35%, ${promo.color} 36% 45%, ${colorLight} 46% 55%, ${promo.color} 56% 65%, ${colorLight} 66% 75%, ${promo.color} 76% 85%, ${colorLight} 86% 95%, #0000 96%), radial-gradient(50% 50% at 0 100%, ${promo.color} 0% 5%, ${colorLight} 6% 15%, ${promo.color} 16% 25%, ${colorLight} 26% 35%, ${promo.color} 36% 45%, ${colorLight} 46% 55%, ${promo.color} 56% 65%, ${colorLight} 66% 75%, ${promo.color} 76% 85%, ${colorLight} 86% 95%, #0000 96%), radial-gradient(50% 50%, ${promo.color} 0% 5%, ${colorLight} 6% 15%, ${promo.color} 16% 25%, ${colorLight} 26% 35%, ${promo.color} 36% 45%, ${colorLight} 46% 55%, ${promo.color} 56% 65%, ${colorLight} 66% 75%, ${promo.color} 76% 85%, ${colorLight} 86% 95%, #0000 96%), radial-gradient(50% 50%, ${promo.color} 0% 5%, ${colorLight} 6% 15%, ${promo.color} 16% 25%, ${colorLight} 26% 35%, ${promo.color} 36% 45%, ${colorLight} 46% 55%, ${promo.color} 56% 65%, ${colorLight} 66% 75%, ${promo.color} 76% 85%, ${colorLight} 86% 95%, #0000 96%)`,
         backgroundSize: '42px 42px',
         backgroundColor: `${promo.color}`
       }}
@@ -79,6 +76,8 @@ const PromoBanner = ({ inCategory = false }) => {
       <MarqueePromo position='bottom' />
     </Row>
   )
-}
+})
+
+PromoBanner.displayName = 'PromoBanner'
 
 export default PromoBanner

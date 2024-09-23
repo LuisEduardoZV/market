@@ -1,14 +1,20 @@
 import { useQuery } from 'react-query'
-import usePexelsClient from './usePexelsClient'
 
-import { getBannerImages } from '../services/imagesFunc'
+import { getBannerImages, getPromoImages } from '../services/imagesFunc'
 
-export function useBannerImages (search) {
-  const { client } = usePexelsClient()
-
+export function useBannerImages (search, promoSearch) {
   const query = (search && search !== '') ? `${search} products` : 'modeling'
 
-  const { data, isLoading, isError } = useQuery(['banner', query], () => getBannerImages(client, query), { refetchOnWindowFocus: false })
+  const { data: banner, isLoading: isLoadingBanner, isError: isErrorBanner } = useQuery(['banner', query], () => getBannerImages(query), { refetchOnWindowFocus: false })
 
-  return { banner: data, isLoading, isError }
+  const { data: promo, isLoading: isLoadingPromo, isError: isErrorPromo } = useQuery(['promo'], () => getPromoImages(promoSearch), { refetchOnWindowFocus: false })
+
+  return {
+    banner,
+    isLoadingBanner,
+    isErrorBanner,
+    promo,
+    isLoadingPromo,
+    isErrorPromo
+  }
 }

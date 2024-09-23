@@ -1,47 +1,53 @@
-export async function getBannerImages (client, query) {
-  const images = await client.photos.search({ query, per_page: 4 }).then(async (images) => {
-    const { photos } = images
-    if (Array.isArray(photos) && photos.length > 0) {
-      return photos.map((img) => ({
-        url: img?.src?.landscape,
-        autor: img?.photographer ?? '',
-        alt: img?.alt ?? ''
-      }))
-    }
-    return null
-  })
-  return images
-}
+import { API_KEY_IMAGES, PEXELS_API } from '../config'
 
-export async function getImageByDesc (client, query, size = 'small') {
-  const images = await Promise.all(query.map(async (op) => {
-    const { name, slug } = op
-    const img = await client.photos.search({ query: name, per_page: 1 }).then((images) => {
-      const { photos } = images
+export async function getBannerImages (query) {
+  return await fetch(`${PEXELS_API}/search?query=${query}&per_page=4`, {
+    method: 'GET',
+    headers: {
+      Authorization: API_KEY_IMAGES
+    }
+  })
+    .then((res) => {
+      if (!res.ok) throw new Error('Error en getProductsByCategory')
+      return res.json()
+    })
+    .then((data) => {
+      const { photos } = data
+
       if (Array.isArray(photos) && photos.length > 0) {
         return photos.map((img) => ({
-          url: img?.src[size],
-          label: name,
-          slug
+          url: img?.src?.landscape,
+          autor: img?.photographer ?? '',
+          alt: img?.alt ?? ''
         }))
       }
       return null
-    }).then((data) => (data))
-    return img
-  })
-  )
-
-  return images.flatMap(op => op)
+    })
 }
 
-export async function getImageById (client, id) {
-  const images = await client.photos.show({ id }).then(async (img) => {
-    return ({
-      url: img?.src?.portrait,
-      autor: img?.photographer ?? '',
-      alt: img?.alt ?? '',
-      color: img?.avg_color
-    })
+export async function getPromoImages (query) {
+  return await fetch(`${PEXELS_API}/search?query=${query}&per_page=1`, {
+    method: 'GET',
+    headers: {
+      Authorization: API_KEY_IMAGES
+    }
   })
-  return images
+    .then((res) => {
+      if (!res.ok) throw new Error('Error en getProductsByCategory')
+      return res.json()
+    })
+    .then((data) => {
+      const { photos } = data
+
+      if (Array.isArray(photos) && photos.length > 0) {
+        const img = photos[0]
+        return {
+          url: img?.src?.portrait,
+          autor: img?.photographer ?? '',
+          alt: img?.alt ?? '',
+          color: img?.avg_color
+        }
+      }
+      return null
+    })
 }
