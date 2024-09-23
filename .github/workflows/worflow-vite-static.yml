@@ -41,6 +41,11 @@ jobs:
               run: npm run build
               env:
                   VITE_API_KEY_IMAGES: ${{ secrets.VITE_API_KEY_IMAGES }}
+                  NODE_ENV: production
+            - name: Verify env variables
+              run: echo $VITE_API_KEY_IMAGES
+              env:
+                  VITE_API_KEY_IMAGES: ${{ secrets.VITE_API_KEY_IMAGES }}
             - name: Setup Pages
               uses: actions/configure-pages@v4
             - name: Upload artifact
