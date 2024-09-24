@@ -1,14 +1,33 @@
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
-import { useRef } from 'react'
+import { useMemo, useRef } from 'react'
 
 import { Flex, Typography } from 'antd'
+
+import beaty from '../../assets/img/beauty.jpeg'
+import fashion from '../../assets/img/fashion.jpeg'
+import home from '../../assets/img/home.jpeg'
+import tech from '../../assets/img/tech.jpeg'
 
 const { Title } = Typography
 gsap.registerPlugin(useGSAP)
 
-const CardMenu = ({ img, category, id, setSelected }) => {
+const CardMenu = ({ category, id, setSelected }) => {
   const card = useRef(null)
+
+  const img = useMemo(() => {
+    switch (id) {
+      case 'tech':
+        return tech
+      case 'fashion':
+        return fashion
+      case 'home':
+        return home
+      case 'beauty':
+      default:
+        return beaty
+    }
+  }, [id])
 
   useGSAP(() => {
     const cardElement = document.querySelector(`#shadow-img-menu-${id}`)

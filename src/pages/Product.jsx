@@ -94,7 +94,7 @@ const Product = ({ hasDiscount }) => {
             ))}
           </Space>
           <Flex vertical style={{ width: '100%', maxWidth: '100%' }}>
-            <Carousel ref={ref} arrows autoplay infinite={false} style={{ width: '100%' }}>
+            <Carousel ref={ref} arrows autoplay infinite>
               {data && data?.images && data.images.map((item, idx) => (
                 <Flex key={idx} className='product-image-carousel'>
                   <img src={item} alt={'Imge preview ' + idx} />
@@ -125,7 +125,7 @@ const Product = ({ hasDiscount }) => {
           <Flex vertical className='info-dimensions-product'>
             <Title level={3}>Package dimensions</Title>
             <Flex>
-              <IconBoxDimension color={token.colorPrimaryText} lineColor={token.colorPrimaryBgHover} />
+              <IconBoxDimension color={token.colorPrimaryText} lineColor={token.colorPrimaryBgHover} style={{ filter: 'drop-shadow(5px 5px 0.35rem rgba(0, 0, 0, 0.4))' }} />
               <Text italic>
                 {data.dimensions.height} in
               </Text>
@@ -168,7 +168,7 @@ const Product = ({ hasDiscount }) => {
               <Flex className='buy-product-price'>
                 <Title level={3} className='shadow-menu-subcategory'>${discountPrice}</Title>
                 {hasDiscount && (
-                  <Text className='shadow-menu-subcategory'>{Math.floor(data.discountPercentage)}% OFF</Text>
+                  <Text className='shadow-card-payment'>{Math.floor(data.discountPercentage)}% OFF</Text>
                 )}
               </Flex>
             </Flex>

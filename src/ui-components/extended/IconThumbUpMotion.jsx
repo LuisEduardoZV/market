@@ -12,7 +12,7 @@ const IconThumbUpMotion = () => {
     <IconMotion
       whileHover={{ scale: 1.2 }}
       whileTap={{ scale: 0.9 }}
-      transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+      transition={{ type: 'spring', stiffness: 400, damping: 10 }}
       style={{ color: token.colorPrimary, outline: 'none' }}
       onClick={(e) => e.stopPropagation()}
     />

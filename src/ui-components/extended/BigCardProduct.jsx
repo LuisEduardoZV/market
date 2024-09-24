@@ -1,7 +1,5 @@
-import { useGSAP } from '@gsap/react'
-import { motion } from 'framer-motion'
-import gsap from 'gsap'
-import { useMemo, useRef } from 'react'
+import { motion, useAnimation } from 'framer-motion'
+import { useMemo } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { Col, Flex, Rate, Row, Space, Typography, theme } from 'antd'
@@ -9,13 +7,10 @@ import { Col, Flex, Rate, Row, Space, Typography, theme } from 'antd'
 const { Title, Text } = Typography
 const { useToken } = theme
 
-gsap.registerPlugin(useGSAP)
-
 const FlexMotion = motion.create(Flex)
 
 const BigCardProduct = ({ id, rating, thumbnail, title, tags, brand, price, discountPercentage, category }) => {
   const { token } = useToken()
-  const container = useRef(null)
   const navigate = useNavigate()
 
   const infoPrice = useMemo(() => ({
@@ -24,37 +19,70 @@ const BigCardProduct = ({ id, rating, thumbnail, title, tags, brand, price, disc
     price: (price * ((100 - Math.round(discountPercentage)) / 100)).toFixed(2)
   }), [price, discountPercentage])
 
-  useGSAP(() => {
-    if (container.current) {
-      const oldPrice = document.querySelector(`#big-card-${id}-oldprice`)
-      const price = document.querySelector(`#big-card-${id}-price`)
+  const priceControls = useAnimation()
+  const oldPriceControls = useAnimation()
 
-      const tl = gsap.timeline({ paused: true })
-
-      tl.to(container.current, {
-        borderColor: token.colorBgBase
-      })
-      tl.to(oldPrice, {
-        backgroundColor: token.colorPaper
-      }, 0.1)
-      tl.to(price, {
-        backgroundColor: token.colorBgBase
-      }, 0.2)
-
-      container.current.addEventListener('mouseenter', () => tl.play())
-      container.current.addEventListener('mouseleave', () => tl.reverse())
+  const containerVariants = {
+    hover: {
+      borderColor: token.colorBgBase,
+      scale: 1.05,
+      boxShadow: '2.8px 2.8px 2.2px rgba(0, 0, 0, 0.02), 6.7px 6.7px 5.3px rgba(0, 0, 0, 0.028), 12.5px 12.5px 10px rgba(0, 0, 0, 0.035), 22.3px 22.3px 17.9px rgba(0, 0, 0, 0.042), 41.8px 41.8px 33.4px rgba(0, 0, 0, 0.05), 100px 100px 80px rgba(0, 0, 0, 0.07)'
+    },
+    tap: {
+      borderColor: token.colorBgBase,
+      scale: 0.9,
+      boxShadow: '2.8px 2.8px 2.2px rgba(0, 0, 0, 0.02), 6.7px 6.7px 5.3px rgba(0, 0, 0, 0.028), 12.5px 12.5px 10px rgba(0, 0, 0, 0.035), 22.3px 22.3px 17.9px rgba(0, 0, 0, 0.042), 41.8px 41.8px 33.4px rgba(0, 0, 0, 0.05), 100px 100px 80px rgba(0, 0, 0, 0.07)'
+    },
+    rest: {
+      borderColor: token.colorPaper,
+      scale: 1,
+      boxShadow: 'none'
     }
-  }, { scope: container })
+  }
+
+  const oldPriceVariants = {
+    hover: {
+      backgroundColor: token.colorPaper
+    },
+    rest: {
+      backgroundColor: token.colorBgBase
+    }
+  }
+
+  const priceVariants = {
+    hover: {
+      backgroundColor: token.colorPrimary,
+      border: 'none',
+      color: token.colorPaper
+    },
+    rest: {
+      backgroundColor: token.colorPaper,
+      border: 'none',
+      color: token.colorText
+    }
+  }
+
+  const handleHoverStart = () => {
+    priceControls.start('hover')
+    oldPriceControls.start('hover')
+  }
+
+  const handleHoverEnd = () => {
+    priceControls.start('rest')
+    oldPriceControls.start('rest')
+  }
 
   return (
     <FlexMotion
-      ref={container}
-      id={`big-card-container-${id}`}
       vertical
       className='big-card-item'
-      onClick={() => navigate(`${category}/product/${id}`)}
-      whileHover={{ scale: 1.05, boxShadow: '2.8px 2.8px 2.2px rgba(0, 0, 0, 0.02), 6.7px 6.7px 5.3px rgba(0, 0, 0, 0.028), 12.5px 12.5px 10px rgba(0, 0, 0, 0.035), 22.3px 22.3px 17.9px rgba(0, 0, 0, 0.042), 41.8px 41.8px 33.4px rgba(0, 0, 0, 0.05), 100px 100px 80px rgba(0, 0, 0, 0.07)' }}
-      whileTap={{ scale: 0.9 }}
+      onClick={() => navigate(`${category}/product/${id}`, { state: { hasDiscount: true } })}
+      variants={containerVariants}
+      whileHover='hover'
+      whileTap='tap'
+      initial='rest'
+      onHoverStart={handleHoverStart}
+      onHoverEnd={handleHoverEnd}
       transition={{ type: 'spring', stiffness: 400, damping: 15 }}
     >
       <Flex className='rating-container'>
@@ -82,18 +110,23 @@ const BigCardProduct = ({ id, rating, thumbnail, title, tags, brand, price, disc
         </Col>
         <Col span={8}>
           {infoPrice && (
-            <Flex className='big-card-price-container'>
-              <Flex
-                id={`big-card-${id}-oldprice`}
+            <FlexMotion
+              className='big-card-price-container'
+              initial='rest'
+              animate={priceControls}
+            >
+              <FlexMotion
+                variants={oldPriceVariants}
                 className='big-card-oldprice'
+                animate={oldPriceVariants}
               >
                 <span>
                   $ {infoPrice.oldPrice}
                   <span className='underline-old-price' />
                 </span>
-              </Flex>
-              <span id={`big-card-${id}-price`} className='big-card-price'>$ {infoPrice.price}</span>
-            </Flex>
+              </FlexMotion>
+              <motion.span variants={priceVariants} animate={priceControls} className='big-card-price'>$ {infoPrice.price}</motion.span>
+            </FlexMotion>
           )}
         </Col>
       </Row>

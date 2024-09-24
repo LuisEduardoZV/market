@@ -1,4 +1,4 @@
-import { useRoutes } from 'react-router-dom'
+import { useLocation, useRoutes } from 'react-router-dom'
 
 import MainLayout from '../layout/MainLayout'
 import HomeLayout from '../layout/components/HomeLayout'
@@ -9,6 +9,8 @@ import Payment from '../pages/Payment'
 import Product from '../pages/Product'
 
 export default function Routes () {
+  const { state } = useLocation()
+
   const Routes = {
     path: '/',
     element: (
@@ -25,7 +27,7 @@ export default function Routes () {
       },
       {
         path: ':category/product/:id',
-        element: <Product />
+        element: <Product {...state} />
       },
       {
         path: 'shopping-cart',

@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from 'framer-motion'
-import { cloneElement, useState } from 'react'
+import { cloneElement, useMemo, useState } from 'react'
 
 import { IconCaretDownFilled, IconCaretUpDown, IconCaretUpFilled } from '@tabler/icons-react'
 import { Dropdown, Flex, Menu, Rate, Space, Typography } from 'antd'
@@ -51,38 +51,44 @@ const MovileMenuCategory = ({ categoriesInside, filters, brands, handleFilters, 
     handleFilters({ ...filters, prices: key })
   }
 
-  const items = [
-    {
-      label: <Flex style={{ gap: 5, alignItems: 'center' }}>Subcategories <IconCaretDownFilled size={17} /></Flex>,
-      key: 'subcategory',
-      children: categoriesInside.map((op) => (
-        {
-          key: (op?.id),
-          label: (<Typography.Text key={op.id}>{op.category}</Typography.Text>)
-        }
-      ))
-    },
-    {
-      label: <Flex style={{ gap: 5, alignItems: 'center' }}>Rating <IconCaretDownFilled size={17} /></Flex>,
-      key: 'rate',
-      children: [1, 2, 3, 4, 5].map((op) => (
-        {
-          key: Number(op),
-          label: (<Rate disabled defaultValue={op} />)
-        }
-      ))
-    },
-    {
-      label: <Flex style={{ gap: 5, alignItems: 'center' }}>Brands <IconCaretDownFilled size={17} /></Flex>,
-      key: 'brand',
-      children: brands.map((op) => (
-        {
-          key: (op),
-          label: (<Typography.Text key={op}>{op ?? 'Sin Marca'}</Typography.Text>)
-        }
-      ))
-    }
-  ]
+  const items = useMemo(() => {
+    return [
+      {
+        label: <Flex style={{ gap: 5, alignItems: 'center' }}>Subcategories <IconCaretDownFilled size={17} /></Flex>,
+        key: 'subcategory',
+        children: categoriesInside
+          ? categoriesInside.map((op) => (
+            {
+              key: (op?.id),
+              label: (<Typography.Text key={op.id}>{op.category}</Typography.Text>)
+            }
+          ))
+          : null
+      },
+      {
+        label: <Flex style={{ gap: 5, alignItems: 'center' }}>Rating <IconCaretDownFilled size={17} /></Flex>,
+        key: 'rate',
+        children: [1, 2, 3, 4, 5].map((op) => (
+          {
+            key: Number(op),
+            label: (<Rate disabled defaultValue={op} />)
+          }
+        ))
+      },
+      {
+        label: <Flex style={{ gap: 5, alignItems: 'center' }}>Brands <IconCaretDownFilled size={17} /></Flex>,
+        key: 'brand',
+        children: brands
+          ? brands.map((op) => (
+            {
+              key: (op),
+              label: (<Typography.Text key={op}>{op ?? 'Sin Marca'}</Typography.Text>)
+            }
+          ))
+          : null
+      }
+    ]
+  })
 
   if (isLoading) return null
   return (

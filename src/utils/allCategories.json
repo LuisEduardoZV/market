@@ -13,8 +13,7 @@
 			{ "id": "sunglasses", "category": "Sunglasses" },
 			{ "id": "sports-accessories", "category": "Sports Accessories" }
 		],
-		"id": "fashion",
-		"img": "./src/assets/img/mode.jpeg"
+		"id": "fashion"
 	},
 	{
 		"category": "Beauty & Personal Care",
@@ -23,8 +22,7 @@
 			{ "id": "fragrances", "category": "Fragrances" },
 			{ "id": "skin-care", "category": "Skin Care" }
 		],
-		"id": "beauty",
-		"img": "./src/assets/img/beauty.jpeg"
+		"id": "beauty"
 	},
 	{
 		"category": "Technology",
@@ -34,8 +32,7 @@
 			{ "id": "smartphones", "category": "Smartphones" },
 			{ "id": "tablets", "category": "Tablets" }
 		],
-		"id": "tech",
-		"img": "./src/assets/img/tech.jpeg"
+		"id": "tech"
 	},
 	{
 		"category": "Home & Decoration",
@@ -44,14 +41,12 @@
 			{ "id": "home-decoration", "category": "Home Decoration" },
 			{ "id": "kitchen-accessories", "category": "Kitchen Accessories" }
 		],
-		"id": "home",
-		"img": "./src/assets/img/home.jpeg"
+		"id": "home"
 	},
 	{
 		"category": "Groceries",
 		"subcategories": [{ "id": "groceries", "category": "Groceries" }],
-		"id": "groceries",
-		"img": "./src/assets/img/food.jpeg"
+		"id": "groceries"
 	},
 	{
 		"category": "Vehicles & Accessories",
@@ -59,7 +54,6 @@
 			{ "id": "motorcycle", "category": "Motorcycle" },
 			{ "id": "vehicle", "category": "Vehicle" }
 		],
-		"id": "cars",
-		"img": "./src/assets/img/cars.jpeg"
+		"id": "cars"
 	}
 ]

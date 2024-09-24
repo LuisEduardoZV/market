@@ -1,7 +1,4 @@
-import { useGSAP } from '@gsap/react'
 import { motion } from 'framer-motion'
-import gsap from 'gsap'
-import { useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { Col, Flex, Row, Skeleton, Space, Typography, theme } from 'antd'
@@ -10,49 +7,47 @@ import IconThumbUpMotion from './IconThumbUpMotion'
 const { Text, Title } = Typography
 const { useToken } = theme
 
-gsap.registerPlugin(useGSAP)
+const FlexMotion = motion.create(Flex)
+const TextMotion = motion.create(Text)
 
-const BasicCardProduct = ({ id, title, rating, tags, images, price, typeCarousel, noRating, category, isLoading = false }) => {
+const BasicCardProduct = ({ id, title, rating, tags, images, price, noRating, category, isLoading = false }) => {
   const { token } = useToken()
-  const card = useRef(null)
   const navigate = useNavigate()
 
   let image = null
   if (!isLoading) image = images[0] ?? ''
 
-  useGSAP(() => {
-    if (!isLoading) {
-      const card = document.querySelector(`#card-item-carousel-${typeCarousel}-${id}`)
-      const title = document.querySelector(`#price-card-item-carousel-${id}`)
-
-      const tl = gsap.timeline({ paused: true })
-
-      tl.to(title, {
-        backgroundColor: token.colorBgBase,
-        paddingInline: '4%',
-        ease: 'expo.inOut',
-        duration: 0.5
-      })
-
-      card.addEventListener('mouseenter', () => tl.play())
-      card.addEventListener('mouseleave', () => tl.reverse())
+  const priceTextVariants = {
+    hover: {
+      backgroundColor: token.colorBgBase,
+      paddingInline: '4%'
+    },
+    rest: {
+      paddingInline: '0.5%',
+      backgroundColor: token.colorPaper
     }
-  }, {
-    scope: card
-  })
+  }
 
-  const FlexMotion = motion.create(Flex)
+  const cardVariants = {
+    hover: {
+      boxShadow: '5.9px 4.6px 10px rgba(0, 0, 0, 0.02), 47px 37px 80px rgba(0, 0, 0, 0.04)'
+    },
+    rest: {
+      boxShadow: 'none'
+    }
+  }
 
   return (
     <FlexMotion
-      ref={card}
-      id={`card-item-carousel-${typeCarousel}-${id}`}
       vertical
       className='basic-card-product'
       onClick={() => {
         navigate(`/${category}/product/${id}`)
       }}
-      whileHover={{ boxShadow: '5.9px 4.6px 10px rgba(0, 0, 0, 0.02), 47px 37px 80px rgba(0, 0, 0, 0.04)' }}
+      variants={cardVariants}
+      whileHover='hover'
+      whileTap='rest'
+      initial='rest'
     >
       {isLoading
         ? <Skeleton.Image active className='skeleton-img-product' />
@@ -87,9 +82,9 @@ const BasicCardProduct = ({ id, title, rating, tags, images, price, typeCarousel
         {isLoading
           ? <Skeleton.Button active block />
           : (
-            <Text id={`price-card-item-carousel-${id}`} strong italic className='price-product-card'>
+            <TextMotion variants={priceTextVariants} strong italic className='price-product-card' transition={{ type: 'spring', stiffness: 200, damping: 5 }}>
               ${price}
-            </Text>
+            </TextMotion>
             )}
       </Flex>
     </FlexMotion>
