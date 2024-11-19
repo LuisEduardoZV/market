@@ -20,7 +20,7 @@ Asegurese de ejecutarlo una vez que haya intalado los paquetes necesario usando:
 ```bash
   npm install
 ```
-## Environment Variables
+## Variables de Entorno
 
 Para desplegar correctamente el proyecto sera necesario que agregues un par de variables de entorno en tu archivo `.env`, localizado al mismo nivel que el archivo `package.json`:
 
@@ -32,6 +32,7 @@ API KEY proporcionada por [OpenWeather](https://home.openweathermap.org/api_keys
 `VITE_KEY_GOOGLE_API`
 
 Tu API KEY personal de [Google Maps](https://console.cloud.google.com/) con la cual podrás hacer busquedas de clima por localización.
+
 ## Screenshots
 
 ### Inicio
