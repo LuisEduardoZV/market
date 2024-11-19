@@ -24,14 +24,9 @@ Asegurese de ejecutarlo una vez que haya intalado los paquetes necesario usando:
 
 Para desplegar correctamente el proyecto sera necesario que agregues un par de variables de entorno en tu archivo `.env`, localizado al mismo nivel que el archivo `package.json`:
 
-`VITE_KEY_API`
+`VITE_API_KEY_IMAGES`
 
-API KEY proporcionada por [OpenWeather](https://home.openweathermap.org/api_keys) para ejecutar consultas del clima.
-
-
-`VITE_KEY_GOOGLE_API`
-
-Tu API KEY personal de [Google Maps](https://console.cloud.google.com/) con la cual podrás hacer busquedas de clima por localización.
+API KEY proporcionada por [Pexels Api](https://www.pexels.com/api/) para obtener imagenes al azar para banners.
 
 ## Screenshots
 
